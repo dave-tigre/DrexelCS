@@ -1,0 +1,64 @@
+David Tigreros
+CS265 Section003 Lab10
+
+Q1:
+Table of results (T(n) is shown in seconds) for ins.(n)0000 files
+								T(n)/f(n)
+n		T(n)		f(n)=n		f(n)=n^2			f(n)=n^3
+1		2.196		2.196			2.196				2.196
+2		4.72		2.36			1.18				0.59
+3		7.479		2.493			0.831				0.277
+4		10.193	2.54825		0.6370625		0.159265625
+5		13.059	2.6118		0.52236			0.104472
+6		15.874	2.6456667	0.440944444		0.073490741
+
+Conclusion:
+a) n vs T(n): 
+As the amount of samples (n) increased, the time (T(n)) increased
+linearly.
+- lower bound but not tight. T(n) is w(1)
+
+b) n vs T(n)/f(n) where f(n)=n:
+As the amount of samples increased, the values of T(n)/f(n) continued to
+increase slightly.
+- lower bound but not tight, T(n) is w(n).
+
+c) n vs T(n)/f(n) where f(n) = n^2:
+As the amount of samples increased, the T(n)/f(n) values decreased.
+- upper bound but not tight, T(n) is o(n^2).
+- Reaches a Non-Zero Constant
+
+d) n vs T(n)/f(n) where f(n) = n^3:
+As the samples increased, the T(n)/f(n) values decreased. 
+- f(n) is upper bound and T(n) is o(n^3).
+- It will eventually decrease to zero.
+
+Q2:
+Table of results of number of swaps for the in.(n)0000 files 
+                        #swap()/f(n)
+n     #swap()     f(n)=n      	f(n)=n^2       f(n)=n^3
+1		45721062		45721062			45721062			45721062
+2		98107982		49053991			24526995.5		12263497.75
+3		153522280	51174093.33		17058031.11		5686010.37
+4		210173451	52543362.75		13135840.69		3283960.172
+5		265180908	53036181.6		10607236.32		2121447.264
+6		319847373	53307895.5		8884649.25		1480774.875
+
+Conclusion:
+a) n vs #swap():
+Number of swaps increased linearly as n increased.
+- Lower bound but not tight, T(n) is w(1).
+
+b) n vs #swap()/f(n) where f(n) = n:
+Number of swaps increases slightly as n increases.
+- Lower bound but not tight, T(n) is w(n).
+
+c) n vs #swap/f(n) where f(n) = n^2:
+Number of swaps decreased as n increased.
+- Upper bound but not tight, T(n) is o(n^2)
+- Will reach a Non-Zero constant
+
+d) n vs #swap/f(n) where f(n) = n^3:
+Number of swaps decreased as n increased.
+- Upper bound but not tight, T(n) is o(n^3).
+- Will eventually reach zero.

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<direntry>
+	<index>
+	</index>
+	<required>
+	</required>
+	<other>
+ 		<file>CS265</file>
+ 		<file>dir.xml</file>
+ 		<file>highlight.css</file>
+ 		<file>index.html</file>
+ 		<file>test</file>
+ 		<file>test2</file>
+	</other>
+</direntry>

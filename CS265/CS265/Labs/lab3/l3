@@ -1,0 +1,54 @@
+David Tigreros
+
+CS265 Section 003 Lab3
+
+Part 1:
+
+egrep was used for all of the regular expressions
+
+1.1:
+'the'
+
+1.2:
+'\<the\>'
+
+1.3:
+'\<Just\>'
+
+1.4:
+'(J|j)ust'
+
+1.5:
+'\<^(J|j)ust\>'
+
+1.6:
+'\<[bm]ad\>'
+
+1.7:
+'\<(br|d)eath\>'
+
+1.8:
+'you.$'
+
+1.9:
+'^\s'
+
+1.10:
+'^\s*$'
+
+1.11
+There are 11 empty lines
+
+Part 2:
+
+2.1
+git revert HEAD
+
+but could also use $ git revert 78eb191185b53d56da28c004133fb7894deea38a
+
+2.2:
+You can tell by checking the log of the git repository, it shows all of the
+commited changes.
+
+
+

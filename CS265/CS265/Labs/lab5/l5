@@ -1,0 +1,86 @@
+David Tigreros
+
+CS265 Section003 Lab5
+
+Q1:
+i) List: 
+A set of items that are linked in a set order. You cannot access an item in
+a list without first going through the items that were before the one you
+are looking for.
+
+ii) Stack:
+A list of items that are sorted in the order in which they were added to the
+list. The way to access items in the stack is that the last item in the list
+is the first one out (LIFO).
+
+iii) Queue:
+A queue is similar to a stack except that it is in the reverse order where
+the first item added to the queue is the first one out (FIFO).
+
+iv) Dictionary (Map):
+A dictionary is a data structure that allows you to store an array of items
+with a key identifer. With the key identifier you can find the value
+assigned to it. When creating a dictionary, or map, you must set a key and
+values associated to that key [key, value].
+
+Q2:
+The binary search will go through a sorted list of 'n' number of items no more than log2(n) time. This is because a binary search cuts a list in half into 2
+parts. It will look into the half that would have the nth value and cut that
+in half. It continues this process until the nth value is found.
+
+Q3:
+A linear search is a search where every item in a list is looked at until
+the nth value that you are searching for is found, meaning it will compare
+elements n times. 
+
+Q4:
+This is better than a binary search in situations where the list is not sorted. A binary search needs sorted data in order to work properly, while a linear doesnot since it looks through every item.
+
+Q5:
+*84* 37 93 82 98 27 63 73 93 27 75 55 45 8
+
+*37* 82 27 63 73 27 75 55 45 8 - *84* 93 98 93
+
+*27* 27 8 - *37* 82 63 73 75 55 45 - 84 - *93* 98 93
+
+8 - 27 27 - 37 - *82* 63 73 75 55 45 - 84 - *93* 98 93
+
+8 - 27 27 - 37 - *63* 73 75 55 45 - 82 84 - 93 93 - 98
+
+8 - 27 27 - 37 - *55* 45 - 63 - *73* 75 82 - 84 - 93 93 - 98
+  
+8 - 27 27 - 37 - 45 - 55 - 63 - 73 - 75 82 - 84 - 93 93 - 98
+ 
+8 27 27 37 45 55 63 73 75 82 84 93 93 98
+
+Q6:
+(3,24,6)
+
+Q7:
+[13, [28, [24, [3, None]]]]
+
+Q8:
+The 2 sets of outputs are different because of how the memory address of the
+buffer is accessed. In the first set, the same memory location of the buffer
+is edited when the assignment is called, however in the second output, the
+buffer isn't associated with the 's' assignment because the 's' pointer is set
+to a different memory location instead of the same one as buffer.
+
+Q9:
+Hash 3 - [Bob,38], [Cos,86]
+Hash 4 - [Vera,99], [Nash,11], [Kate,28], [Jaga,24]
+Hash 5 - [Jesse,78]
+
+Q10:
+int find(char *key, int *p_ans) {
+	entry *hash_table;
+	int hash_value = hash(key);
+	hash_table = table[hash_val];
+	while (hash_table != NULL) {
+		if (hash_table->key == key) {
+			*p_ans = hash_table->value;
+			return 1;
+		}
+	}
+	return 0;
+}

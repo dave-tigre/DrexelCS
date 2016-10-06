@@ -1,0 +1,18 @@
+David Tigreros
+CS265 Section003 Assignment1
+
+README
+
+Instructions:
+
+- Run as a bash with either one or no  arguments
+- Go through directories and view the dir.xml files
+
+Notes:
+
+- For some reason, even though I have an if statement identifying
+  directories, it only populates the <dir></dir> in the xml file with the
+current directory, for any subdirectory where the xml file is created, it
+places the directories in the <file></file>  section of the xml. After
+trouble shooting, I was unable to find a solution.
+

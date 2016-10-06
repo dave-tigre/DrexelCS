@@ -1,0 +1,15 @@
+David Tigreros
+CS265 Section003 Assignment4
+
+RUN:
+Should be able to just run the make file and execute the program. Was not
+sure if you wanted it to run from the makefile, but I decided against it.
+To run the program you must type './CDDB'
+
+NOTES:
+1. How you wanted us to add the tracklist wasn't specific so I made it so
+that it accepted a name for a track everytime you hit enter, unless you type
+'0' which it reads as you being done with track names.
+
+2. Was unsure on how I should implement a temporary file, so that is not in
+place. 

@@ -1,0 +1,7 @@
+David Tigreros
+CS265 Section003 Lab9
+
+Notes:
+Could not get the test class to work, I based it off of the example given
+for the lab but an error kept saying that the import package did not exist
+and the TestCase could not be found.

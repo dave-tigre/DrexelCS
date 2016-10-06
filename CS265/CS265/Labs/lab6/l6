@@ -1,0 +1,76 @@
+
+David Tigreros
+CS265 Section003 Lab6
+
+Design and Implementation
+
+Q1:
+add() performs the general service of adding a suffix to a prefix, while
+addSuffix() performs the implementation specific action of adding a word to
+a suffix. add() is used by build but addSuffix() is onlu used interally by
+add().
+
+Q2:
+lookup searches for a prefix and creates it if requested, returns pointer if
+the prefix one is searchinf for is present or created and NULL if it isn't.
+The functions that call lookup are: add() and generate().
+
+Q3:
+
+
+Q4:
+It has better memory allocation since it require's less memory, also making
+it faster.
+
+Q5:
+
+
+Q6:
+void cleanup(char *prefix[NPREF]){
+	int preftab = statetab[hash(prefix)];
+	while (preftab != NULL){
+		memset(preftab, 0, sizeof(State));
+		preftab = preftab->next
+	}
+}
+
+Q7:
+Errors, not sure if I set up the function correctly, I am not too
+experienced in C programming.
+
+Q8:
+Iterate through the memory address of the strings and then free that memory
+address.
+
+Q9:
+They are stored as deques. They are better than vectors when dealing with a
+larger collection size.
+
+Q10:
+A map.
+
+Q11:
+Vector
+
+Q12:
+This method does not use pointers like the C-implementation, makes it easier
+to change the entry since it just changes the entry instead of what a
+pointer may be pointing to.
+
+Q13:
+A disadvantage is that if uses more memory than the c implementation
+
+Q14:
+They are stored in a dictionary.
+
+Q15:
+The dictionary (map) data structure.
+
+Q16:
+A list
+
+Q17:
+The advantages are that you don't need to allocate memory.
+
+Q18:
+C++ has memory management.

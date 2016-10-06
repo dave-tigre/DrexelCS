@@ -1,0 +1,24 @@
+#!/bin/bash
+#!/usr/bin/awk -f
+# Author: David Tigreros
+# CS265 Section003 Lab3
+# anagram
+# Script to be used to find all anagrams in a file containing words
+signFile="sign.c"
+squashFile="squash.awk"
+
+if [ -e "$signFile" ]; then  # checks to see if file exists
+	gcc -osign sign.c # creates executable file
+	if [ -e "$squashFile" ]; then 
+		# sorts dictionary words into out file
+		./sign < /usr/share/dict/words | sort | awk -f squash.awk > out
+		# awk program to sort anagrams
+		awk '{ print NF " " $0}' <out | sort -n | tail
+	else
+		#prints error if file not found
+		echo -e "Error: squash.awk file not found"
+	fi
+else
+	# prints error if file not found
+	echo -e "Error: sing.c file not found"
+fi

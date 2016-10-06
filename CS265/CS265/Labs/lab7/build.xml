@@ -1,0 +1,47 @@
+<!--
+	Author: David Tigreros
+	CS265 Section003 Lab7
+	build.xml file works as an ant script to build lab7 java files
+-->
+<project default = "compile"> 
+	<target name="compile"> 
+		<javac srcdir="." includeantruntime='true'/> 
+	</target>
+	<target name="clean">
+		<delete>
+			<fileset dir="./">
+				<include name='*.class'/>
+			</fileset>
+		</delete>
+	</target>
+	<target name="prob1.java" depends='compile'>
+		<java classname='prob1.java' classpath="./" fork="true">
+		</java>
+	</target>
+	<target name="prob2.java" depends='compile'>
+		<java classname='prob2.java' classpath="./" fork="true">
+		</java>		
+	</target>
+	<target name="prob3.java" depends='compile'>
+		<java classname='prob3.java' classpath="./" fork="true">
+		</java>
+	</target>
+	<target name="prob4.java" depends='compile'>
+		<java classname='prob4.java' classpath="./" fork="true">
+		</java>
+	</target>
+	<target name="run" depends='compile'>
+		<java classname='prob1' classpath="./" fork="true">
+			<arg value="Lab7"/>
+		</java>
+		<java classname='prob2' classpath="./" fork="true">
+         <arg value="100"/>
+      </java>
+		<java classname='prob3' classpath="./" fork="true">
+         <arg value="2016"/>
+      </java>
+		<java classname='prob4' classpath="./" fork="true">
+         <arg value="2"/>
+      </java>
+   </target>
+</project>

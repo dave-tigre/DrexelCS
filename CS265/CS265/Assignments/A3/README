@@ -1,0 +1,16 @@
+David Tigreros
+CS265 Section003 Assignment3
+
+Run:
+To run the files, just compile using javac and run the Chase.class file
+which contains the main method. The outcome of each event will be displayed
+and the statistics will follow.
+
+Notes:
+The assignment stated that a single random generator was supposed to be used
+for the entire program, however, since the Cat and Mouse constructors needed
+a generator for the input, I had to create another one in the Chase class. I
+did not figure out another way around that aside from creating the second
+generator.
+
+

@@ -1,0 +1,71 @@
+David Tigreros
+CS265 Section 003
+Lab2
+
+Q1:
+dt458@tux64-13 CS265> pushd ~/
+~ ~/CS265
+dt458@tux64-13 ~> find . -type f -mtime -2 -print
+./.bash_history
+./CS265/lab1/TEST
+./CS265/lab1/vi_lab
+./CS265/lab1/funny
+./CS265/lab1/hello.bash
+./CS265/lab1/annoy
+./CS265/lab1/annoy.cc
+./CS265/lab1/itemList
+./CS265/lab1/itemList-2cols
+./CS265/lab1/TelecomTruths
+./CS265/lab1/UnitTestingPhase
+./CS265/lab1/people
+./CS265/lab1/play/lab1.tar
+./CS265/lab1/play/lab1.2.tgz
+./CS265/lab1/play/annoy
+./CS265/lab1/play/annoy.cc
+./CS265/lab1/play/funny
+./CS265/lab1/play/hello.bash
+./CS265/lab1/play/itemList
+./CS265/lab1/play/itemList-2cols
+./CS265/lab1/play/people
+./CS265/lab1/play/TelecomTruths
+./CS265/lab1/play/TEST
+./CS265/lab1/play/UnitTestingPhase
+./CS265/lab1/play/vi_lab
+./CS265/lab1/dt458_lab1
+./public_html/index.html
+./.ssh/known_hosts
+./.viminfo
+
+Q2:
+find . -iname "*.bash"
+
+Q3:
+./tmp/gotMe.bash
+./tmp/envelope.bash
+
+Q4:
+97  499 2960 breadIsDangerous.txt
+
+Q5:
+grep "the" breadIsDangerous.txt | wc -l
+
+Q6:
+Created spellExample.bak
+This is the backup version of the spellExample file without the spell
+corrections
+
+Q7:
+the diff command shows the difference that is found between the same line
+numbers of the 2 files
+
+Q8:
+There was no output because there are no differences since it is comparing
+it against the same file.
+
+Q9:
+The difference in the return values reflects the type of error that occurs
+when the command is entered. The 0 return value meant that no error
+occurred. The 1 return value meant that it did not find the word in the
+file. The 2 return value meant that a more serious error existed since the
+file doesn't exist.
+

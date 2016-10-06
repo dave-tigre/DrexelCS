@@ -1,0 +1,9 @@
+#!/usr/bin/awk -f
+
+# Author: David Tigreros
+# CS265 Section003 Lab3
+# anagram
+# Script to be used to find all anagrams in a file containing words
+
+
+

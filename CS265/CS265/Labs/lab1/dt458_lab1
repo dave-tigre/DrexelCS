@@ -1,0 +1,98 @@
+David Tigreros
+CS 265 Section: 003
+Lab1
+
+Q1:
+.bashshrc runs bash using an interactive shell not a login shell
+.bash_profile is executed when bash is invoked as an interactive login shell
+
+
+Q2:
+ Done
+
+Q3: 
+-rw-rw-r-- 1 dt458 dt458  8059 Apr  4 00:27 funny
+-rwxrwxr-x 1 dt458 dt458   240 Apr  4 00:27 hello.bash
+-rw-rw-r-- 1 dt458 dt458   515 Apr  4 00:04 TEST
+-rw-rw-r-- 1 dt458 dt458    51 Apr  3 21:42 tutor
+-rw-rw-r-- 1 dt458 dt458 33714 Apr  4 00:19 vi_lab
+
+Q4: 
+You have read and write on your own file and everyone else can only read
+
+Q5:
+Gives you all the permission; gives everyone else read and execute
+permissions
+
+Q6:
+Yes
+
+Q7:
+Yes
+
+Q8:
+No, permissions were denied to execute
+
+Q9:
+Chmod 700 / chmod 500
+
+Q10:
+Doesn't not let me edit it due to it being a read only file
+
+Q11:
+dt458@tux64-13 lab1> ls *
+annoy     funny       itemList        TelecomTruths  tutor            
+vi_lab
+annoy.cc  hello.bash  itemList-2cols  TEST           UnitTestingPhase
+dt458@tux64-13 lab1> ls a*
+annoy  annoy.cc
+dt458@tux64-13 lab1> ls *m*
+itemList  itemList-2cols  TelecomTruths
+dt458@tux64-13 lab1> ls anno
+ls: cannot access anno: No such file or directory
+dt458@tux64-13 lab1> ls anno?
+annoy
+dt458@tux64-13 lab1> ls annoy?
+ls: cannot access annoy?: No such file or directory
+
+Q12:
+Created 2 files since it was separated by tokens. One called "a" the other
+called "space"
+
+Q13:
+dt458@tux64-13 lab1> echo Is a < b?
+-bash: b?: No such file or directory
+dt458@tux64-13 lab1> echo "Is a < b?"
+Is a < b?
+dt458@tux64-13 lab1> echo "\$USER is $USER"
+$USER is dt458
+dt458@tux64-13 lab1> echo '\$USER is $USER'
+\$USER is $USER
+dt458@tux64-13 lab1> echo "Today is `date`"
+Today is Mon Apr  4 01:34:11 EDT 2016
+dt458@tux64-13 lab1> echo "Today is $(date)"
+Today is Mon Apr  4 01:34:17 EDT 2016
+dt458@tux64-13 lab1> echo 'Today is `date`'
+Today is `date`
+dt458@tux64-13 lab1> echo -e "Files that start w/e:\n`ls e*`"
+ls: cannot access e*: No such file or directory
+Files that start w/e:
+
+Q14:
+Sort lists out the items in the list while sort -n list them out in
+ascending order according to their value
+
+Q15:
+sort -nr itemList-2cols | head -8
+
+Q16:
+lab1.tar.gz 
+
+Q17:
+It changed into a lab1.tar file
+
+Q18:
+grep "Vacation" lab1
+
+Q19:
+find ./ -name dt458_lab1

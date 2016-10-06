@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+
+touch "David - song1.mp3"
+touch "David - song2.mp3"
+touch "Cup - song1.mp3"
+touch "Cup - song2.mp3"

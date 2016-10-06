@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<direntry>
+	<index>
+	</index>
+	<required>
+	</required>
+	<other>
+ 		<file>dir.xml</file>
+ 		<file>Files</file>
+ 		<file>index.html</file>
+ 		<file>Labs</file>
+ 		<file>Lectures</file>
+	</other>
+</direntry>

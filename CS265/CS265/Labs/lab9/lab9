@@ -1,0 +1,37 @@
+David Tigreros
+CS265 Section003 Lab9
+
+Part1:
+1.1:
+It had a "Segmentation fault (core dumped)" error. A new file called "core"
+was created.
+
+1.2:
+The function that it bombed was the "inTable()" function because of an error
+with  __strcmp_sse2_unaligned ().
+
+1.3:
+a) The problem was the scanf() function, it expected an address of the variable
+it is writing to and not the actual variable. I replaced the "n" in the
+function with a "&n"
+
+b) The problem was that the specifiers used for the "pi" and "n" were wrong.
+The "pi" value needed the "%f" specifier and the "n" needed the "%d"
+specifier.
+
+c) The problem was that the numLines was being incremented before the array
+used it in line 49. To fix this, I moved the "++numLines" after the
+assingment for the array so that it could be assigned as the incrementation
+occured properly.  
+
+d) The scanf() function expected an address to write to, similar to bug1.c.
+It was fixed by replacing "n" with "&n".
+
+e) Problem is that it returns an array with an empty first element.
+
+1.4:
+The compiler can't catch this because it only catches syntax errors.
+
+1.5:
+If the inputs are specified by the type then the compiler will catch the
+error.

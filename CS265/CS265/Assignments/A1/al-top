@@ -1,0 +1,71 @@
+#!/bin/bash
+# 
+# Author: David Tigreros
+# CS265 Section003 Assignment1
+# 04/21/2016
+# al-top
+# This script takes in an optional working directory argument. 
+# In each subdirectory of the directory it is called in, it will place the
+# dir.xml file with child node elements that contain text elements.
+# Index and required data will be harvested from README.
+#  Other files will be found by taking a list of the directory,
+# looking for files or directories that
+# weren't listed in README.
+
+# checks to see if number of arguments is valid
+if (( "$#" < 1 )); then
+	dir=$(pwd)
+elif (( "$#" > 1 )); then
+	echo -e "\n Error: Cannot have more than one argument!\n"
+	exit
+elif [ ! -d $1 ]; then
+	echo -e "\nError: Argument must be of type directory (-d)!\n"
+	exit
+else
+	dir=$1
+fi
+# loops through the given directory
+for i in $(find $dir -type d)
+do
+	# creates new dir.xml file and directs text into it
+	echo $'<?xml version="1.0" encoding="ISO-8859-1"?>' > $i/dir.xml
+	echo $'<direntry>' >> $i/dir.xml
+	echo $'	<index>' >> $i/dir.xml
+	# checks to see if the dir contains a README file
+	readme=$(find $i -maxdepth 1 -name README)
+	if [ ! -z $readme ]; then
+		# parse readme to harvest index file
+		echo "	$(grep index $i/README | awk -F: 'NR==1{print "	<file>"$2"</file>"}')" >> $i/dir.xml
+	fi
+	echo $'	</index>' >> $i/dir.xml
+	echo $'	<required>' >> $i/dir.xml
+	if [ ! -z $readme ]; then
+		# parse file to find required files
+		echo "	$(grep required $i/README | awk -F: '{reqFile = ""; for(i = 2; i<= NF; i++) reqFile = reqFile "	<file>"$i"</file>\n	"; print reqFile}')" >> $i/dir.xml
+	fi
+	echo $'	</required>' >> $i/dir.xml
+	echo $'	<other>' >> $i/dir.xml
+	# loops through files in the current dir
+	for j in $(ls $i)
+	do
+		if [ ! -z $readme ]; then
+			otherFiles=$(grep $j $i/README)
+			# doesn't allow README files in other list
+			if [ -z $otherFiles ]; then
+				if [ -d $j ]; then
+					echo $'		<dir>'$j'</dir>' >> $i/dir.xml
+				else
+					echo $'		<file>'$j'</file>' >> $i/dir.xml
+				fi
+			fi
+		else 
+			if [ -d $j ]; then
+         	echo $'		<dir>'$j'</dir>' >> $i/dir.xml
+         else
+        		echo $' 		<file>'$j'</file>' >> $i/dir.xml
+         fi
+		fi
+	done
+	echo $'	</other>' >> $i/dir.xml
+	echo $'</direntry>' >> $i/dir.xml
+done
