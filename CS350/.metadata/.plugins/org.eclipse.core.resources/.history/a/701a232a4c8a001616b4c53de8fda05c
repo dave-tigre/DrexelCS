@@ -1,0 +1,156 @@
+/**
+ * 
+ */
+
+/**
+ * Alarm Clock Radio
+ * @author davidtigreros
+ * 
+ * Does the following tasks:
+ * 	Display the time, radio station, and alarm time when requested
+ * 	Allow the time to be set
+ * 	Allow the alarm to be set
+ * 	Allow the alarm to be shut off
+ * 	Allow for a 9 minute snooze
+ * 	Allow the setting of the radio station
+ * 	Allow the setting of the volume
+ * 	Allow the radio to be turned on
+ * 	Allow the radio to be shut off
+ * 	When the alarm goes off, simply out put 'Buzz Buzz Buzz'
+ */
+public class AlarmClock {
+	
+	public static int currentTime;
+	public static int alarmTime;
+	public static String radioStation = "1060 AM";
+	public static int secondCount = 0;
+	
+	public AlarmClock(int startHour, int startMin, String currentPeriod, int endHour, int endMin, String endPeriod)
+	{
+		
+		if(currentPeriod.equals("AM"))
+		{
+			currentTime = startHour*1000 + startMin;
+		}
+		else if(currentPeriod.equals("PM"))
+		{
+			currentTime = (startHour+12)*1000 + startMin;
+		}
+		else{
+			System.err.println("Invalid Current Time Period (Must me AM or PM)");
+		}
+		
+		if(endPeriod.equals("AM"))
+		{
+			alarmTime = endHour*1000 + endMin;
+		}
+		else if(endPeriod.equals("PM"))
+		{
+			alarmTime = (endHour+12)*1000 + endMin;
+		}
+		else{
+			System.err.println("Invalid Alarm Time Period (Must me AM or PM)");
+		}
+	}
+	
+	public void AlarmOff()
+	{
+		System.out.println("Alarm is now off.");
+		//System.exit(0);
+	}
+	
+	public void setRadio(String station)
+	{
+		radioStation = station;
+	}
+	
+	public String getRadio()
+	{
+		return radioStation;
+	}
+	
+	public boolean checkAlarm()
+	{
+		if(currentTime >= alarmTime)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public void tick()
+	{
+		long startTime = System.currentTimeMillis();
+		long oneSecond = startTime + (1000);
+		while(System.currentTimeMillis() < oneSecond)
+		{
+			
+		}
+		secondCount++;
+		if(secondCount == 1)
+		{
+			currentTime++;
+			secondCount = 0;
+		}
+		
+		
+	}
+	
+	public void snooze()
+	{
+		alarmTime = alarmTime+9;
+		System.out.println("Alarm has been extended...");
+	}
+	
+	public String showTime()
+	{
+		
+		String hours = Integer.toString(currentTime).substring(0,2);
+		String mins = Integer.toString(currentTime).substring(2);
+		return hours +":"+mins;
+	}
+	
+	public String alarmTime()
+	{
+		String hours = Integer.toString(alarmTime).substring(0,2);
+		String mins = Integer.toString(alarmTime).substring(2);
+		return hours +":"+mins;
+	}
+	
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		int seconds;
+		
+		AlarmClock myClock = new AlarmClock(8,0,"AM", 8, 5, "AM");
+		System.out.println("Initial Time: " +myClock.showTime());
+		System.out.println("Radio is set to: " + myClock.getRadio());
+		System.out.println("Alarm set to: " +myClock.alarmTime());
+		boolean alarmOff = true;
+		while(alarmOff)
+		{
+			for(seconds = 0; seconds < 1; seconds++)
+			{
+				if(myClock.checkAlarm() == true)
+				{
+					System.out.println("Buzz Buzz Buzz");
+					myClock.AlarmOff();
+					alarmOff = false;
+					break;
+				}
+				myClock.tick();
+			}
+			System.out.println(myClock.showTime());
+		}
+		
+
+	}
+
+}
