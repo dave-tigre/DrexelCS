@@ -1,0 +1,333 @@
+/**
+ * 
+ */
+
+/**
+ * Alarm Clock Radio
+ * @author davidtigreros
+ * 
+ * Does the following tasks:
+ * 	Display the time, radio station, and alarm time when requested
+ * 	Allow the time to be set
+ * 	Allow the alarm to be set
+ * 	Allow the alarm to be shut off
+ * 	Allow for a 9 minute snooze
+ * 	Allow the setting of the radio station
+ * 	Allow the setting of the volume
+ * 	Allow the radio to be turned on
+ * 	Allow the radio to be shut off
+ * 	When the alarm goes off, simply out put 'Buzz Buzz Buzz'
+ */
+public class AlarmClock {
+	
+	private static int currentTime; //current time on clock
+	private static int alarmTime; //time for alarm to go off, does not change with snooze
+	private static int wakeUpTime; //time that alarm will compare to, can change with snooze
+	public static String radioStation = "1060 AM"; //radio station variable, intially set to 1060AM
+	private static int secondCount = 0; //counter for seconds
+	private boolean radioStatus; //status for using radio as alarm or Buzzing
+	private int snoozeCount; //snooze counter for demonstration purposes, or to stop snoozes at certain amount
+	private boolean alarmStatus; //alarm status (ON or OFF)
+	
+	/*
+	 * AlarmClock constructor
+	 * @param setHour : set clock hour
+	 * @param setMin : set clock minute
+	 * @param currentPeriod : set AM or PM
+	 * 
+	 * Accepts 12-hour clock scheme, but used 24-hour clock scheme in processing
+	 */
+	public AlarmClock(int setHour, int setMin, String currentPeriod)
+	{
+		// set 12 hour clock input to 24 hour clock
+		if(currentPeriod.equals("AM"))
+		{
+			currentTime = setHour*100 + setMin;
+		}
+		else if(currentPeriod.equals("PM"))
+		{
+			currentTime = (setHour+12)*100 + setMin;
+		}
+		else{
+			System.err.println("Invalid Current Time Period (Must me AM or PM)");
+		}
+	}
+	
+	/*
+	 * Method to set alarm time.
+	 * @param endHour : alarm hour
+	 * @param endMin : alarm minute
+	 * @param endPeriod : set AM or PM
+	 */
+	public void setAlarm(int endHour, int endMin, String endPeriod)
+	{
+		// convert 12-H clock input to 24-H clock 
+		if(endPeriod.equals("AM"))
+		{
+			alarmTime = endHour*100 + endMin;
+		}
+		else if(endPeriod.equals("PM"))
+		{
+			alarmTime = (endHour+12)*100 + endMin;
+			if(alarmTime > 2359)
+			{
+				alarmTime = alarmTime-1200;
+			}
+		}
+		else{
+			System.err.println("Invalid Alarm Time Period (Must me AM or PM)");
+		}
+		wakeUpTime = alarmTime;	
+		System.out.println(wakeUpTime);
+	}
+	
+	// Method to set alarm ON or OFF
+	public void setAlarmStatus(boolean alarmStatus)
+	{
+		this.alarmStatus = alarmStatus;
+		
+	}
+	
+	// Method to get the status of the Alarm
+	public String getAlarmStatus()
+	{
+		if(alarmStatus)
+			return "ON";
+		else
+			return "OFF";
+	}
+	
+	// Method to set radio station if a change is desired
+	public void setRadio(String station)
+	{
+		radioStation = station;
+	}
+	
+	// Method to get radio status
+	public String getRadio()
+	{
+		return radioStation;
+	}
+	
+	// Method that has actions for when alarm goes off, actions dependent on radio status
+	public void AlarmOff()
+	{
+		// if radio status is on, play radio, else Buzz Buzz Buzz
+		if(radioStatus)
+		{
+			System.out.println("Now Playing: " +getRadio());
+		}
+		else
+		{
+			System.out.println("Buzz Buzz Buzz");
+		}
+		
+	}
+	
+	// Method to check alarm, determines if alarm should go off or not
+	public boolean checkAlarm()
+	{
+		if(alarmStatus == true)
+		{
+			if(currentTime >= wakeUpTime)
+				return true;
+			else
+				return false;
+		}
+		return false;
+		
+	}
+	
+	// Method to set status of the radio, true plays radio station, off does Buzzing
+	public void setRadioStatus(boolean radioStatus)
+	{
+		this.radioStatus = radioStatus;
+	}
+	
+	/*
+	 * Method for time.
+	 * Tick determines how long one second is and increases the time based on that
+	 */
+	public void tick()
+	{
+		long startTime = System.currentTimeMillis(); // take in system time
+		long oneSecond = startTime + (1000); // add one second to recorded system time
+		
+		// wait until one second has passed before continuing
+		while(System.currentTimeMillis() < oneSecond)
+		{
+			
+		}
+		
+		// if one second has passed, increase time by one minute (for demo purposes)
+		secondCount++;
+		if(secondCount == 1)
+		{
+			//determine if next hour is up
+			double nextHour = currentTime/100.0;
+			if((nextHour % 1) >= 0.59)
+			{
+				currentTime = currentTime + 41;
+			}
+			else{
+				currentTime++;
+			}
+			
+			secondCount = 0;
+		}
+		
+		
+	}
+	
+	/*
+	 * Method to snooze alarm clock.
+	 * Does not change initial set alarm time, uses wake up compare time for alarm
+	 */
+	public boolean snooze()
+	{
+		snoozeCount++;
+		wakeUpTime = wakeUpTime+9;
+		
+		// does not allow more than one snooze, set for demo purposes
+		if(snoozeCount > 1)
+		{
+			return false;
+		}
+		else
+		{
+			System.out.println("Snooze is activated...");
+			return true;
+		}
+	}
+	
+	// Method to show time in 12-H clock scheme
+	public String showTime()
+	{
+		String hours = "";
+		String mins = "";
+		if(currentTime <= 1159)
+		{
+			if(currentTime < 1000)
+			{
+				hours = "0" + Integer.toString(currentTime).substring(0,1);
+				mins = Integer.toString(currentTime).substring(1) + "AM";
+			}
+			else
+			{
+				hours = Integer.toString(currentTime).substring(0,2);
+				mins = Integer.toString(currentTime).substring(2) + "AM";
+			}
+			
+		}
+		else
+		{
+			int clock;
+			if(currentTime > 1259)
+				clock = currentTime-1200;
+			else
+				clock = currentTime;
+			
+			if(currentTime < 1000)
+			{
+				hours = "0" + Integer.toString(clock).substring(0,0); 
+				mins = Integer.toString(currentTime).substring(1) + "PM";
+			}
+			else
+			{
+				hours = Integer.toString(clock).substring(0,2);
+				mins = Integer.toString(currentTime).substring(2) + "PM";
+			}
+		}
+		return hours +":"+mins;
+	}
+	
+	// Method to display time in 12-H clock scheme
+	public String alarmTime()
+	{
+		
+		String hours = "";
+		String mins = "";
+		if(alarmTime <= 1159)
+		{
+			if(alarmTime < 1000)
+			{
+				hours = "0" + Integer.toString(alarmTime).substring(0,1);
+				mins = Integer.toString(alarmTime).substring(1) + "AM";
+			}
+			else
+			{
+				hours = Integer.toString(alarmTime).substring(0,2);
+				mins = Integer.toString(alarmTime).substring(2) + "AM";
+			}
+			
+		}
+		else
+		{
+			int clock;
+			if(alarmTime > 1259)
+				clock = alarmTime-1200;
+			else
+				clock = alarmTime;
+			
+			if(alarmTime < 1000)
+			{
+				hours = "0" + Integer.toString(clock).substring(0,0); 
+				mins = Integer.toString(alarmTime).substring(1) + "PM";
+			}
+			else
+			{
+				hours = Integer.toString(clock).substring(0,2);
+				mins = Integer.toString(alarmTime).substring(2) + "PM";
+			}
+		}
+		return hours +":"+mins;
+	}
+	
+
+	/**
+	 * Main driver
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		int seconds; //counter for seconds passing
+		
+		// @param maxTime variable for how long a "minute is in seconds" 
+			//clock currently runs at 1 second, if set to 60, it will run for 1 actual minute
+		int maxTime = 1; 
+		
+		// Alarm Clock set up, turn alarm on of off using boolean
+		AlarmClock myClock = new AlarmClock(8,00,"AM"); //set clock
+		myClock.setAlarm(8, 05, "PM"); //set alarm time
+		myClock.setAlarmStatus(true); // set alarm status [true == on, false == off]
+		
+		// Display initial clock set up
+		System.out.println("Initial Time: " +myClock.showTime());
+		System.out.println("Radio is set to: " + myClock.getRadio());
+		System.out.println("Alarm set to: " +myClock.alarmTime());
+		System.out.println("Alarm Status: " +myClock.getAlarmStatus());
+		
+		// set alarm to either use radio station (true) or use 'Buzz Buzz Buzz' (false)
+		myClock.setRadioStatus(true);
+		
+		// while loop will keep clock running until the alarm is set off
+		boolean alarmOff = true;
+		while(alarmOff)
+		{
+			for(seconds = 0; seconds < maxTime; seconds++)
+			{
+				if(myClock.checkAlarm() == true)
+				{
+					myClock.AlarmOff();
+					alarmOff = myClock.snooze();
+				}
+				myClock.tick();
+			}
+			System.out.println(myClock.showTime());
+		}
+		
+
+	}
+
+}
