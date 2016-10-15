@@ -1,0 +1,18 @@
+/**
+ * 
+ */
+
+/**
+ * @author dave-tigre
+ *
+ */
+public class SurveyMenu {
+
+	/**
+	 * 
+	 */
+	public SurveyMenu() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

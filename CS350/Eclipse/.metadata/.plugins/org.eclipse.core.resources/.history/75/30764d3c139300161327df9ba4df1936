@@ -1,0 +1,19 @@
+
+import java.util.*;
+
+/**
+ * @author David Tigreros
+ * 10/15/2016
+ * Survey Maker
+ * 
+ * Main Driver
+ */
+public class OutPutConsole {
+
+    /**
+     * Default constructor
+     */
+    public OutPutConsole() {
+    }
+
+}

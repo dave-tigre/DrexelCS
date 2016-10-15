@@ -1,0 +1,14 @@
+
+import java.util.*;
+
+/**
+ * 
+ */
+public abstract class Question {
+
+    /**
+     * 
+     */
+    public void Operation1();
+
+}

@@ -1,0 +1,44 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ * 
+ */
+
+/**
+ * @author dave-tigre
+ *
+ */
+public abstract class Menu {
+	
+	private String menuPrompt;
+	private ArrayList<String> options;
+	private int choice;
+
+	public Menu(){
+		System.out.println("Creating new Menu");
+	}
+	
+	public void setMenuPrompt(String menuPrompt)
+	{
+		this.menuPrompt = menuPrompt;
+	}
+	
+	public void displayOptions()
+	{
+		int p = 0;
+		for(String option : options)
+		{
+			p++;
+			System.out.println(p + ") " +option);
+		}
+	}
+	
+	public void getUserResponse()
+	{
+		Scanner input = new Scanner(System.in);
+		int choice = input.nextInt();
+		this.choice = choice;
+	}
+	
+}

@@ -1,0 +1,51 @@
+import java.util.Scanner;
+
+/**
+ * 
+ */
+
+/**
+ * @author dave-tigre
+ *
+ */
+public class SurveyMenu extends Menu{
+
+	/**
+	 * 
+	 */
+	public SurveyMenu() {
+		// TODO Auto-generated constructor stub
+		System.out.println("Survey Menu");
+		displayOptions();
+	}
+	
+	public void displayOptions()
+	{
+		System.out.println("1) Create a new Survey");
+		System.out.println("2) Display a Survey");
+		System.out.println("3) Load a Survey");
+		System.out.println("4) Save a Survey");
+		System.out.println("5) Quit");
+		System.out.println();
+		String choice = getResponse();
+		
+		switch(choice)
+		{
+		case "1": creationMenu();
+				break;
+		default: System.out.println("Invalid Input");
+				break;
+		}
+	}
+	
+	public void creationMenu()
+	{
+		Test newTest = new Test();
+		System.out.println("Name this Survey: ");
+		Scanner input = new Scanner(System.in);
+		newTest.setTestName(input.nextLine());
+		
+	}
+	
+
+}

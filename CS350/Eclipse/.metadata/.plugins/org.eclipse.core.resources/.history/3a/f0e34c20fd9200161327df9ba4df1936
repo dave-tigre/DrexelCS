@@ -1,0 +1,110 @@
+
+import java.util.*;
+
+/**
+ * 
+ */
+public class Test extends Survey {
+
+    /**
+     * Default constructor
+     */
+    public Test() {
+    }
+
+    /**
+     * 
+     */
+    private HashMap<QR> userReponses;
+
+    /**
+     * 
+     */
+    public String testName;
+
+    /**
+     * 
+     */
+    private HashMap<QA> correctAnswers;
+
+    /**
+     * 
+     */
+    private double grade;
+
+
+
+    /**
+     * @param testName
+     */
+    public void Test(String testName) {
+        // TODO implement here
+    }
+
+    /**
+     * @param question 
+     * @param answer
+     */
+    public void setCorrectAnswer(Question question, Answer answer) {
+        // TODO implement here
+    }
+
+    /**
+     * @param question 
+     * @param answer 
+     * @param response 
+     * @return
+     */
+    public boolean compareAnswer(Question question, Answer answer, Response response) {
+        // TODO implement here
+        return false;
+    }
+
+    /**
+     * 
+     */
+    public void editAnswer() {
+        // TODO implement here
+    }
+
+    /**
+     * @param grade
+     */
+    public void setGrade(double grade) {
+        // TODO implement here
+    }
+
+    /**
+     * @return
+     */
+    public double getGrade() {
+        // TODO implement here
+        return 0.0d;
+    }
+
+    /**
+     * @param testMap 
+     * @param answers 
+     * @param grade
+     */
+    public void serialize(HashMap<QR> testMap, HashMap<QA> answers, double grade) {
+        // TODO implement here
+    }
+
+    /**
+     * @param question 
+     * @param response
+     */
+    public void addResponse(Question question, Response response) {
+        // TODO implement here
+    }
+
+    /**
+     * @return
+     */
+    public Test createTest() {
+        // TODO implement here
+        return null;
+    }
+
+}

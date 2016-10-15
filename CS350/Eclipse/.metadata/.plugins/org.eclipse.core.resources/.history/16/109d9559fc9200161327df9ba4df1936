@@ -1,0 +1,98 @@
+
+import java.util.*;
+
+/**
+ * 
+ */
+public class Main {
+
+    /**
+     * Default constructor
+     */
+    public Main() {
+    }
+
+
+
+
+    /**
+     * @return
+     */
+    public void main() {
+        // TODO implement here
+        return null;
+    }
+
+    /**
+     * @return
+     */
+    public Survey createSurvey() {
+        // TODO implement here
+        return null;
+    }
+
+    /**
+     * @return
+     */
+    public Test createTest() {
+        // TODO implement here
+        return null;
+    }
+
+    /**
+     * 
+     */
+    public void displaySurvey() {
+        // TODO implement here
+    }
+
+    /**
+     * 
+     */
+    public void displayTest() {
+        // TODO implement here
+    }
+
+    /**
+     * 
+     */
+    public void editSurvey() {
+        // TODO implement here
+    }
+
+    /**
+     * 
+     */
+    public void editTest() {
+        // TODO implement here
+    }
+
+    /**
+     * @param fileLocation
+     */
+    public void importSurvey(String fileLocation) {
+        // TODO implement here
+    }
+
+    /**
+     * @param fileLocation
+     */
+    public void importTest(String fileLocation) {
+        // TODO implement here
+    }
+
+    /**
+     * 
+     */
+    public void serializeSurvey() {
+        // TODO implement here
+    }
+
+    /**
+     * 
+     */
+    public void serializeTest() {
+        // TODO implement here
+    }
+
+}

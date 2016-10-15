@@ -1,0 +1,19 @@
+/**
+ * 
+ */
+
+/**
+ * @author dave-tigre
+ *
+ */
+public class SurveyMenu extends Menu{
+
+	/**
+	 * 
+	 */
+	public SurveyMenu() {
+		// TODO Auto-generated constructor stub
+		System.out.println("Survey Menu");
+	}
+
+}

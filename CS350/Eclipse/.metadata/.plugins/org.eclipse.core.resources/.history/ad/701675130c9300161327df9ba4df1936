@@ -1,0 +1,41 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ * 
+ */
+
+/**
+ * @author dave-tigre
+ *
+ */
+public class Menu {
+	
+
+	public Menu(){
+	}
+	
+	public void displayOptions()
+	{
+		System.out.println("1) Survey Menu");
+		System.out.println("2) Test Menu");
+		System.out.println();
+		getUserResponse();
+	}
+	
+	public Menu getUserResponse()
+	{
+		Scanner input = new Scanner(System.in);
+		int choice = input.nextInt();
+		switch(choice)
+		{
+		case 1: SurveyMenu sMenu = new SurveyMenu();
+				return sMenu;
+		case 2: TestMenu tMenu = new TestMenu();
+				return tMenu;
+		}
+		SurveyMenu safeMenu = new SurveyMenu();
+		return safeMenu;
+	}
+	
+}

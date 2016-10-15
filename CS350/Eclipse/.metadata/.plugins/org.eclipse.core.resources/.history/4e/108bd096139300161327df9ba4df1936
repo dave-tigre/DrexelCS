@@ -1,0 +1,49 @@
+
+import java.util.*;
+
+/**
+ * 
+ */
+public class Answer extends Response {
+
+    /**
+     * Default constructor
+     */
+    public Answer() {
+    }
+
+    /**
+     * 
+     */
+    private String answer;
+
+    /**
+     * 
+     */
+    public void Answer() {
+        // TODO implement here
+    }
+
+    /**
+     * @return
+     */
+    public Answer getAnswer() {
+        // TODO implement here
+        return null;
+    }
+
+    /**
+     * @param answer
+     */
+    public void setAnswer(Object answer) {
+        // TODO implement here
+    }
+
+    /**
+     * 
+     */
+    public void display() {
+        // TODO implement here
+    }
+
+}
