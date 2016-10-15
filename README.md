@@ -1,4 +1,4 @@
-# DrexelCS
+# Drexel University Computer Science
 Course work for my computer science minor at Drexel University
 
 - CS171: Intro to Computer Programming I
