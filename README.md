@@ -1,8 +1,8 @@
 # DrexelCS
 Course work for my computer science minor at Drexel University
 
--CS171: Intro to Computer Programming I
--CS172: Into to Computer Programming II
--CS265: Advanced Programming Techniques
--CS260: Data Structures and Algorithms
--CS350: Software Design
+- CS171: Intro to Computer Programming I
+- CS172: Into to Computer Programming II
+- CS265: Advanced Programming Techniques
+- CS260: Data Structures and Algorithms
+- CS350: Software Design
