@@ -10,28 +10,40 @@ import java.util.*;
  */
 public class MultipleChoice extends Question {
 
-	public ArrayList<String> choices;
-    private Response userResponse;
-
     /**
      * Default constructor
      */
     public MultipleChoice() {
-    	
-    } 
-
-    /**
-     * @param choices
-     */
-    public void addChoices(String ch) {
-        // TODO implement here
-    	choices.add(ch);
     }
 
     /**
      * 
      */
-    private void editChoices() {
+    public ArrayList<String> choices;
+
+    /**
+     * 
+     */
+    private Response userResponse;
+
+    /**
+     * 
+     */
+    public void MultipleChoice() {
+        // TODO implement here
+    }
+
+    /**
+     * @param choices
+     */
+    public void addChoices(ArrayList<String> choices) {
+        // TODO implement here
+    }
+
+    /**
+     * 
+     */
+    public void editChoices() {
         // TODO implement here
     }
 

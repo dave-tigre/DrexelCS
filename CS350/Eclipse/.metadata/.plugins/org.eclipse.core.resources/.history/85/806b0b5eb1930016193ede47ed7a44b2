@@ -87,28 +87,19 @@ public class Menu {
 			case "6":  Matching newMatch = new Matching();
 						createNewQuestion(newMatch);
 						break;
-			case "7": System.out.println("Terminating Survey Maker...");
-						break;
 			default: System.out.println("Invalid Input please Try again");
 						creationMenu();
 						break;
 		}
+
+		
+		
 	}
 	
 	public void createNewQuestion(Question q)
 	{
 		System.out.println("Input Question prompt: ");
 		q.setPrompt(getResponse());
-	}
-	
-	public void loadMenu()
-	{
-		//method for loading previously created survey's or tests
-	}
-	
-	public void saveMenu()
-	{
-		
 	}
 	
 }

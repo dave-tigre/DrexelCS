@@ -17,21 +17,26 @@ public class MultipleChoice extends Question {
      * Default constructor
      */
     public MultipleChoice() {
-    	
-    } 
+    }
+    
+    /**
+     * 
+     */
+    public void MultipleChoice() {
+        // TODO implement here
+    }
 
     /**
      * @param choices
      */
-    public void addChoices(String ch) {
+    public void addChoices(ArrayList<String> choices) {
         // TODO implement here
-    	choices.add(ch);
     }
 
     /**
      * 
      */
-    private void editChoices() {
+    public void editChoices() {
         // TODO implement here
     }
 

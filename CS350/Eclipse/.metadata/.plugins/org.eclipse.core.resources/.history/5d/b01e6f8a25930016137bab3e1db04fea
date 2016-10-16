@@ -37,8 +37,8 @@ public class Survey {
     /**
      * 
      */
-    public void addQuestion(Question q) {
-        Questions.add(q);
+    public void addQuestion() {
+        // TODO implement here
     }
 
     /**

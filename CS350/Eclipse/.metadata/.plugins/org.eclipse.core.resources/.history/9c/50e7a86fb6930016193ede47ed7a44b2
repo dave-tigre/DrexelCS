@@ -11,12 +11,22 @@ import java.util.*;
 
 public class TrueFalse extends MultipleChoice {
 
-	private Response userResponse;
-	
     /**
      * Default constructor
      */
     public TrueFalse() {
+    }
+
+    /**
+     * 
+     */
+    private Response userResponse;
+
+    /**
+     * 
+     */
+    public void TrueFalse() {
+        // TODO implement here
     }
 
     /**

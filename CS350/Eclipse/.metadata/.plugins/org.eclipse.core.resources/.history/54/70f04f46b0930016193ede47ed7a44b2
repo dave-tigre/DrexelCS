@@ -39,5 +39,11 @@ public class TestMenu extends Menu {
 		newTest.setTestName(getResponse());
 		creationMenu();
 	}
+	
+	public void creationMenu()
+	{
+		display(super.creationOptions);
+		
+	}
 
 }

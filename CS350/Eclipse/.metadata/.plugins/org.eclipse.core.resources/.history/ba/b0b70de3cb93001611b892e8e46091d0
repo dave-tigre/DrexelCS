@@ -93,22 +93,15 @@ public class Menu {
 						creationMenu();
 						break;
 		}
+
+		
+		
 	}
 	
 	public void createNewQuestion(Question q)
 	{
 		System.out.println("Input Question prompt: ");
 		q.setPrompt(getResponse());
-	}
-	
-	public void loadMenu()
-	{
-		//method for loading previously created survey's or tests
-	}
-	
-	public void saveMenu()
-	{
-		
 	}
 	
 }

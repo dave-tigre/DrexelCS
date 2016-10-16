@@ -64,7 +64,6 @@ public class Menu {
 	
 	public void creationMenu()
 	{
-		
 		display(creationOptions);
 		String choice = getResponse();
 		switch(choice)
@@ -99,16 +98,6 @@ public class Menu {
 	{
 		System.out.println("Input Question prompt: ");
 		q.setPrompt(getResponse());
-	}
-	
-	public void loadMenu()
-	{
-		//method for loading previously created survey's or tests
-	}
-	
-	public void saveMenu()
-	{
-		
 	}
 	
 }

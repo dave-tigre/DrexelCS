@@ -31,10 +31,6 @@ public class SurveyMenu extends Menu{
 		{
 		case "1": createNewSurvey();
 				break;
-		case "2": //display survey
-				break;
-		case "3": // load survey
-				break;
 		default: System.out.println("Invalid Input");
 				break;
 		}
@@ -47,8 +43,40 @@ public class SurveyMenu extends Menu{
 		currentSurvey.setSurveyName(getResponse());
 		creationMenu();
 	}
-	
-	
+	public void creationMenu()
+	{
+		
+		display(super.creationOptions);
+		String choice = getResponse();
+		switch(choice)
+		{
+			case "1" : TrueFalse newTF = new TrueFalse();
+						createNewQuestion(newTF);
+						break;
+			case "2": MultipleChoice newMC = new MultipleChoice();
+						createNewQuestion(newMC);
+						break;
+			case "3": ShortAnswer newSA = new ShortAnswer();
+						createNewQuestion(newSA);
+						break;
+			case "4": Essay newEssay = new Essay();
+						createNewQuestion(newEssay);
+						break;
+			case "5": Ranking newRank = new Ranking();
+						createNewQuestion(newRank);
+						break;
+			case "6":  Matching newMatch = new Matching();
+						createNewQuestion(newMatch);
+						break;
+			default: System.out.println("Invalid Input please Try again");
+						creationMenu();
+						break;
+
+		}
+
+		
+		
+	}
 	
 
 }

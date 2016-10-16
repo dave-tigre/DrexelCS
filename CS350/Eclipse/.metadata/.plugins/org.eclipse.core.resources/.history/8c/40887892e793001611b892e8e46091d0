@@ -31,10 +31,6 @@ public class SurveyMenu extends Menu{
 		{
 		case "1": createNewSurvey();
 				break;
-		case "2": //display survey
-				break;
-		case "3": // load survey
-				break;
 		default: System.out.println("Invalid Input");
 				break;
 		}
