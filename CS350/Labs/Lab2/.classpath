@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="lab1/src"/>
+	<classpathentry kind="lib" path="lab1/maze-ui.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/dave-tigre/Documents/Git/DrexelCS/CS350/Labs/Lab2/lab1/maze-ui.jar"/>
+	<classpathentry kind="output" path="lab1/bin"/>
+</classpath>
