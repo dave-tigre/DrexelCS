@@ -16,9 +16,9 @@ public class Test extends Survey {
     public Test() {
     }
 
-    private HashMap<String, Response>  userReponses;
+    private HashMap<String, Response>  userReponses = new HashMap<String, Response>();
     public String testName;
-    private HashMap<String, Answer>  correctAnswers;
+    private HashMap<String, Answer>  correctAnswers = new HashMap<String, Answer>();
     private double grade;
 
     public void setTestName(String testName)

@@ -12,6 +12,7 @@ import java.util.*;
 public class TrueFalse extends MultipleChoice {
 
 	private Response userResponse;
+	private final String choices[] = {"True", "False"};
 	
     /**
      * Default constructor
@@ -22,8 +23,14 @@ public class TrueFalse extends MultipleChoice {
     /**
      * 
      */
+    @Override
     public void display() {
         // TODO implement here
+    	System.out.println(getPrompt());
+    	for(int i = 0; i < choices.length; i++)
+    	{
+    		System.out.println(i + ") " + choices[i]);
+    	}
     }
 
     /**

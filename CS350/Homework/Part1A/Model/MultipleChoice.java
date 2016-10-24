@@ -10,7 +10,7 @@ import java.util.*;
  */
 public class MultipleChoice extends Question {
 
-	public ArrayList<String> choices;
+	public ArrayList<String> choices = new ArrayList<String>();
     private Response userResponse;
 
     /**
@@ -25,7 +25,13 @@ public class MultipleChoice extends Question {
      */
     public void addChoices(String ch) {
         // TODO implement here
-    	choices.add(ch);
+    	
+    	String chs[] = ch.split(",");
+    	for(String choice : chs)
+    	{
+    		choices.add(choice);
+    	}
+    	
     }
 
     /**
@@ -40,6 +46,11 @@ public class MultipleChoice extends Question {
      */
     public void display() {
         // TODO implement here
+    	System.out.println(getPrompt());
+    	for(int i = 0; i < choices.size(); i++)
+    	{
+    		System.out.println(i + ") " + choices.get(i));
+    	}
     }
 
     /**

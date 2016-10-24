@@ -15,7 +15,7 @@ public abstract class Question {
 	
 	public Question()
 	{
-		System.out.println("Constructing a Question");
+		//System.out.println("Constructing a Question");
 	}
 
 	public void setPrompt(String prompt)

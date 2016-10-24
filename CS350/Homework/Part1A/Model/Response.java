@@ -22,26 +22,16 @@ public class Response {
     private String response;
 
 
-    /**
-     * 
-     */
-    public void Response() {
-        // TODO implement here
-    }
 
-    /**
-     * @return
-     */
-    public Response getUserResponse() {
-        // TODO implement here
-        return null;
-    }
 
     /**
      * @param inputResponse
      */
-    public void setUserResponse(Object inputResponse) {
+    public void setUserResponse() {
         // TODO implement here
+    	Scanner input = new Scanner(System.in);
+    	String resp = input.nextLine();
+    	this.response = resp;
     }
 
     /**
@@ -49,6 +39,7 @@ public class Response {
      */
     public void display() {
         // TODO implement here
+    	System.out.println(response);
     }
 
 }

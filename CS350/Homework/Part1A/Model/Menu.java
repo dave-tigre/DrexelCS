@@ -62,38 +62,7 @@ public class Menu {
 	
 	}
 	
-	public void creationMenu()
-	{
-		
-		display(creationOptions);
-		String choice = getResponse();
-		switch(choice)
-		{
-			case "1" : TrueFalse newTF = new TrueFalse();
-						createNewQuestion(newTF);
-						break;
-			case "2": MultipleChoice newMC = new MultipleChoice();
-						createNewQuestion(newMC);
-						break;
-			case "3": ShortAnswer newSA = new ShortAnswer();
-						createNewQuestion(newSA);
-						break;
-			case "4": Essay newEssay = new Essay();
-						createNewQuestion(newEssay);
-						break;
-			case "5": Ranking newRank = new Ranking();
-						createNewQuestion(newRank);
-						break;
-			case "6":  Matching newMatch = new Matching();
-						createNewQuestion(newMatch);
-						break;
-			case "7": System.out.println("Terminating Survey Maker...");
-						break;
-			default: System.out.println("Invalid Input please Try again");
-						creationMenu();
-						break;
-		}
-	}
+	
 	
 	public void createNewQuestion(Question q)
 	{
