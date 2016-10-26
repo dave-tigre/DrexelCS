@@ -86,6 +86,7 @@ public class Survey {
      */
     public void addResponse(Question question, Response response) {
         // TODO implement here
+    	userResponses.put(question.getPrompt(), response);
     }
 
     /**
@@ -94,8 +95,7 @@ public class Survey {
     public void getUserResponse() 
     {
     	
-    	
-    	}
+    }
 
     /**
      * @param surveyMap

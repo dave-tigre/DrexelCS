@@ -47,7 +47,8 @@ public class SurveyMenu extends Menu{
 				break;
 		case "4": saveSurvey();
 				break;
-		case "5": break;
+		case "5": System.out.println("Terminating Survey Maker..."); System.exit(0);
+				break;
 			
 		default: System.out.println("Invalid Input");
 				break;
@@ -65,13 +66,23 @@ public class SurveyMenu extends Menu{
 	
 	public void displaySurvey()
 	{
-		System.out.println("Select the Survey you wish to display: ");
-		for(int i = 0; i < availableSurveys.size(); i++)
+		if(availableSurveys.isEmpty())
 		{
-			System.out.println(i +") " + availableSurveys.get(i).getSurveyName());
+			System.out.println("There are no surveys to display. Create or load a new survey to display");
+			surveyMenu();
 		}
-		String choice = getResponse();
-		availableSurveys.get(Integer.parseInt(choice)).display();
+		else{
+			
+		
+			System.out.println("Select the Survey you wish to display: ");
+			for(int i = 0; i < availableSurveys.size(); i++)
+			{
+				System.out.println(i +") " + availableSurveys.get(i).getSurveyName());
+			}
+			String choice = getResponse();
+			availableSurveys.get(Integer.parseInt(choice)).display();
+			surveyMenu();
+		}
 	}
 	
 	public void loadSurvey()
@@ -79,15 +90,32 @@ public class SurveyMenu extends Menu{
 		System.out.println("Enter the file path of the survey you wish to load: ");
 		Scanner in = new Scanner(System.in);
 		String path = in.nextLine();
+		if(path.contains("\\"))
+		{
+			
+		}
+		else
+		{
+			System.out.println("Invalid input... File Does not exist.");
+			surveyMenu();
+		}
 		
 	}
 	
 	public void saveSurvey()
 	{
-		System.out.println("Select the Survey you with to save: ");
-		for(int i = 0; i < availableSurveys.size(); i++)
+		if(availableSurveys.isEmpty())
 		{
-			System.out.println(i +") " + availableSurveys.get(i).getSurveyName());
+			System.out.println("There are no surveys to save. Create a new survey to save.");
+			surveyMenu();
+		}
+		else{
+			
+			System.out.println("Select the Survey you with to save: ");
+			for(int i = 0; i < availableSurveys.size(); i++)
+			{
+				System.out.println(i +") " + availableSurveys.get(i).getSurveyName());
+			}
 		}
 	}
 	
