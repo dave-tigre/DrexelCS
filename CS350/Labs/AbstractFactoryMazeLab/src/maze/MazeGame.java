@@ -1,29 +1,5 @@
-/*
- * SimpleMazeGame.java
- * Copyright (c) 2008, Drexel University.
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Drexel University nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY DREXEL UNIVERSITY ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL DREXEL UNIVERSITY BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+/**
+ * 
  */
 package maze;
 
@@ -37,32 +13,37 @@ import java.util.Scanner;
 import maze.ui.MazeViewer;
 
 /**
- * 
- * @author Sunny
- * @version 1.0
- * @since 1.0
+ * @author dave-tigre
+ *
  */
-public class SimpleMazeGame
-{
+public class MazeGame {
+
+	/**
+	 * 
+	 */
+	public MazeGame() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Creates a small maze.
 	 */
-	public static Maze createMaze()
+	public static Maze createMaze(MazeFactory inFactory)
 	{
 		
-		Maze maze = new Maze();
-		Room r0 = new Room(0);
-		Room r1 = new Room(1);
-		Door d0 = new Door(r0,r1);
+		Maze maze = inFactory.makeMaze();
+		Room r0 = inFactory.makeRoom(0);
+		Room r1 = inFactory.makeRoom(1);
+		Door d0 = inFactory.makeDoor(r0,r1);
 		
-		r0.setSide(Direction.North, new Wall());
-		r0.setSide(Direction.South, new Wall());
+		r0.setSide(Direction.North, inFactory.makeWall());
+		r0.setSide(Direction.South, inFactory.makeWall());
 		r0.setSide(Direction.East, d0);
-		r0.setSide(Direction.West, new Wall());
+		r0.setSide(Direction.West, inFactory.makeWall());
 		
-		r1.setSide(Direction.North, new Wall());
-		r1.setSide(Direction.South, new Wall());
-		r1.setSide(Direction.East, new Wall());
+		r1.setSide(Direction.North, inFactory.makeWall());
+		r1.setSide(Direction.South, inFactory.makeWall());
+		r1.setSide(Direction.East, inFactory.makeWall());
 		r1.setSide(Direction.West, d0);
 		
 		maze.addRoom(r0);
@@ -75,9 +56,9 @@ public class SimpleMazeGame
 	 * Loads a given maze.
 	 * @param path : given file path
 	 */
-	public static Maze loadMaze(final String path) throws FileNotFoundException
+	public static Maze loadMaze(final String path, MazeFactory inFactory) throws FileNotFoundException
 	{
-		Maze maze = new Maze();
+		Maze maze = inFactory.makeMaze();
 		HashMap<Integer,String[]> roomMap = new HashMap<Integer,String[]>();
 		HashMap<Integer,String[]> doorMap = new HashMap<Integer,String[]>();
 		ArrayList<Room> roomList = new ArrayList<Room>();
@@ -111,7 +92,7 @@ public class SimpleMazeGame
 		for(int i : roomMap.keySet())
 		{
 			//create new room
-			Room newRoom = new Room(i);
+			Room newRoom = inFactory.makeRoom(i);
 			int dr = 0; //room side direction
 			//get the specific room params
 			for(String s : roomMap.get(i))
@@ -119,7 +100,7 @@ public class SimpleMazeGame
 				//if wall create new wall for that side
 				if(s.equals("wall"))
 				{
-					newRoom.setSide(dir[dr], new Wall());
+					newRoom.setSide(dir[dr], inFactory.makeWall());
 				}
 				// if a door, get the door specs and add the door spec listing
 				else if(s.contains("d"))
@@ -146,7 +127,7 @@ public class SimpleMazeGame
 		{
 			int rm1 = Integer.parseInt(doorMap.get(i)[0]);
 			int rm2 = Integer.parseInt(doorMap.get(i)[1]);
-			Door newDoor = new Door(roomList.get(rm1), roomList.get(rm2));
+			Door newDoor = inFactory.makeDoor(roomList.get(rm1), roomList.get(rm2));
 			doorList.add(newDoor);			
 		}
 		
@@ -171,30 +152,63 @@ public class SimpleMazeGame
 		
 		return maze;
 	}
+	
+	public static MazeFactory mazeFactorySelection()
+	{
+		MazeFactory inFactory;
+		Scanner in = new Scanner(System.in);
+		System.out.println("Select which maze type:");
+		String choices[] = {"Basic Maze", "Red Maze", "Blue Maze"};
+		int k;
+		for(int i = 0; i < choices.length; i++)
+		{
+			k = i+1;
+			System.out.println(k +") " + choices[i]);
+		}
+		int choice = in.nextInt();
+		switch(choice)
+		{
+		case 1: inFactory = new MazeFactory();
+		break;
+		case 2: inFactory = new RedMazeFactory();
+		break;
+		case 3: inFactory = new BlueMazeFactory();
+		break;
+		default: choice = 1; inFactory = new MazeFactory();
+		break;
+		}
+		return inFactory;
+		
+	}
 
 	public static void main(String[] args)
 	{
-		Maze maze;
 		Scanner in = new Scanner(System.in);
 		System.out.println("Enter file path of maze (if creating default maze just hit enter) :");
 		String path = in.nextLine();
-		
+		MazeFactory inFactory;
+		Maze maze;
 		// user enters file path, uses regex in order to determine file location
 		// if file path is entered it finds it, else it creates the default
 		if(path.contains("\\"))
 		{
 			path = path.replace("\\", "/");
 			try {
-				maze = loadMaze(path);
+				inFactory = mazeFactorySelection();
+				
+				maze = loadMaze(path,inFactory);
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				System.out.println("File not found, creating default maze...");
-				maze = createMaze();
+				inFactory = new MazeFactory();
+				maze = createMaze(inFactory);
 			}
 		}
 		else
 		{
-			maze = createMaze();
+			inFactory = mazeFactorySelection();
+			maze = createMaze(inFactory);
+			//System.out.println("Creating " +choices[choice-1]+ " Game...");
 		}
 		
 	    MazeViewer viewer = new MazeViewer(maze);
