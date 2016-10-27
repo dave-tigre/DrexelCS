@@ -18,7 +18,7 @@ public class Test extends Survey {
 
     private HashMap<String, Response>  userReponses = new HashMap<String, Response>();
     public String testName;
-    private HashMap<String, Answer>  correctAnswers = new HashMap<String, Answer>();
+    private HashMap<String, Response>  correctAnswers = new HashMap<String, Response>();
     private double grade;
 
     public void setTestName(String testName)
@@ -33,19 +33,24 @@ public class Test extends Survey {
 
     /**
      * @param question 
-     * @param answer
+     * @param Response
      */
-    public void setCorrectAnswer(Question question, Answer answer) {
+    public void setCorrectResponse(Question question) {
         // TODO implement here
+    	System.out.println("Correct Answer: ");
+    	Response correctResponse = new Response();
+    	correctResponse.setUserResponse();
+    	correctAnswers.put(question.getPrompt(), correctResponse);
+    	
     }
 
     /**
      * @param question 
-     * @param answer 
+     * @param Response 
      * @param response 
      * @return
      */
-    public boolean compareAnswer(Question question, Answer answer, Response response) {
+    public boolean compareResponse(Question question, Response userResponse, Response answer) {
         // TODO implement here
         return false;
     }
@@ -53,7 +58,7 @@ public class Test extends Survey {
     /**
      * 
      */
-    public void editAnswer() {
+    public void editResponse() {
         // TODO implement here
     }
 
@@ -74,10 +79,10 @@ public class Test extends Survey {
 
     /**
      * @param testMap 
-     * @param answers 
+     * @param Responses 
      * @param grade
      */
-    public void serialize(HashMap<String, Response>  testMap, HashMap<String, Answer>  answers, double grade) {
+    public void serialize(HashMap<String, Response>  testMap, HashMap<String, Response>  Responses, double grade) {
         // TODO implement here
     }
 

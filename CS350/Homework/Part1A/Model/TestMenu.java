@@ -4,7 +4,7 @@ import java.util.Scanner;
 /**
  * @author David Tigreros
  * 10/15/2016
- * Survey Maker
+ * Test Maker
  * 
  * Test Menu
  */
@@ -13,35 +13,109 @@ public class TestMenu extends Menu {
 
 	public String options1[] = {"1) Create a new Test","2) Display a Test",
 			"3) Load a Test","4) Save a Test", "5) Quit"};
+	
 	private ArrayList<Test> availableTests = new ArrayList<Test>();
 	
 	public Test currentTest;
-	
 	/**
 	 * 
 	 */
 	public TestMenu() {
 		// TODO Auto-generated constructor stub
-		System.out.println("Test Menu");
-		display(options1);
-		System.out.println();
-		String choice = getResponse();
-		
-		switch(choice)
+		TestMenu();
+	}
+	
+	public void TestMenu()
+	{
+		int invalid_count = 0;
+		while(invalid_count < 3)
 		{
-		case "1": createNewTest();
-				break;
-		default: System.out.println("Invalid Input");
-				break;
+			System.out.println("Test Menu");
+			display(options1);
+			System.out.println();
+			String choice = getResponse();
+			switch(choice)
+			{
+			case "1": createNewTest();
+			break;
+			case "2": displayTest();
+			break;
+			case "3": loadTest();
+			break;
+			case "4": saveTest();
+			break;
+			case "5": invalid_count = 10;
+			break;
+			default: System.out.println("Invalid Input");
+			invalid_count++;
+			break;
+			}
 		}
+		System.out.println("Terminating Test Maker..."); 
 	}
 	
 	public void createNewTest()
 	{
-		Test newTest = new Test();
+		currentTest = new Test();
 		System.out.println("Name this Test: ");
-		newTest.setTestName(getResponse());
+		currentTest.setTestName(getResponse());
+		availableTests.add(currentTest);
 		creationMenu();
+	}
+	
+	public void displayTest()
+	{
+		if(availableTests.isEmpty())
+		{
+			System.out.println("There are no Tests to display. Create or load a new Test to display");
+			
+		}
+		else{
+			
+		
+			System.out.println("Select the Test you wish to display: ");
+			for(int i = 0; i < availableTests.size(); i++)
+			{
+				System.out.println(i +") " + availableTests.get(i).getTestName());
+			}
+			String choice = getResponse();
+			availableTests.get(Integer.parseInt(choice)).display();
+			
+		}
+	}
+	
+	public void loadTest()
+	{
+		System.out.println("Enter the file path of the Test you wish to load: ");
+		Scanner in = new Scanner(System.in);
+		String path = in.nextLine();
+		if(path.contains("\\"))
+		{
+			
+		}
+		else
+		{
+			System.out.println("Invalid input... File Does not exist.");
+			
+		}
+		
+	}
+	
+	public void saveTest()
+	{
+		if(availableTests.isEmpty())
+		{
+			System.out.println("There are no Tests to save. Create a new Test to save.");
+		
+		}
+		else{
+			
+			System.out.println("Select the Test you with to save: ");
+			for(int i = 0; i < availableTests.size(); i++)
+			{
+				System.out.println(i +") " + availableTests.get(i).getTestName());
+			}
+		}
 	}
 	
 	public void creationMenu()
@@ -49,17 +123,20 @@ public class TestMenu extends Menu {
 		
 		display(creationOptions);
 		String choice = getResponse();
+		
 		switch(choice)
 		{
 			case "1" : TrueFalse newTF = new TrueFalse();
 						createNewQuestion(newTF);
 						currentTest.addQuestion(newTF);
+						currentTest.setCorrectResponse(newTF);
 						creationMenu();
 			case "2": MultipleChoice newMC = new MultipleChoice();
 						createNewQuestion(newMC);
 						System.out.println("Enter the choices, place a comma after each choice: ");
 						newMC.addChoices(getResponse());
 						currentTest.addQuestion(newMC);
+						currentTest.setCorrectResponse(newMC);
 						creationMenu();
 			case "3": ShortAnswer newSA = new ShortAnswer();
 						createNewQuestion(newSA);
@@ -77,12 +154,14 @@ public class TestMenu extends Menu {
 						createNewQuestion(newMatch);
 						currentTest.addQuestion(newMatch);
 						creationMenu();
-			case "7": System.out.println("Terminating Survey Maker...");
+			case "7": System.out.println("Terminating Test Maker...");
+						TestMenu();
 						break;
 			default: System.out.println("Invalid Input please Try again");
 						creationMenu();
 						break;
 		}
+		
 	}
 
 }

@@ -32,27 +32,33 @@ public class SurveyMenu extends Menu{
 	
 	public void surveyMenu()
 	{
-		System.out.println("Survey Menu");
-		display(options1);
-		System.out.println();
-		String choice = getResponse();
 		
-		switch(choice)
+		
+		int invalid_count = 0;
+		while(invalid_count < 3)
 		{
-		case "1": createNewSurvey();
-				break;
-		case "2": displaySurvey();
-				break;
-		case "3": loadSurvey();
-				break;
-		case "4": saveSurvey();
-				break;
-		case "5": System.out.println("Terminating Survey Maker..."); System.exit(0);
-				break;
-			
-		default: System.out.println("Invalid Input");
-				break;
+			System.out.println("Survey Menu");
+			display(options1);
+			System.out.println();
+			String choice = getResponse();
+			switch(choice)
+			{
+			case "1": createNewSurvey();
+			break;
+			case "2": displaySurvey();
+			break;
+			case "3": loadSurvey();
+			break;
+			case "4": saveSurvey();
+			break;
+			case "5": invalid_count = 10;
+			break;
+			default: System.out.println("Invalid Input");
+			invalid_count++;
+			break;
+			}
 		}
+		System.out.println("Terminating Survey Maker..."); 
 	}
 	
 	public void createNewSurvey()
@@ -69,7 +75,7 @@ public class SurveyMenu extends Menu{
 		if(availableSurveys.isEmpty())
 		{
 			System.out.println("There are no surveys to display. Create or load a new survey to display");
-			surveyMenu();
+			
 		}
 		else{
 			
@@ -81,7 +87,7 @@ public class SurveyMenu extends Menu{
 			}
 			String choice = getResponse();
 			availableSurveys.get(Integer.parseInt(choice)).display();
-			surveyMenu();
+			
 		}
 	}
 	
@@ -97,7 +103,7 @@ public class SurveyMenu extends Menu{
 		else
 		{
 			System.out.println("Invalid input... File Does not exist.");
-			surveyMenu();
+			
 		}
 		
 	}
@@ -107,7 +113,7 @@ public class SurveyMenu extends Menu{
 		if(availableSurveys.isEmpty())
 		{
 			System.out.println("There are no surveys to save. Create a new survey to save.");
-			surveyMenu();
+		
 		}
 		else{
 			

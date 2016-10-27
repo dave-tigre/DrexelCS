@@ -76,7 +76,7 @@ public class Survey {
     		response.setUserResponse();
     		addResponse(Questions.get(i), response);
     	}
-    	System.out.println("End of the Survey... Thank you!");
+    	System.out.println("End of questions... Thank you!");
     	
     }
 
