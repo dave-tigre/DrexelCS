@@ -135,7 +135,7 @@ public class TestMenu extends Menu {
 			case "2": MultipleChoice newMC = new MultipleChoice();
 						createNewQuestion(newMC);
 						System.out.println("Enter number of choices for your multiple choice question: ");
-						newMC.choiceAmount(Integer.parseInt(getResponse()));
+						newMC.choiceAmount();
 						newMC.addChoices();
 						currentTest.addQuestion(newMC);
 						currentTest.setCorrectResponse(newMC);

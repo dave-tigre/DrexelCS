@@ -33,10 +33,20 @@ public class MultipleChoice extends Question {
     	
     }
     
-    public void choiceAmount(int numOfChoices)
+    public void choiceAmount()
     {
-    	this.numOfChoices = numOfChoices;
+    	String numCh = getUserResponse();
+    	try
+    	{
+    		numOfChoices = Integer.parseInt(numCh);
+    	}
+    	catch(NumberFormatException nfe)
+    	{
+    		System.out.println("Input was not a valid integer... Try again..");
+    		choiceAmount();
+    	}
     }
+
 
     /**
      * 
@@ -48,6 +58,7 @@ public class MultipleChoice extends Question {
     /**
      * 
      */
+    @Override
     public void display() {
         // TODO implement here
     	System.out.println(getPrompt());

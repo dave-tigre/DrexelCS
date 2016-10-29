@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -8,7 +9,7 @@ import java.util.HashMap;
  * 
  * Survey Class
  */
-public class Survey {
+public class Survey implements Serializable {
 
     /**
      * Default constructor
@@ -18,7 +19,7 @@ public class Survey {
 
     public ArrayList<Question> Questions = new ArrayList<Question>();
     private HashMap<String, Response> userResponses = new HashMap<String, Response>();
-    public String surveyName;
+    private String surveyName;
     int numberOfQuestions;
 
 
@@ -31,7 +32,6 @@ public class Survey {
     {
     	return surveyName;
     
-
     }
 
     /**
@@ -75,7 +75,7 @@ public class Survey {
     		System.out.print(x + ") ");
     		Questions.get(i).display();
     	}
-    	System.out.println();
+    	System.out.println("\n");
     }
 
     /**

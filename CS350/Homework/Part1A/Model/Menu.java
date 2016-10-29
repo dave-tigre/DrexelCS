@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -69,6 +70,28 @@ public class Menu {
 	{
 		System.out.println("Enter the prompt for your "+q.getQuestionFormat() + " question: ");
 		q.setPrompt(getResponse());
+	}
+	
+	public ArrayList<String> listFiles(final String filePath)
+	{
+		File folder = new File(filePath);
+		File listOfFiles[] = folder.listFiles();
+		ArrayList<String> fileNames = new ArrayList<String>();
+		
+		if(listOfFiles.length > 0)
+		{
+			for(int i = 0; i < listOfFiles.length; i++)
+			{
+				int x = 0;
+				if(listOfFiles[i].isFile())
+				{
+					fileNames.add(listOfFiles[i].getName());
+					x++;			
+				}
+			}
+		}
+		
+		return fileNames;
 	}
 	
 	public void loadMenu()

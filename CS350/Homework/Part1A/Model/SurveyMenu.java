@@ -22,6 +22,8 @@ public class SurveyMenu extends Menu{
 	private ArrayList<Survey> availableSurveys = new ArrayList<Survey>();
 	
 	public Survey currentSurvey;
+	Serialize serializeObj = new Serialize();
+	private final String surveyFolder = "saved_surveys";
 	/**
 	 * 
 	 */
@@ -94,18 +96,29 @@ public class SurveyMenu extends Menu{
 	
 	public void loadSurvey()
 	{
-		System.out.println("Enter the file path of the survey you wish to load: ");
-		Scanner in = new Scanner(System.in);
-		String path = in.nextLine();
-		if(path.contains("\\"))
+		ArrayList<String> listOfFiles = listFiles(surveyFolder);
+		if(listOfFiles.size() < 1)
 		{
-			
+			System.out.println("There are no surveys to load...");
+			return;
 		}
-		else
-		{
-			System.out.println("Invalid input... File Does not exist.");
+		else{
+			System.out.println("Select the survey you want to load: ");
 			
+			for(int i = 0; i < listOfFiles.size(); i++)
+			{
+				int x = i+1;
+				System.out.println(x +") " + listOfFiles.get(i));
+			}
+			String choice = getResponse();
+			int ch = Integer.parseInt(choice) - 1;
+			String filePath = surveyFolder + "/" + listOfFiles.get(ch);
+			Survey loadedSurvey = serializeObj.deserializeSurvey(filePath);
+			availableSurveys.add(loadedSurvey);
+			surveyMenu();
 		}
+		
+
 		
 	}
 	
@@ -123,6 +136,12 @@ public class SurveyMenu extends Menu{
 			{
 				System.out.println(i +") " + availableSurveys.get(i).getSurveyName());
 			}
+			String choice = getResponse();
+			Survey savedSurvey = availableSurveys.get(Integer.parseInt(choice));
+			
+			serializeObj.serialize(savedSurvey);
+			System.out.println();
+			surveyMenu();
 		}
 	}
 	
@@ -140,7 +159,7 @@ public class SurveyMenu extends Menu{
 			case "2": MultipleChoice newMC = new MultipleChoice();
 						createNewQuestion(newMC);
 						System.out.println("Enter number of choices for your multiple choice question: ");
-						newMC.choiceAmount(Integer.parseInt(getResponse()));
+						newMC.choiceAmount();
 						newMC.addChoices();
 						currentSurvey.addQuestion(newMC);
 						creationMenu();
@@ -154,10 +173,17 @@ public class SurveyMenu extends Menu{
 						creationMenu();
 			case "5": Ranking newRank = new Ranking();
 						createNewQuestion(newRank);
+						System.out.println("Enter the number of premises for your ranking question");
+						newRank.prchAmount();
+						newRank.addPremises();
 						currentSurvey.addQuestion(newRank);
 						break;
 			case "6":  Matching newMatch = new Matching();
 						createNewQuestion(newMatch);
+						System.out.println("Enter the number of premises for your matching question");
+						newMatch.prchAmount();
+						newMatch.addPremises();
+						newMatch.addChoices();
 						currentSurvey.addQuestion(newMatch);
 						creationMenu();
 			case "7": System.out.println("Terminating Survey Maker...");

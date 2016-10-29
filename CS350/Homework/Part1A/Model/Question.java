@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
 /**
@@ -7,11 +8,9 @@ import java.util.Scanner;
  * 
  * Abstract Question Class
  */
-public abstract class Question {
+public abstract class Question implements Serializable {
 	
 	public String prompt;
-	private Response userResponse;
-	public String type;
 	
 	public Question()
 	{
