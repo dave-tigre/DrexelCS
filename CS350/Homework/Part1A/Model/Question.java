@@ -11,6 +11,7 @@ import java.util.Scanner;
 public abstract class Question implements Serializable {
 	
 	public String prompt;
+	protected Response qResponse; //response to this question
 	
 	public Question()
 	{
@@ -40,11 +41,6 @@ public abstract class Question implements Serializable {
     	System.out.println(prompt);
     }
     
-    public void setQuestionFormat(String type)
-    {
-    	
-    }
-    
     public abstract String getQuestionFormat();
     
     public String getUserResponse()
@@ -52,6 +48,17 @@ public abstract class Question implements Serializable {
     	Scanner input = new Scanner(System.in);
 		String choice = input.nextLine();
 		return choice;
+    }
+    
+    public void setResponse()
+    {
+    	qResponse = new Response();
+    	qResponse.setUserResponse();
+    }
+    
+    public Response getResponse()
+    {
+    	return qResponse;
     }
 
 }

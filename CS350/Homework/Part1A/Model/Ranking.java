@@ -38,12 +38,24 @@ public class Ranking extends Matching {
     }
 
 
-    /**
-     * @return
-     */
-    public Ranking createQuestion() {
-        // TODO implement here
-        return null;
+    @Override
+    public void setResponse()
+    {
+    	String rankingOrder = "Ranking Order From Top to Bottom: ";
+    	for(int i = 0; i< premises.size(); i++)
+    	{
+    		int x = i+1;
+    		System.out.println("Enter ranking of Premise #" +x + " "+premises.get(i) +": ");
+    		rankingOrder +=getUserResponse()+" ";
+    	}
+    	qResponse = new Response();
+    	qResponse.setUserResponse(rankingOrder);
+    }
+    
+    @Override
+    public Response getResponse()
+    {
+    	return qResponse;
     }
     
     @Override

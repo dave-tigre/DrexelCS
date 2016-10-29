@@ -10,7 +10,6 @@ import java.util.ArrayList;
 public class MultipleChoice extends Question {
 
 	public ArrayList<String> choices = new ArrayList<String>();
-    private Response userResponse;
     private int numOfChoices;
 
     /**
@@ -69,15 +68,7 @@ public class MultipleChoice extends Question {
     		System.out.print("	" +alpha[i] + ") " + choices.get(i));
     	}
     }
-
-    /**
-     * @return
-     */
-    public MultipleChoice createQuestion() {
-        // TODO implement here
-        return null;
-    }
-
+    
 	@Override
 	public String getQuestionFormat() {
 		// TODO Auto-generated method stub

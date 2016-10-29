@@ -78,12 +78,24 @@ public class Matching extends Question {
     	}
     }
 
-    /**
-     * @return
-     */
-    public Matching createQuestion() {
-        // TODO implement here
-        return null;
+    @Override
+    public void setResponse()
+    {
+    	String rankingOrder = "Matching Order From Top to Bottom: ";
+    	for(int i = 0; i< premises.size(); i++)
+    	{
+    		int x = i+1;
+    		System.out.println("Enter Matching Answer of Premise #" +x + " "+premises.get(i) +": ");
+    		rankingOrder +=getUserResponse()+" ";
+    	}
+    	qResponse = new Response();
+    	qResponse.setUserResponse(rankingOrder);
+    }
+    
+    @Override
+    public Response getResponse()
+    {
+    	return qResponse;
     }
 
 	@Override

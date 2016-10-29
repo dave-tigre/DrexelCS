@@ -59,8 +59,8 @@ public class Test extends Survey {
     public void setCorrectResponse(Question question) {
         // TODO implement here
     	System.out.println("Correct Response: ");
-    	Response correctResponse = new Response();
-    	correctResponse.setUserResponse();
+    	question.setResponse();
+    	Response correctResponse = question.getResponse();
     	correctResponses.put(question.getPrompt(), correctResponse);
     	
     }

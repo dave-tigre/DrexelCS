@@ -28,6 +28,13 @@ public class Response implements Serializable{
     	this.response = resp;
     }
     
+    /**
+     * @param inputResponse
+     */
+    public void setUserResponse(String response) {
+    	this.response = response;
+    }
+    
     public String getResponse()
     {
     	return response;
