@@ -17,6 +17,8 @@ public class TestMenu extends Menu {
 	private ArrayList<Test> availableTests = new ArrayList<Test>();
 	
 	public Test currentTest;
+	Serialize serializeObj = new Serialize();
+	private final String testFolder = "saved_tests";
 	/**
 	 * 
 	 */
@@ -87,18 +89,29 @@ public class TestMenu extends Menu {
 	
 	public void loadTest()
 	{
-		System.out.println("Enter the file path of the Test you wish to load: ");
-		Scanner in = new Scanner(System.in);
-		String path = in.nextLine();
-		if(path.contains("\\"))
+		ArrayList<String> listOfFiles = listFiles(testFolder);
+		if(listOfFiles.size() < 1)
 		{
-			
+			System.out.println("There are no tests to load...");
+			return;
 		}
-		else
-		{
-			System.out.println("Invalid input... File Does not exist.");
+		else{
+			System.out.println("Select the test you want to load: ");
 			
+			for(int i = 0; i < listOfFiles.size(); i++)
+			{
+				int x = i+1;
+				System.out.println(x +") " + listOfFiles.get(i));
+			}
+			String choice = getResponse();
+			int ch = Integer.parseInt(choice) - 1;
+			String filePath = testFolder + "/" + listOfFiles.get(ch);
+			Test loadedTest = serializeObj.deserializeTest(filePath);
+			availableTests.add(loadedTest);
+			testMenu();
 		}
+		
+
 		
 	}
 	
@@ -106,7 +119,7 @@ public class TestMenu extends Menu {
 	{
 		if(availableTests.isEmpty())
 		{
-			System.out.println("There are no Tests to save. Create a new Test to save.");
+			System.out.println("There are no tests to save. Create a new test to save.");
 		
 		}
 		else{
@@ -116,6 +129,12 @@ public class TestMenu extends Menu {
 			{
 				System.out.println(i +") " + availableTests.get(i).getTestName());
 			}
+			String choice = getResponse();
+			Test savedTest = availableTests.get(Integer.parseInt(choice));
+			
+			serializeObj.serializeTest(savedTest,testFolder);
+			System.out.println();
+			testMenu();
 		}
 	}
 	
@@ -143,25 +162,34 @@ public class TestMenu extends Menu {
 			case "3": ShortAnswer newSA = new ShortAnswer();
 						createNewQuestion(newSA);
 						currentTest.addQuestion(newSA);
+						currentTest.setCorrectResponse(newSA);
 						creationMenu();
 			case "4": Essay newEssay = new Essay();
 						createNewQuestion(newEssay);
 						currentTest.addQuestion(newEssay);
+						currentTest.setCorrectResponse(newEssay);
 						creationMenu();
 			case "5": Ranking newRank = new Ranking();
 						createNewQuestion(newRank);
+						System.out.println("Enter the number of premises for your ranking question");
+						newRank.prchAmount();
+						newRank.addPremises();
 						currentTest.addQuestion(newRank);
-						break;
+						currentTest.setCorrectResponse(newRank);
+						creationMenu();
 			case "6":  Matching newMatch = new Matching();
 						createNewQuestion(newMatch);
+						System.out.println("Enter the number of premises for your matching question");
+						newMatch.prchAmount();
+						newMatch.addPremises();
+						newMatch.addChoices();
 						currentTest.addQuestion(newMatch);
+						currentTest.setCorrectResponse(newMatch);
 						creationMenu();
 			case "7": System.out.println("Terminating Test Maker...");
 						testMenu();
-						break;
 			default: System.out.println("Invalid Input please Try again");
 						creationMenu();
-						break;
 		}
 		
 	}

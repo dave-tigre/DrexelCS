@@ -64,8 +64,6 @@ public class Menu {
 	
 	}
 	
-	
-	
 	public void createNewQuestion(Question q)
 	{
 		System.out.println("Enter the prompt for your "+q.getQuestionFormat() + " question: ");
@@ -92,16 +90,6 @@ public class Menu {
 		}
 		
 		return fileNames;
-	}
-	
-	public void loadMenu()
-	{
-		//method for loading previously created survey's or tests
-	}
-	
-	public void saveMenu()
-	{
-		
 	}
 	
 }

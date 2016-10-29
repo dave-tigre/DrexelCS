@@ -139,7 +139,7 @@ public class SurveyMenu extends Menu{
 			String choice = getResponse();
 			Survey savedSurvey = availableSurveys.get(Integer.parseInt(choice));
 			
-			serializeObj.serialize(savedSurvey);
+			serializeObj.serializeSurvey(savedSurvey,surveyFolder);
 			System.out.println();
 			surveyMenu();
 		}
@@ -177,7 +177,7 @@ public class SurveyMenu extends Menu{
 						newRank.prchAmount();
 						newRank.addPremises();
 						currentSurvey.addQuestion(newRank);
-						break;
+						creationMenu();
 			case "6":  Matching newMatch = new Matching();
 						createNewQuestion(newMatch);
 						System.out.println("Enter the number of premises for your matching question");
@@ -188,10 +188,8 @@ public class SurveyMenu extends Menu{
 						creationMenu();
 			case "7": System.out.println("Terminating Survey Maker...");
 						surveyMenu();
-						break;
 			default: System.out.println("Invalid Input please Try again");
 						creationMenu();
-						break;
 		}
 	}
 	

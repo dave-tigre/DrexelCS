@@ -13,30 +13,19 @@ import java.util.HashMap;
  * Serialization Class
  */
 public class Serialize {
-
-	private String fileName;
-    //private String storageLocation;
-    
     
     /**
      * Default constructor
      */
     public Serialize() {
     }
-    
-    /**
-     * 
-     */
-    public void Serialize() {
-        // TODO implement here
-    }
 
     /**
      * @param surveyMap
      */
-    public void serialize(Survey current) {
+    public void serializeSurvey(Survey current, final String folderName) {
         // TODO implement here
-    	fileName = "saved_surveys/"+ current.getSurveyName()+ ".ser";
+    	String fileName = folderName + "/"+ current.getSurveyName()+ ".ser";
     	try{
     		FileOutputStream fileOut = new FileOutputStream(fileName);
     		ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -48,7 +37,7 @@ public class Serialize {
     	catch(IOException i)
     	{
     		System.out.println("Error with serialization... Try again....");
-    		i.printStackTrace();
+    		return;
     	}
     }
 
@@ -61,6 +50,7 @@ public class Serialize {
     		loadSurvey = (Survey) in.readObject();
     		in.close();
     		fileIn.close();
+    		System.out.println("The " + loadSurvey.getSurveyName() +" survey has been loaded...");
     	}
     	catch(IOException i)
     	{
@@ -70,22 +60,49 @@ public class Serialize {
     	{
     		System.out.println("Survey not found");
     	}
-    	System.out.println("The " + loadSurvey.getSurveyName() +" Survey has been loaded...");
+    	
     	return loadSurvey;
     }
-
-    /**
-     * 
-     */
-    public void serializeSurvey() {
+    
+    public void serializeTest(Test current, final String folderName) {
         // TODO implement here
+    	String fileName = folderName + "/"+ current.getTestName()+ ".ser";
+    	try{
+    		FileOutputStream fileOut = new FileOutputStream(fileName);
+    		ObjectOutputStream out = new ObjectOutputStream(fileOut);
+    		out.writeObject(current);
+    		out.close();
+    		fileOut.close();
+    		System.out.println("The " +current.getTestName() +"  test has been serialized and saved in " + fileName);
+    	}
+    	catch(IOException i)
+    	{
+    		System.out.println("Error with serialization... Try again....");
+    		return;
+    	}
     }
-
-    /**
-     * 
-     */
-    public void serializeTest() {
-        // TODO implement here
+    
+    public Test deserializeTest(String fileName)
+    {
+    	Test loadTest = null;
+    	try{
+    		FileInputStream fileIn = new FileInputStream(fileName);
+    		ObjectInputStream in = new ObjectInputStream(fileIn);
+    		loadTest = (Test) in.readObject();
+    		in.close();
+    		fileIn.close();
+    		System.out.println("The " + loadTest.getTestName() +" test has been loaded...");
+    	}
+    	catch(IOException i)
+    	{
+    		System.out.println("Error with serialization... Try again....");
+    	}
+    	catch(ClassNotFoundException c)
+    	{
+    		System.out.println("Survey not found");
+    	}
+    	return loadTest;
+    	
     }
 
 }
