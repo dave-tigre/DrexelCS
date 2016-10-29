@@ -1,6 +1,4 @@
 
-import java.util.*;
-
 /**
  * @author David Tigreros
  * 10/15/2016
@@ -27,17 +25,9 @@ public class TrueFalse extends MultipleChoice {
     public void display() {
         // TODO implement here
     	System.out.println(getPrompt());
-    	for(int i = 0; i < choices.length; i++)
-    	{
-    		System.out.println(i + ") " + choices[i]);
-    	}
-    }
+    	System.out.println("A) " + choices[0]);
+    	System.out.println("B) " + choices[1]);
 
-    /**
-     * 
-     */
-    public void getUserResponse() {
-        // TODO implement here
     }
 
     /**
@@ -46,6 +36,11 @@ public class TrueFalse extends MultipleChoice {
     public TrueFalse createQuestion() {
         // TODO implement here
         return null;
+    }
+    
+    @Override
+    public String getQuestionFormat() {
+    	return "True/False";
     }
 
 }

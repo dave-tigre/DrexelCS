@@ -1,0 +1,30 @@
+/**
+ * 
+ */
+package maze;
+
+/**
+ * @author dave-tigre
+ *
+ */
+public class RedMazeFactory extends MazeFactory {
+
+	/**
+	 * 
+	 */
+	public RedMazeFactory() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public static Wall makeWall()
+	{
+		return new RedWall();
+	}
+	
+	public static Room makeRoom(int n)
+	{
+		return new RedRoom(n);
+	}
+	
+
+}

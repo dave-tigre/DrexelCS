@@ -1,5 +1,5 @@
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author David Tigreros
@@ -69,15 +69,13 @@ public class Survey {
      */
     public void display() {
         // TODO implement here
-    	Response response = new Response();
     	for(int i = 0; i < Questions.size();i++)
     	{
+    		int x = i+1;
+    		System.out.print(x + ") ");
     		Questions.get(i).display();
-    		response.setUserResponse();
-    		addResponse(Questions.get(i), response);
     	}
-    	System.out.println("End of questions... Thank you!");
-    	
+    	System.out.println();
     }
 
     /**

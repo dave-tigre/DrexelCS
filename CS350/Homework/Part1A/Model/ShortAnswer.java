@@ -10,41 +10,12 @@ import java.util.*;
  */
 public class ShortAnswer extends Essay {
 
+	private Response userResponse;
+    public int maxWordCount;
     /**
      * Default constructor
      */
     public ShortAnswer() {
-    }
-
-    /**
-     * 
-     */
-    private Response userResponse;
-
-    /**
-     * 
-     */
-    public int maxWordCount;
-
-    /**
-     * 
-     */
-    public void ShortAnswer() {
-        // TODO implement here
-    }
-
-    /**
-     * 
-     */
-    public void display() {
-        // TODO implement here
-    }
-
-    /**
-     * 
-     */
-    public void getUserResponse() {
-        // TODO implement here
     }
 
     /**
@@ -53,6 +24,11 @@ public class ShortAnswer extends Essay {
     public ShortAnswer createQuestion() {
         // TODO implement here
         return null;
+    }
+    
+    @Override
+    public String getQuestionFormat() {
+    	return "Short Answer";
     }
 
 }

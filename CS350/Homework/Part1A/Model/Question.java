@@ -1,5 +1,4 @@
-
-import java.util.*;
+import java.util.Scanner;
 
 /**
  * @author David Tigreros
@@ -12,6 +11,7 @@ public abstract class Question {
 	
 	public String prompt;
 	private Response userResponse;
+	public String type;
 	
 	public Question()
 	{
@@ -22,6 +22,7 @@ public abstract class Question {
 	{
 		this.prompt = prompt;
 	}
+	
 	
 	public String getPrompt()
 	{
@@ -45,14 +46,13 @@ public abstract class Question {
     	
     }
     
-    public String getQuestionFormat()
-    {
-    	return null;
-    }
+    public abstract String getQuestionFormat();
     
-    public void getUserReponse()
+    public String getUserResponse()
     {
-    	
+    	Scanner input = new Scanner(System.in);
+		String choice = input.nextLine();
+		return choice;
     }
 
 }

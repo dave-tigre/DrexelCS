@@ -1,6 +1,4 @@
 
-import java.util.*;
-
 /**
  * @author David Tigreros
  * 10/15/2016
@@ -10,22 +8,11 @@ import java.util.*;
  */
 public class Ranking extends Matching {
 
+	private Response userResponse;
     /**
      * Default constructor
      */
     public Ranking() {
-    }
-
-    /**
-     * 
-     */
-    private Response userResponse;
-
-    /**
-     * 
-     */
-    public void Ranking() {
-        // TODO implement here
     }
 
     /**
@@ -36,18 +23,16 @@ public class Ranking extends Matching {
     }
 
     /**
-     * 
-     */
-    public void getUserResponse() {
-        // TODO implement here
-    }
-
-    /**
      * @return
      */
     public Ranking createQuestion() {
         // TODO implement here
         return null;
+    }
+    
+    @Override
+    public String getQuestionFormat() {
+    	return "Ranking";
     }
 
 }

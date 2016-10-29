@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class Menu {
 
-	public String options[] = {"1) Survey Menu", "2) Test Menu"};
+	public String options[] = {"1) Survey Menu", "2) Test Menu", "3) Quit"};
 	public String creationOptions[] = {"1) Add a new T/F question", "2) Add new multiple choice questions",
 			"3) Add a new short answer question","4) Add a new essay question", 
 			"5) Add a new ranking question", "6) Add a new matching question",
@@ -49,6 +49,7 @@ public class Menu {
 				return sMenu;
 		case "2": TestMenu tMenu = new TestMenu();
 				return tMenu;
+		case "3": System.out.println("Terminating Survey System..."); System.exit(0);
 		}
 		SurveyMenu safeMenu = new SurveyMenu();
 		return safeMenu;
@@ -66,7 +67,7 @@ public class Menu {
 	
 	public void createNewQuestion(Question q)
 	{
-		System.out.println("Input Question prompt: ");
+		System.out.println("Enter the prompt for your "+q.getQuestionFormat() + " question: ");
 		q.setPrompt(getResponse());
 	}
 	

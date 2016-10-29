@@ -18,7 +18,7 @@ public class Test extends Survey {
 
     private HashMap<String, Response>  userReponses = new HashMap<String, Response>();
     public String testName;
-    private HashMap<String, Response>  correctAnswers = new HashMap<String, Response>();
+    private HashMap<String, Response>  correctResponses = new HashMap<String, Response>();
     private double grade;
 
     public void setTestName(String testName)
@@ -30,6 +30,22 @@ public class Test extends Survey {
     {
     	return testName;
     }
+    
+    @Override
+    public void display()
+    {
+    	 // TODO implement here
+    	for(int i = 0; i < Questions.size();i++)
+    	{
+    		int x = i+1;
+    		System.out.print(x + ") ");
+    		Questions.get(i).display();		
+    		System.out.println("\nThe Correct Response: " + correctResponses.get(Questions.get(i).getPrompt()).getResponse());
+    	}
+    	System.out.println();
+    	
+    	
+    }
 
     /**
      * @param question 
@@ -37,10 +53,10 @@ public class Test extends Survey {
      */
     public void setCorrectResponse(Question question) {
         // TODO implement here
-    	System.out.println("Correct Answer: ");
+    	System.out.println("Correct Response: ");
     	Response correctResponse = new Response();
     	correctResponse.setUserResponse();
-    	correctAnswers.put(question.getPrompt(), correctResponse);
+    	correctResponses.put(question.getPrompt(), correctResponse);
     	
     }
 
@@ -50,7 +66,7 @@ public class Test extends Survey {
      * @param response 
      * @return
      */
-    public boolean compareResponse(Question question, Response userResponse, Response answer) {
+    public boolean compareResponse(Question question, Response userResponse, Response correctResponse) {
         // TODO implement here
         return false;
     }
@@ -82,7 +98,7 @@ public class Test extends Survey {
      * @param Responses 
      * @param grade
      */
-    public void serialize(HashMap<String, Response>  testMap, HashMap<String, Response>  Responses, double grade) {
+    public void serialize(HashMap<String, Response>  testMap, HashMap<String, Response>  answers, double grade) {
         // TODO implement here
     }
 

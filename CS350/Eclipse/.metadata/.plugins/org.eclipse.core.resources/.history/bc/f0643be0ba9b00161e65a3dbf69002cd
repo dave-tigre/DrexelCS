@@ -1,0 +1,19 @@
+/**
+ * 
+ */
+package maze;
+
+/**
+ * @author dave-tigre
+ *
+ */
+public class MazeFactory {
+
+	/**
+	 * 
+	 */
+	public MazeFactory() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

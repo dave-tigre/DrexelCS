@@ -1,0 +1,19 @@
+/**
+ * 
+ */
+package surveyMaker;
+
+/**
+ * @author dave-tigre
+ *
+ */
+public abstract class Question {
+
+	/**
+	 * 
+	 */
+	public Question() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

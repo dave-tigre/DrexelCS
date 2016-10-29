@@ -1,5 +1,4 @@
-
-import java.util.*;
+import java.util.HashMap;
 
 /**
  * @author David Tigreros
@@ -10,25 +9,16 @@ import java.util.*;
  */
 public class Serialize {
 
+	private String fileName;
+    private String storageLocation;
+    
+    
     /**
      * Default constructor
      */
     public Serialize() {
     }
-
-    /**
-     * 
-     */
-    private String fileName;
-
-    /**
-     * 
-     */
-    private String storageLocation;
-
-
-
-
+    
     /**
      * 
      */
@@ -48,7 +38,7 @@ public class Serialize {
      * @param answers 
      * @param grade
      */
-    public void serialize(HashMap<String, Response> testMap, HashMap<String, Answer> answers, double grade) {
+    public void serialize(HashMap<String, Response> testMap, HashMap<String, Response> answers, double grade) {
         // TODO implement here
     }
 

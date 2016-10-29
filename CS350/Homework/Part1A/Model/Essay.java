@@ -10,6 +10,8 @@ import java.util.*;
  */
 public class Essay extends Question {
 
+	public int wordCount;
+	private Response userResponse;
     /**
      * Default constructor
      */
@@ -19,32 +21,8 @@ public class Essay extends Question {
     /**
      * 
      */
-    private Response userResponse;
-
-    /**
-     * 
-     */
-    public int wordCount;
-
-    /**
-     * 
-     */
-    public void Essay() {
-        // TODO implement here
-    }
-
-    /**
-     * 
-     */
     public void display() {
-        // TODO implement here
-    }
-
-    /**
-     * 
-     */
-    public void getUserResponse() {
-        // TODO implement here
+        super.display();
     }
 
     /**
@@ -61,5 +39,11 @@ public class Essay extends Question {
         // TODO implement here
         return null;
     }
+
+	@Override
+	public String getQuestionFormat() {
+		// TODO Auto-generated method stub
+		return "Essay";
+	}
 
 }

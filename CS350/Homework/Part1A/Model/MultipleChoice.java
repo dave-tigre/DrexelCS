@@ -1,5 +1,4 @@
-
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * @author David Tigreros
@@ -12,26 +11,31 @@ public class MultipleChoice extends Question {
 
 	public ArrayList<String> choices = new ArrayList<String>();
     private Response userResponse;
+    private int numOfChoices;
 
     /**
      * Default constructor
      */
     public MultipleChoice() {
-    	
     } 
 
     /**
      * @param choices
      */
-    public void addChoices(String ch) {
+    public void addChoices() {
         // TODO implement here
     	
-    	String chs[] = ch.split(",");
-    	for(String choice : chs)
+    	for(int i = 1; i <= numOfChoices; i++)
     	{
-    		choices.add(choice);
+    		System.out.println("Enter Choice #"+i);
+    		choices.add(getUserResponse());
     	}
     	
+    }
+    
+    public void choiceAmount(int numOfChoices)
+    {
+    	this.numOfChoices = numOfChoices;
     }
 
     /**
@@ -47,17 +51,12 @@ public class MultipleChoice extends Question {
     public void display() {
         // TODO implement here
     	System.out.println(getPrompt());
-    	for(int i = 0; i < choices.size(); i++)
+    	String alpha[] = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P"};
+    	System.out.print(alpha[0] + ") " + choices.get(0));
+    	for(int i = 1; i < choices.size(); i++)
     	{
-    		System.out.println(i + ") " + choices.get(i));
+    		System.out.print("	" +alpha[i] + ") " + choices.get(i));
     	}
-    }
-
-    /**
-     * 
-     */
-    public void getUserResponse() {
-        // TODO implement here
     }
 
     /**
@@ -67,5 +66,11 @@ public class MultipleChoice extends Question {
         // TODO implement here
         return null;
     }
+
+	@Override
+	public String getQuestionFormat() {
+		// TODO Auto-generated method stub
+		return "Multiple Choice";
+	}
 
 }

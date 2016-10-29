@@ -58,7 +58,8 @@ public class SurveyMenu extends Menu{
 			break;
 			}
 		}
-		System.out.println("Terminating Survey Maker..."); 
+		System.out.println("Returning to Main Menu..."); 
+		startMenu();
 	}
 	
 	public void createNewSurvey()
@@ -138,8 +139,9 @@ public class SurveyMenu extends Menu{
 						creationMenu();
 			case "2": MultipleChoice newMC = new MultipleChoice();
 						createNewQuestion(newMC);
-						System.out.println("Enter the choices, place a comma after each choice: ");
-						newMC.addChoices(getResponse());
+						System.out.println("Enter number of choices for your multiple choice question: ");
+						newMC.choiceAmount(Integer.parseInt(getResponse()));
+						newMC.addChoices();
 						currentSurvey.addQuestion(newMC);
 						creationMenu();
 			case "3": ShortAnswer newSA = new ShortAnswer();

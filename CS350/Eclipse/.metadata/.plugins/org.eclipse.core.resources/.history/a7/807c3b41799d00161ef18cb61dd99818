@@ -1,0 +1,9 @@
+package surveyMaker;
+
+public class MenuFactory {
+
+	public MenuFactory() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

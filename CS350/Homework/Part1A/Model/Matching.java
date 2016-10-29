@@ -1,5 +1,4 @@
-
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * @author David Tigreros
@@ -10,27 +9,15 @@ import java.util.*;
  */
 public class Matching extends Question {
 
+	private Response userResponse;
+    public ArrayList<String> choices;
+    
+    
     /**
      * Default constructor
      */
     public Matching() {
-    }
-
-    /**
-     * 
-     */
-    private Response userResponse;
-
-    /**
-     * 
-     */
-    public ArrayList<String> choices;
-
-    /**
-     * 
-     */
-    public void Matching() {
-        // TODO implement here
+  
     }
 
     /**
@@ -40,12 +27,6 @@ public class Matching extends Question {
         // TODO implement here
     }
 
-    /**
-     * 
-     */
-    public void getUserResponse() {
-        // TODO implement here
-    }
 
     /**
      * @return
@@ -54,5 +35,11 @@ public class Matching extends Question {
         // TODO implement here
         return null;
     }
+
+	@Override
+	public String getQuestionFormat() {
+		// TODO Auto-generated method stub
+		return "Matching";
+	}
 
 }

@@ -1,5 +1,4 @@
-
-import java.util.*;
+import java.util.Scanner;
 
 /**
  * @author David Tigreros
@@ -9,20 +8,14 @@ import java.util.*;
  * Response Class
  */
 public class Response {
+	
+	private String response;
 
     /**
      * Default constructor
      */
     public Response() {
     }
-
-    /**
-     * 
-     */
-    private String response;
-
-
-
 
     /**
      * @param inputResponse
@@ -32,6 +25,11 @@ public class Response {
     	Scanner input = new Scanner(System.in);
     	String resp = input.nextLine();
     	this.response = resp;
+    }
+    
+    public String getResponse()
+    {
+    	return response;
     }
 
     /**

@@ -22,10 +22,10 @@ public class TestMenu extends Menu {
 	 */
 	public TestMenu() {
 		// TODO Auto-generated constructor stub
-		TestMenu();
+		testMenu();
 	}
 	
-	public void TestMenu()
+	public void testMenu()
 	{
 		int invalid_count = 0;
 		while(invalid_count < 3)
@@ -51,7 +51,8 @@ public class TestMenu extends Menu {
 			break;
 			}
 		}
-		System.out.println("Terminating Test Maker..."); 
+		System.out.println("Returning to Main Menu..."); 
+		startMenu();
 	}
 	
 	public void createNewTest()
@@ -133,8 +134,9 @@ public class TestMenu extends Menu {
 						creationMenu();
 			case "2": MultipleChoice newMC = new MultipleChoice();
 						createNewQuestion(newMC);
-						System.out.println("Enter the choices, place a comma after each choice: ");
-						newMC.addChoices(getResponse());
+						System.out.println("Enter number of choices for your multiple choice question: ");
+						newMC.choiceAmount(Integer.parseInt(getResponse()));
+						newMC.addChoices();
 						currentTest.addQuestion(newMC);
 						currentTest.setCorrectResponse(newMC);
 						creationMenu();
@@ -155,7 +157,7 @@ public class TestMenu extends Menu {
 						currentTest.addQuestion(newMatch);
 						creationMenu();
 			case "7": System.out.println("Terminating Test Maker...");
-						TestMenu();
+						testMenu();
 						break;
 			default: System.out.println("Invalid Input please Try again");
 						creationMenu();

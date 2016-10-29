@@ -1,0 +1,19 @@
+/**
+ * 
+ */
+package maze;
+
+/**
+ * @author dave-tigre
+ *
+ */
+public class BlueMazeFactory extends MazeFactory {
+
+	/**
+	 * 
+	 */
+	public BlueMazeFactory() {
+		// TODO Auto-generated constructor stub
+	}
+
+}
