@@ -28,8 +28,7 @@ public class SurveyMenu extends Menu{
 	 * 
 	 */
 	public SurveyMenu() {
-		// TODO Auto-generated constructor stub
-		surveyMenu();
+
 	}
 	
 	public void surveyMenu()
@@ -39,7 +38,7 @@ public class SurveyMenu extends Menu{
 		int invalid_count = 0;
 		while(invalid_count < 3)
 		{
-			System.out.println("Survey Menu");
+			System.out.println("\nSurvey Menu");
 			display(options1);
 			System.out.println();
 			String choice = getResponse();
@@ -86,10 +85,11 @@ public class SurveyMenu extends Menu{
 			System.out.println("Select the Survey you wish to display: ");
 			for(int i = 0; i < availableSurveys.size(); i++)
 			{
-				System.out.println(i +") " + availableSurveys.get(i).getSurveyName());
+				int x = i+1;
+				System.out.println(x +") " + availableSurveys.get(i).getSurveyName());
 			}
 			String choice = getResponse();
-			availableSurveys.get(Integer.parseInt(choice)).display();
+			availableSurveys.get(Integer.parseInt(choice)-1).display();
 			
 		}
 	}
@@ -134,10 +134,11 @@ public class SurveyMenu extends Menu{
 			System.out.println("Select the Survey you with to save: ");
 			for(int i = 0; i < availableSurveys.size(); i++)
 			{
-				System.out.println(i +") " + availableSurveys.get(i).getSurveyName());
+				int x = i+1;
+				System.out.println(x +") " + availableSurveys.get(i).getSurveyName());
 			}
 			String choice = getResponse();
-			Survey savedSurvey = availableSurveys.get(Integer.parseInt(choice));
+			Survey savedSurvey = availableSurveys.get(Integer.parseInt(choice)-1);
 			
 			serializeObj.serializeSurvey(savedSurvey,surveyFolder);
 			System.out.println();

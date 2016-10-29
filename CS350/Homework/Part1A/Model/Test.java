@@ -1,4 +1,5 @@
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -35,16 +36,20 @@ public class Test extends Survey {
     public void display()
     {
     	 // TODO implement here
+    	if(Questions.size() < 1)
+    	{
+    		System.out.println("This test has no questions...\n");
+    		return;
+    	}
     	for(int i = 0; i < Questions.size();i++)
     	{
     		int x = i+1;
     		System.out.print(x + ") ");
     		Questions.get(i).display();		
     		System.out.println("\nThe Correct Response: " + correctResponses.get(Questions.get(i).getPrompt()).getResponse());
+    		System.out.println("\n");
     	}
     	System.out.println();
-    	
-    	
     }
 
     /**
@@ -94,28 +99,11 @@ public class Test extends Survey {
     }
 
     /**
-     * @param testMap 
-     * @param Responses 
-     * @param grade
-     */
-    public void serialize(HashMap<String, Response>  testMap, HashMap<String, Response>  answers, double grade) {
-        // TODO implement here
-    }
-
-    /**
      * @param question 
      * @param response
      */
     public void addResponse(Question question, Response response) {
         // TODO implement here
-    }
-
-    /**
-     * @return
-     */
-    public Test createTest() {
-        // TODO implement here
-        return null;
     }
 
 }

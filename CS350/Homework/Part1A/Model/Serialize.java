@@ -41,7 +41,7 @@ public class Serialize {
     	}
     }
 
-    public Survey deserializeSurvey(String fileName)
+    public Survey deserializeSurvey(final String fileName)
     {
     	Survey loadSurvey = null;
     	try{
@@ -55,6 +55,7 @@ public class Serialize {
     	catch(IOException i)
     	{
     		System.out.println("Error with serialization... Try again....");
+    		i.printStackTrace();
     	}
     	catch(ClassNotFoundException c)
     	{
@@ -78,11 +79,11 @@ public class Serialize {
     	catch(IOException i)
     	{
     		System.out.println("Error with serialization... Try again....");
-    		return;
+    		i.printStackTrace();
     	}
     }
     
-    public Test deserializeTest(String fileName)
+    public Test deserializeTest(final String fileName)
     {
     	Test loadTest = null;
     	try{

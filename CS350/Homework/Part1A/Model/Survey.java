@@ -69,11 +69,17 @@ public class Survey implements Serializable {
      */
     public void display() {
         // TODO implement here
+    	if(Questions.size() < 1)
+    	{
+    		System.out.println("This survey has no questions...\n");
+    		return;
+    	}
     	for(int i = 0; i < Questions.size();i++)
     	{
     		int x = i+1;
     		System.out.print(x + ") ");
     		Questions.get(i).display();
+    		System.out.println("\n");
     	}
     	System.out.println("\n");
     }
@@ -93,13 +99,6 @@ public class Survey implements Serializable {
     public void getUserResponse() 
     {
     	
-    }
-
-    /**
-     * @param surveyMap
-     */
-    public void serialize(HashMap<String, Response> surveyMap) {
-        // TODO implement here
     }
 
     /**

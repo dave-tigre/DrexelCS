@@ -21,11 +21,16 @@ public class Menu {
 			"5) Add a new ranking question", "6) Add a new matching question",
 			"7) Quit"};
 	
+	public static SurveyMenu sMenu = new SurveyMenu();
+	public static TestMenu tMenu = new TestMenu();
+	
 	public Menu(){
+		
 	}
 	
 	public void startMenu()
 	{
+		System.out.println("\nMain Menu");
 		for(String option: options)
 		{
 			System.out.println(option);
@@ -41,19 +46,15 @@ public class Menu {
 		}
 	}
 	
-	public Menu getNextMenu()
+	public void getNextMenu()
 	{
 		String choice = getResponse();
 		switch(choice)
 		{
-		case "1": SurveyMenu sMenu = new SurveyMenu();
-				return sMenu;
-		case "2": TestMenu tMenu = new TestMenu();
-				return tMenu;
+		case "1": sMenu.surveyMenu();
+		case "2": tMenu.testMenu();
 		case "3": System.out.println("Terminating Survey System..."); System.exit(0);
 		}
-		SurveyMenu safeMenu = new SurveyMenu();
-		return safeMenu;
 	}
 	
 	public String getResponse()
@@ -91,5 +92,17 @@ public class Menu {
 		
 		return fileNames;
 	}
+	
+	 /**
+     * @return
+     */
+    public static void main(String[] args) {
+        // TODO implement here
+    	
+    	System.out.println("Starting Survey Maker...");
+    	Menu test = new Menu();
+    	test.startMenu();
+       
+    }
 	
 }

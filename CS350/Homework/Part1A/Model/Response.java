@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Scanner;
  * 
  * Response Class
  */
-public class Response {
+public class Response implements Serializable{
 	
 	private String response;
 

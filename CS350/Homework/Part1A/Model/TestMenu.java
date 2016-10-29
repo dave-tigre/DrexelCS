@@ -23,8 +23,7 @@ public class TestMenu extends Menu {
 	 * 
 	 */
 	public TestMenu() {
-		// TODO Auto-generated constructor stub
-		testMenu();
+
 	}
 	
 	public void testMenu()
@@ -32,7 +31,7 @@ public class TestMenu extends Menu {
 		int invalid_count = 0;
 		while(invalid_count < 3)
 		{
-			System.out.println("Test Menu");
+			System.out.println("\nTest Menu");
 			display(options1);
 			System.out.println();
 			String choice = getResponse();
@@ -79,10 +78,11 @@ public class TestMenu extends Menu {
 			System.out.println("Select the Test you wish to display: ");
 			for(int i = 0; i < availableTests.size(); i++)
 			{
-				System.out.println(i +") " + availableTests.get(i).getTestName());
+				int x = i+1;
+				System.out.println(x +") " + availableTests.get(i).getTestName());
 			}
 			String choice = getResponse();
-			availableTests.get(Integer.parseInt(choice)).display();
+			availableTests.get(Integer.parseInt(choice)-1).display();
 			
 		}
 	}
@@ -127,10 +127,11 @@ public class TestMenu extends Menu {
 			System.out.println("Select the Test you with to save: ");
 			for(int i = 0; i < availableTests.size(); i++)
 			{
-				System.out.println(i +") " + availableTests.get(i).getTestName());
+				int x = i+1;
+				System.out.println(x +") " + availableTests.get(i).getTestName());
 			}
 			String choice = getResponse();
-			Test savedTest = availableTests.get(Integer.parseInt(choice));
+			Test savedTest = availableTests.get(Integer.parseInt(choice)-1);
 			
 			serializeObj.serializeTest(savedTest,testFolder);
 			System.out.println();
