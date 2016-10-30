@@ -12,6 +12,12 @@ import java.util.HashMap;
 public class Survey implements Serializable {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+	/**
      * Default constructor
      */
     public Survey() {

@@ -1,6 +1,4 @@
-
-import java.io.Serializable;
-import java.util.*;
+import java.util.HashMap;
 
 /**
  * @author David Tigreros
@@ -12,15 +10,20 @@ import java.util.*;
 public class Test extends Survey {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Default constructor
      */
     public Test() {
     }
 
-    private HashMap<String, Response>  userReponses = new HashMap<String, Response>();
+    private HashMap<String, Response>  userReponses = new HashMap<String, Response>(); //responses of test taker
     public String testName;
-    private HashMap<String, Response>  correctResponses = new HashMap<String, Response>();
-    private double grade;
+    private HashMap<String, Response>  correctResponses = new HashMap<String, Response>(); //responses of test creator
+    private double grade; // grading score when test is taken
 
     public void setTestName(String testName)
     {

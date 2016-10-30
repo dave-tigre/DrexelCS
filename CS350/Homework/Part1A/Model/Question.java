@@ -10,6 +10,10 @@ import java.util.Scanner;
  */
 public abstract class Question implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public String prompt;
 	protected Response qResponse; //response to this question
 	
@@ -43,7 +47,8 @@ public abstract class Question implements Serializable {
     
     public abstract String getQuestionFormat();
     
-    public String getUserResponse()
+    @SuppressWarnings("resource")
+	public String getUserResponse()
     {
     	Scanner input = new Scanner(System.in);
 		String choice = input.nextLine();

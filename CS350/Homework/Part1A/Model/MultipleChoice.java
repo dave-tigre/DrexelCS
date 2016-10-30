@@ -9,6 +9,10 @@ import java.util.ArrayList;
  */
 public class MultipleChoice extends Question {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public ArrayList<String> choices = new ArrayList<String>();
     private int numOfChoices;
 

@@ -57,6 +57,7 @@ public class Menu {
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	public String getResponse()
 	{
 		Scanner input = new Scanner(System.in);
@@ -81,11 +82,9 @@ public class Menu {
 		{
 			for(int i = 0; i < listOfFiles.length; i++)
 			{
-				int x = 0;
 				if(listOfFiles[i].isFile())
 				{
-					fileNames.add(listOfFiles[i].getName());
-					x++;			
+					fileNames.add(listOfFiles[i].getName());			
 				}
 			}
 		}

@@ -3,7 +3,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.HashMap;
 
 /**
  * @author David Tigreros
@@ -32,11 +31,11 @@ public class Serialize {
     		out.writeObject(current);
     		out.close();
     		fileOut.close();
-    		System.out.println("The " +current.getSurveyName() +" survey has been serialized and saved in " + fileName);
+    		System.out.println("The '" +current.getSurveyName() +"' survey has been serialized and saved in the '" + folderName +"' folder.");
     	}
     	catch(IOException i)
     	{
-    		System.out.println("Error with serialization... Try again....");
+    		System.out.println("Error with saving survey... Try again....");
     		return;
     	}
     }
@@ -54,7 +53,7 @@ public class Serialize {
     	}
     	catch(IOException i)
     	{
-    		System.out.println("Error with serialization... Try again....");
+    		System.out.println("Error with loading survey... Try again....");
     		i.printStackTrace();
     	}
     	catch(ClassNotFoundException c)
@@ -74,12 +73,12 @@ public class Serialize {
     		out.writeObject(current);
     		out.close();
     		fileOut.close();
-    		System.out.println("The " +current.getTestName() +"  test has been serialized and saved in " + fileName);
+    		System.out.println("The '" +current.getTestName() +"' test has been serialized and saved in the '" + folderName +"' folder.");
     	}
     	catch(IOException i)
     	{
-    		System.out.println("Error with serialization... Try again....");
-    		i.printStackTrace();
+    		System.out.println("Error with saving test... Try again....");
+    		//i.printStackTrace();
     	}
     }
     
@@ -96,7 +95,7 @@ public class Serialize {
     	}
     	catch(IOException i)
     	{
-    		System.out.println("Error with serialization... Try again....");
+    		System.out.println("Error with laoding test... Try again....");
     	}
     	catch(ClassNotFoundException c)
     	{

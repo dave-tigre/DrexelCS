@@ -10,6 +10,10 @@ import java.util.Scanner;
  */
 public class Response implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String response;
 
     /**
@@ -21,7 +25,8 @@ public class Response implements Serializable{
     /**
      * @param inputResponse
      */
-    public void setUserResponse() {
+    @SuppressWarnings("resource")
+	public void setUserResponse() {
         // TODO implement here
     	Scanner input = new Scanner(System.in);
     	String resp = input.nextLine();

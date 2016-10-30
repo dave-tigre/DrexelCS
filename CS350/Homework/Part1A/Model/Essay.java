@@ -1,6 +1,4 @@
 
-import java.util.*;
-
 /**
  * @author David Tigreros
  * 10/15/2016
@@ -10,8 +8,12 @@ import java.util.*;
  */
 public class Essay extends Question {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public int wordCount;
-	private Response userResponse;
+	
     /**
      * Default constructor
      */
@@ -30,14 +32,6 @@ public class Essay extends Question {
      */
     public void getWordCount() {
         // TODO implement here
-    }
-
-    /**
-     * @return
-     */
-    public Essay createQuestion() {
-        // TODO implement here
-        return null;
     }
 
 	@Override

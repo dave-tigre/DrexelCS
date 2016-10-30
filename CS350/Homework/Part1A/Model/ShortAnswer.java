@@ -1,6 +1,4 @@
 
-import java.util.*;
-
 /**
  * @author David Tigreros
  * 10/15/2016
@@ -10,8 +8,11 @@ import java.util.*;
  */
 public class ShortAnswer extends Essay {
 
-	private Response userResponse;
-    public int maxWordCount;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public int maxWordCount;
     /**
      * Default constructor
      */

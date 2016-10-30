@@ -9,7 +9,10 @@ import java.util.ArrayList;
  */
 public class Matching extends Question {
 
-	private Response userResponse;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
     public ArrayList<String> choices = new ArrayList<String>();
     public ArrayList<String> premises = new ArrayList<String>();
     protected int numOfprch;

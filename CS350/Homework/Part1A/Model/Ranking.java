@@ -8,7 +8,11 @@
  */
 public class Ranking extends Matching {
 
-	private Response userResponse;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
     /**
      * Default constructor
      */

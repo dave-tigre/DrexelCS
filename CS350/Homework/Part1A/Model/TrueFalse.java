@@ -9,7 +9,10 @@
 
 public class TrueFalse extends MultipleChoice {
 
-	private Response userResponse;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final String choices[] = {"True", "False"};
 	
     /**
