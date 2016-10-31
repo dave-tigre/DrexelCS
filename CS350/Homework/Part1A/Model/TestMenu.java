@@ -59,7 +59,7 @@ public class TestMenu extends Menu {
 	{
 		currentTest = new Test();
 		System.out.println("Name this Test: ");
-		currentTest.setTestName(getResponse());
+		currentTest.setName(getResponse());
 		availableTests.add(currentTest);
 		creationMenu();
 	}
@@ -78,10 +78,15 @@ public class TestMenu extends Menu {
 			for(int i = 0; i < availableTests.size(); i++)
 			{
 				int x = i+1;
-				System.out.println(x +") " + availableTests.get(i).getTestName());
+				System.out.println(x +") " + availableTests.get(i).getName());
 			}
 			String choice = getResponse();
-			availableTests.get(Integer.parseInt(choice)-1).display();
+			int ch = string2int(choice) - 1;
+			
+			if(withinRange(availableTests.size(),ch))
+			{
+				availableTests.get(ch).display();
+			}
 			
 		}
 	}
@@ -100,14 +105,18 @@ public class TestMenu extends Menu {
 			for(int i = 0; i < listOfFiles.size(); i++)
 			{
 				int x = i+1;
-				System.out.println(x +") " + listOfFiles.get(i));
+				String fileName = listOfFiles.get(i);
+				fileName = fileName.replace(".ser", "");
+				System.out.println(x +") " + fileName);
 			}
 			String choice = getResponse();
-			int ch = Integer.parseInt(choice) - 1;
-			String filePath = testFolder + "/" + listOfFiles.get(ch);
-			Test loadedTest = serializeObj.deserializeTest(filePath);
-			availableTests.add(loadedTest);
-			testMenu();
+			int ch = string2int(choice) - 1;
+			if(withinRange(listOfFiles.size(),ch))
+			{
+				String filePath = testFolder + "/" + listOfFiles.get(ch);
+				Test loadedTest = serializeObj.deserializeTest(filePath);
+				availableTests.add(loadedTest);
+			}
 		}
 		
 
@@ -127,14 +136,18 @@ public class TestMenu extends Menu {
 			for(int i = 0; i < availableTests.size(); i++)
 			{
 				int x = i+1;
-				System.out.println(x +") " + availableTests.get(i).getTestName());
+				System.out.println(x +") " + availableTests.get(i).getName());
 			}
 			String choice = getResponse();
-			Test savedTest = availableTests.get(Integer.parseInt(choice)-1);
+			int ch = string2int(choice) - 1;
+			if(withinRange(availableTests.size(),ch))
+			{
+				Test savedTest = availableTests.get(ch);
+				
+				serializeObj.serializeTest(savedTest,testFolder);
+				System.out.println();
+			}
 			
-			serializeObj.serializeTest(savedTest,testFolder);
-			System.out.println();
-			testMenu();
 		}
 	}
 	

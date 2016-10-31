@@ -11,50 +11,42 @@ import java.util.HashMap;
  */
 public class Survey implements Serializable {
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
-
+	public ArrayList<Question> Questions = new ArrayList<Question>();
+    private HashMap<String, Response> userResponses = new HashMap<String, Response>();
+    public String name;
+    public int numberOfQuestions;
+    
 	/**
      * Default constructor
      */
     public Survey() {
     }
-
-    public ArrayList<Question> Questions = new ArrayList<Question>();
-    private HashMap<String, Response> userResponses = new HashMap<String, Response>();
-    private String surveyName;
-    int numberOfQuestions;
-
-
-    public void setSurveyName(String testName)
+    
+    /*
+     * Set survey name.
+     */
+    public void setName(String name)
     {
-    	this.surveyName = testName;
+    	this.name = name;
     }
     
-    public String getSurveyName()
+    /*
+     * return survey name
+     */
+    public String getName()
     {
-    	return surveyName;
-    
+    	return name;
     }
 
     /**
-     * 
+     * Method to add question to survey
+     * @param q : given question to add to survey
      */
     public void addQuestion(Question q) {
         Questions.add(q);
     }
 
-    /**
-     * @param questionNumber 
-     * @return
-     */
-    public Question getQuestion(int questionNumber) {
-        // TODO implement here
-        return null;
-    }
 
     /**
      * 
@@ -71,7 +63,7 @@ public class Survey implements Serializable {
     }
 
     /**
-     * 
+     * Method to display a survey
      */
     public void display() {
         // TODO implement here
@@ -91,6 +83,7 @@ public class Survey implements Serializable {
     }
 
     /**
+     * Method to be used to take in survey taker response
      * @param question 
      * @param response
      */
@@ -99,27 +92,12 @@ public class Survey implements Serializable {
     	userResponses.put(question.getPrompt(), response);
     }
 
-    /**
-     * 
-     */
-    public void getUserResponse() 
-    {
-    	
-    }
 
     /**
-     * 
+     * Method to be used to tabulate data 
      */
     public void tabulateData() {
         // TODO implement here
-    }
-
-    /**
-     * @return
-     */
-    public Survey createSurvey() {
-        // TODO implement here
-        return null;
     }
 
 }

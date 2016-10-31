@@ -8,9 +8,6 @@
  */
 public class ShortAnswer extends Essay {
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public int maxWordCount;
     /**
@@ -19,17 +16,8 @@ public class ShortAnswer extends Essay {
     public ShortAnswer() {
     }
 
-    /**
-     * @return
-     */
-    public ShortAnswer createQuestion() {
-        // TODO implement here
-        return null;
-    }
-    
     @Override
     public String getQuestionFormat() {
     	return "Short Answer";
     }
-
 }

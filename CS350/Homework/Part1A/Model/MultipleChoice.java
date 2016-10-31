@@ -9,9 +9,6 @@ import java.util.ArrayList;
  */
 public class MultipleChoice extends Question {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public ArrayList<String> choices = new ArrayList<String>();
     private int numOfChoices;
@@ -36,6 +33,9 @@ public class MultipleChoice extends Question {
     	
     }
     
+    /*
+     * Method for creator to set the amount of choices 
+     */
     public void choiceAmount()
     {
     	String numCh = getUserResponse();
@@ -52,20 +52,20 @@ public class MultipleChoice extends Question {
 
 
     /**
-     * 
+     * Method to be used to edit creator choices
      */
     private void editChoices() {
         // TODO implement here
     }
 
-    /**
-     * 
+    /*
+     * (non-Javadoc)
+     * @see Question#display()
      */
     @Override
     public void display() {
         // TODO implement here
     	System.out.println(getPrompt());
-    	String alpha[] = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P"};
     	System.out.print(alpha[0] + ") " + choices.get(0));
     	for(int i = 1; i < choices.size(); i++)
     	{
@@ -73,6 +73,10 @@ public class MultipleChoice extends Question {
     	}
     }
     
+    /*
+     * (non-Javadoc)
+     * @see Question#getQuestionFormat()
+     */
 	@Override
 	public String getQuestionFormat() {
 		// TODO Auto-generated method stub

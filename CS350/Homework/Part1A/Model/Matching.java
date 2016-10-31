@@ -6,16 +6,14 @@ import java.util.ArrayList;
  * Survey Maker
  * 
  * Matching Questions
+ *
  */
 public class Matching extends Question {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-    public ArrayList<String> choices = new ArrayList<String>();
-    public ArrayList<String> premises = new ArrayList<String>();
-    protected int numOfprch;
+	private static final long serialVersionUID = 1L; //for serialization
+    public ArrayList<String> choices = new ArrayList<String>(); // array list of choices
+    public ArrayList<String> premises = new ArrayList<String>(); //array list of premises
+    protected int numOfprch; // number of premises/choices
     
     
     /**
@@ -25,6 +23,9 @@ public class Matching extends Question {
   
     }
     
+    /*
+     * Add premises to array list one at a time
+     */
     public void addPremises()
     {
     	for(int i = 1; i <= numOfprch; i++)
@@ -34,6 +35,9 @@ public class Matching extends Question {
     	}
     }
     
+    /*
+     * Add choices to array list one at a time
+     */
     public void addChoices()
     {
     	for(int i = 1; i <= numOfprch; i++)
@@ -61,7 +65,7 @@ public class Matching extends Question {
     }
 
     /**
-     * 
+     * Display a matching question
      */
     @Override
     public void display() {
@@ -73,7 +77,6 @@ public class Matching extends Question {
     		System.out.println("____ " + premises.get(i-1));
     	}
     	
-    	String alpha[] = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P"};
     	System.out.print(alpha[0] + ") " + choices.get(0));
     	for(int i = 1; i < choices.size(); i++)
     	{
@@ -81,10 +84,15 @@ public class Matching extends Question {
     	}
     }
 
+    /*
+     * (non-Javadoc)
+     * @see Question#setResponse()
+     */
     @Override
     public void setResponse()
     {
-    	String rankingOrder = "Matching Order From Top to Bottom: ";
+    	String rankingOrder = "Matching Order From top to bottom: ";
+    	//loop through to obtain matching choice to each premise
     	for(int i = 0; i< premises.size(); i++)
     	{
     		int x = i+1;
@@ -95,12 +103,20 @@ public class Matching extends Question {
     	qResponse.setUserResponse(rankingOrder);
     }
     
+    /*
+     * (non-Javadoc)
+     * @see Question#getResponse()
+     */
     @Override
     public Response getResponse()
     {
     	return qResponse;
     }
 
+    /*
+     * (non-Javadoc)
+     * @see Question#getQuestionFormat()
+     */
 	@Override
 	public String getQuestionFormat() {
 		// TODO Auto-generated method stub

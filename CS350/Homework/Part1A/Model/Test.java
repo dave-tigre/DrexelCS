@@ -24,17 +24,11 @@ public class Test extends Survey {
     public String testName;
     private HashMap<String, Response>  correctResponses = new HashMap<String, Response>(); //responses of test creator
     private double grade; // grading score when test is taken
-
-    public void setTestName(String testName)
-    {
-    	this.testName = testName;
-    }
     
-    public String getTestName()
-    {
-    	return testName;
-    }
-    
+    /*
+     * (non-Javadoc)
+     * @see Survey#display()
+     */
     @Override
     public void display()
     {
@@ -56,12 +50,13 @@ public class Test extends Survey {
     }
 
     /**
+     * Method for test creator to set the correct response to a question
      * @param question 
      * @param Response
      */
     public void setCorrectResponse(Question question) {
         // TODO implement here
-    	System.out.println("Correct Response: ");
+    	System.out.println("Enter Correct Response: ");
     	question.setResponse();
     	Response correctResponse = question.getResponse();
     	correctResponses.put(question.getPrompt(), correctResponse);
@@ -69,6 +64,7 @@ public class Test extends Survey {
     }
 
     /**
+     * Method to be used to compare responses
      * @param question 
      * @param Response 
      * @param response 
@@ -80,13 +76,14 @@ public class Test extends Survey {
     }
 
     /**
-     * 
+     * method to be used to edit responses
      */
     public void editResponse() {
         // TODO implement here
     }
 
     /**
+     * Method to be used to grade test
      * @param grade
      */
     public void setGrade(double grade) {
@@ -94,14 +91,16 @@ public class Test extends Survey {
     }
 
     /**
-     * @return
+     * Method to be used to return test grade
+     * @return test grade
      */
     public double getGrade() {
         // TODO implement here
-        return 0.0d;
+        return 0.0;
     }
 
     /**
+     * Method to be used to add test taker response 
      * @param question 
      * @param response
      */

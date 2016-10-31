@@ -21,8 +21,9 @@ public class SurveyMenu extends Menu{
 	public Survey currentSurvey;
 	Serialize serializeObj = new Serialize();
 	private final String surveyFolder = "saved_surveys";
+	
 	/**
-	 * 
+	 * Default Constructor
 	 */
 	public SurveyMenu() {
 
@@ -30,8 +31,6 @@ public class SurveyMenu extends Menu{
 	
 	public void surveyMenu()
 	{
-		
-		
 		int invalid_count = 0;
 		while(invalid_count < 3)
 		{
@@ -60,15 +59,21 @@ public class SurveyMenu extends Menu{
 		startMenu();
 	}
 	
+	/*
+	 * Method to create a new survey
+	 */
 	public void createNewSurvey()
 	{
 		currentSurvey = new Survey();
 		System.out.println("Name this Survey: ");
-		currentSurvey.setSurveyName(getResponse());
+		currentSurvey.setName(getResponse());
 		availableSurveys.add(currentSurvey);
 		creationMenu();
 	}
 	
+	/*
+	 * Method to display a survey
+	 */
 	public void displaySurvey()
 	{
 		if(availableSurveys.isEmpty())
@@ -77,20 +82,26 @@ public class SurveyMenu extends Menu{
 			
 		}
 		else{
-			
-		
 			System.out.println("Select the Survey you wish to display: ");
 			for(int i = 0; i < availableSurveys.size(); i++)
 			{
 				int x = i+1;
-				System.out.println(x +") " + availableSurveys.get(i).getSurveyName());
+				System.out.println(x +") " + availableSurveys.get(i).getName());
 			}
-			String choice = getResponse();
-			availableSurveys.get(Integer.parseInt(choice)-1).display();
+			String choice = getResponse();		
+			int ch = string2int(choice) - 1;
+			
+			if(withinRange(availableSurveys.size(),ch))
+			{
+				availableSurveys.get(ch).display();
+			}
 			
 		}
 	}
 	
+	/*
+	 * Method to load a survey
+	 */
 	public void loadSurvey()
 	{
 		ArrayList<String> listOfFiles = listFiles(surveyFolder);
@@ -105,20 +116,28 @@ public class SurveyMenu extends Menu{
 			for(int i = 0; i < listOfFiles.size(); i++)
 			{
 				int x = i+1;
-				System.out.println(x +") " + listOfFiles.get(i));
+				String fileName = listOfFiles.get(i);
+				fileName = fileName.replace(".ser", "");
+				System.out.println(x +") " + fileName);
 			}
 			String choice = getResponse();
-			int ch = Integer.parseInt(choice) - 1;
-			String filePath = surveyFolder + "/" + listOfFiles.get(ch);
-			Survey loadedSurvey = serializeObj.deserializeSurvey(filePath);
-			availableSurveys.add(loadedSurvey);
-			surveyMenu();
-		}
-		
-
-		
+			int ch = string2int(choice) - 1;
+			if(withinRange(listOfFiles.size(),ch))
+			{
+				String filePath = surveyFolder + "/" + listOfFiles.get(ch);
+				Survey loadedSurvey = serializeObj.deserializeSurvey(filePath);
+				availableSurveys.add(loadedSurvey);
+			}
+			else
+			{
+				System.out.println("Input was not a valid integer...");
+			}
+		}	
 	}
 	
+	/*
+	 * Method to save a survey
+	 */
 	public void saveSurvey()
 	{
 		if(availableSurveys.isEmpty())
@@ -132,17 +151,24 @@ public class SurveyMenu extends Menu{
 			for(int i = 0; i < availableSurveys.size(); i++)
 			{
 				int x = i+1;
-				System.out.println(x +") " + availableSurveys.get(i).getSurveyName());
+				System.out.println(x +") " + availableSurveys.get(i).getName());
 			}
 			String choice = getResponse();
-			Survey savedSurvey = availableSurveys.get(Integer.parseInt(choice)-1);
 			
-			serializeObj.serializeSurvey(savedSurvey,surveyFolder);
-			System.out.println();
-			surveyMenu();
+			int ch = string2int(choice) - 1;
+			if(withinRange(availableSurveys.size(),ch))
+			{
+				Survey savedSurvey= availableSurveys.get(ch);
+				
+				serializeObj.serializeSurvey(savedSurvey,surveyFolder);
+				System.out.println();
+			}
 		}
 	}
 	
+	/*
+	 * Menu used to create new questions and perform tasks based on choice
+	 */
 	public void creationMenu()
 	{
 		
