@@ -21,8 +21,8 @@ public class Test extends Survey {
     }
 
     public String testName;
-    private HashMap<String, Response>  correctResponses = new HashMap<String, Response>(); //responses of test creator
-    private double grade; // grading score when test is taken
+    private HashMap<Question, Response>  correctResponses = new HashMap<Question, Response>(); //responses of test creator
+    private double grade = 0; // grading score when test is taken
     
     /*
      * (non-Javadoc)
@@ -42,7 +42,7 @@ public class Test extends Survey {
     		int x = i+1;
     		System.out.print(x + ") ");
     		Questions.get(i).display();		
-    		System.out.println("\nThe Correct Response: " + correctResponses.get(Questions.get(i).getPrompt()).getResponse());
+    		System.out.println("\nThe Correct Response: " + correctResponses.get(Questions.get(i)).getResponse());
     		System.out.println("\n");
     	}
     	System.out.println();
@@ -58,7 +58,41 @@ public class Test extends Survey {
     	System.out.println("Enter Correct Response: ");
     	question.setResponse();
     	Response correctResponse = question.getResponse();
-    	correctResponses.put(question.getPrompt(), correctResponse);
+    	correctResponses.put(question, correctResponse);
+    	
+    }
+    
+    public void editCorrectResponse(Question q)
+    {
+    	System.out.println("Enter Correct Response: ");
+    	Response correctResponse = new Response();
+    	correctResponse.setUserResponse(getUserResponse());
+    	correctResponses.replace(q, correctResponse);
+    }
+    
+    @Override
+    public void modifySurvey()
+    {
+    	int count = 1;
+    	System.out.println("What question do you want to modify?");
+    	for(Question q : Questions)
+    	{
+    		System.out.println("\nQuestion " +count+")");
+    		q.display();
+    		System.out.println("\nThe Correct Response: " + correctResponses.get(q).getResponse());
+    		System.out.println();
+    		count++;
+    		
+    	}
+    	System.out.println();
+    	String choice = getUserResponse();
+    	int ch = string2int(choice) - 1;
+    	Questions.get(ch).editQuestion();
+    	System.out.println("Do you want to edit the Correct Response (y/n)? ");
+    	choice = getUserResponse();
+    	if(choice.equals("y") || choice.equals("Y"))
+    		editCorrectResponse(Questions.get(ch));
+    	
     	
     }
 
@@ -69,8 +103,15 @@ public class Test extends Survey {
      * @param response 
      * @return
      */
-    public boolean compareResponse(Question question, Response userResponse, Response correctResponse) {
+    public boolean compareResponse(Question question, Response userResponse) {
         // TODO implement here
+    	String correctResponse = correctResponses.get(question).getResponse();
+    	String user = getCurrentResponse(question).getResponse();
+    	if(user.equals(correctResponse))
+    	{
+    		return true;
+    	}
+    	
         return false;
     }
 
@@ -85,9 +126,43 @@ public class Test extends Survey {
      * Method to be used to grade test
      * @param grade
      */
-    public void calculateGrade() {
+    public double calculateGrade() {
         // TODO implement here
+    	double total = Questions.size();
+    	double user = 0;
+    	for(Question q : currentResponses.keySet())
+    	{
+    		if(compareResponse(q,currentResponses.get(q)) == true)
+				user++;
+
+    	}
+    	return (user/total)*100;
     	
+    }
+    
+    /**
+     * Method to display a survey
+     */
+    public void takeSurvey() {
+        // TODO implement here
+    	if(Questions.size() < 1)
+    	{
+    		System.out.println("There are no questions...\n");
+    		return;
+    	}
+    	for(int i = 0; i < Questions.size();i++)
+    	{
+    		int x = i+1;
+    		System.out.print(x + ") ");
+    		Questions.get(i).display();
+    		System.out.println("\nEnter Your Response: ");
+    		Questions.get(i).setResponse();
+        	Response userResponse = Questions.get(i).getResponse();
+    		addResponse(Questions.get(i), userResponse);
+    		System.out.println("\n");
+    	}
+    	System.out.println("Grade: "+calculateGrade() +"%");
+    	System.out.println("\n");
     }
 
     /**
@@ -96,6 +171,7 @@ public class Test extends Survey {
      */
     public double getGrade() {
         // TODO implement here
-        return 0.0;
+    	grade = calculateGrade();
+        return calculateGrade();
     }
 }

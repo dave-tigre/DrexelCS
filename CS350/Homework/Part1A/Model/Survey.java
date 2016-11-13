@@ -1,6 +1,7 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  * @author David Tigreros
@@ -13,7 +14,9 @@ public class Survey implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	public ArrayList<Question> Questions = new ArrayList<Question>();
-    private HashMap<String, Response> userResponses = new HashMap<String, Response>();
+	public ArrayList<Response> Responses;
+    protected HashMap<Question, ArrayList<Response>> userResponses = new HashMap<Question, ArrayList<Response>>();
+    protected HashMap<Question, Response> currentResponses = new HashMap<Question, Response>();
     public String name;
     public int numberOfQuestions;
     
@@ -45,6 +48,9 @@ public class Survey implements Serializable {
      */
     public void addQuestion(Question q) {
         Questions.add(q);
+        Responses = new ArrayList<Response>();
+        userResponses.put(q, Responses);
+        
     }
 
 
@@ -112,7 +118,16 @@ public class Survey implements Serializable {
      */
     public void addResponse(Question question, Response response) {
         // TODO implement here
-    	userResponses.put(question.getPrompt(), response);
+    	userResponses.get(question).add(response);
+    	if(currentResponses.isEmpty())
+    		currentResponses.put(question, response);
+    	else
+    	{
+    		if(currentResponses.containsKey(question))
+    			currentResponses.replace(question, response);
+    		else
+    			currentResponses.put(question, response);
+    	}
     }
 
 
@@ -121,6 +136,95 @@ public class Survey implements Serializable {
      */
     public void tabulateData() {
         // TODO implement here
+    	int count = 1;
+    	for(Question q : userResponses.keySet())
+    	{
+    		System.out.println("Question #"+count+":");
+    		q.display();
+    		System.out.println("\n\nReplies: ");
+    		for(Response r : userResponses.get(q))
+    		{
+    			System.out.println(r.getResponse());
+    		}
+    		
+    		System.out.println("Tabulation:");
+    		System.out.println();
+    		count++;
+    	}
+    	
+    	
     }
+    
+    public void tabulate()
+    {
+    	for(Question q : userResponses.keySet())
+    	{
+    		for(Response r : userResponses.get(q))
+    		{
+    			String response[] = r.getResponse().split(" ");
+    			
+    		}
+    	}
+    }
+    
+    public void modifySurvey()
+    {
+    	int count = 1;
+    	System.out.println("What question do you want to modify?");
+    	for(Question q : Questions)
+    	{
+    		System.out.println("\nQuestion " +count+")");
+    		q.display();
+    		System.out.println();
+    		count++;
+    		
+    	}
+    	System.out.println();
+    	String choice = getUserResponse();
+    	int ch = string2int(choice) - 1;
+    	Questions.get(ch).editQuestion();
+    	
+    }
+    
+    /*
+     * Method used to obtain user input response from console.
+     */
+    @SuppressWarnings("resource")
+	public String getUserResponse()
+    {
+    	Scanner input = new Scanner(System.in);
+		String choice = input.nextLine();
+		return choice;
+    }
+    
+    public Response getCurrentResponse(Question q)
+    {
+    	return currentResponses.get(q);
+    	
+    }
+    
+    /*
+	 * Method to convert input string to integer and catch for exception.
+	 * Used for error handling.
+	 */
+	public int string2int(String string)
+	{
+		int number = 99; //test number, should never leave as 99, unless input is invalid..
+		try
+    	{
+    		number = Integer.parseInt(string);
+    		if(number < 1)
+    		{
+    			number = 99;
+    		}
+    		
+    	}
+    	catch(NumberFormatException nfe)
+    	{
+    		System.out.println("Input was not a valid integer... Try again..");
+    	}
+		
+		return number;
+	}
 
 }

@@ -42,9 +42,10 @@ public abstract class Question implements Serializable {
 	/*
 	 * Method to edit the question prompt
 	 */
-	public void editPrompt(String prompt)
+	public void editPrompt()
 	{
-		this.prompt = prompt;
+		System.out.println("Enter the new prompt:\n");
+		this.prompt = getUserResponse();
 	}
 	
     /**
@@ -59,6 +60,8 @@ public abstract class Question implements Serializable {
      */
     public abstract String getQuestionFormat();
     
+    public abstract void editQuestion();
+    
     /*
      * Method used to obtain user input response from console.
      */
@@ -69,6 +72,30 @@ public abstract class Question implements Serializable {
 		String choice = input.nextLine();
 		return choice;
     }
+    
+    /*
+  	 * Method to convert input string to integer and catch for exception.
+  	 * Used for error handling.
+  	 */
+  	public int string2int(String string)
+  	{
+  		int number = 99; //test number, should never leave as 99, unless input is invalid..
+  		try
+      	{
+      		number = Integer.parseInt(string);
+      		if(number < 1)
+      		{
+      			number = 99;
+      		}
+      		
+      	}
+      	catch(NumberFormatException nfe)
+      	{
+      		System.out.println("Input was not a valid integer... Try again..");
+      	}
+  		
+  		return number;
+  	}
     
     /*
      * Method to set the response to a question.

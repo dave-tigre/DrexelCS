@@ -1,4 +1,4 @@
-import java.io.Serializable;
+ import java.io.Serializable;
 import java.util.Scanner;
 
 /**
@@ -37,6 +37,7 @@ public class Response implements Serializable{
     public void setUserResponse(String response) {
     	this.response = response;
     }
+
     
     /*
      * @return the response

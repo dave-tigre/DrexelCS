@@ -176,6 +176,16 @@ public class SurveyMenu extends Menu{
 			
 			System.out.println("Select the Survey you want to modify: ");
 			listSurveys();
+			
+			String choice = getResponse();
+			
+			int ch = string2int(choice) - 1;
+			if(withinRange(availableSurveys.size(),ch))
+			{
+				availableSurveys.get(ch).modifySurvey();
+				System.out.println();
+			}
+			
 		}
 	}
 	
@@ -213,6 +223,15 @@ public class SurveyMenu extends Menu{
 			
 			System.out.println("Select the Survey you want to tabulate: ");
 			listSurveys();
+			
+			String choice = getResponse();
+			
+			int ch = string2int(choice) - 1;
+			if(withinRange(availableSurveys.size(),ch))
+			{
+				availableSurveys.get(ch).tabulateData();
+				System.out.println();
+			}
 		}
 	}
 	

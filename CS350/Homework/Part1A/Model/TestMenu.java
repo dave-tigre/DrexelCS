@@ -51,7 +51,9 @@ public class TestMenu extends Menu {
 			break;
 			case "7": tabulateTest();
 			break;
-			case "8": invalid_count = 10;
+			case "8": gradeTest();
+			break;
+			case "9": invalid_count = 10;
 			break;
 			default: System.out.println("Invalid Input");
 			invalid_count++;
@@ -161,6 +163,15 @@ public class TestMenu extends Menu {
 			
 			System.out.println("Select the Test you want to modify: ");
 			listTests();
+			
+			String choice = getResponse();
+			
+			int ch = string2int(choice) - 1;
+			if(withinRange(availableTests.size(),ch))
+			{
+				availableTests.get(ch).modifySurvey();
+				System.out.println();
+			}
 		}
 	}
 	
@@ -198,6 +209,38 @@ public class TestMenu extends Menu {
 			
 			System.out.println("Select the Test you want to tabulate: ");
 			listTests();
+			
+			String choice = getResponse();
+			
+			int ch = string2int(choice) - 1;
+			if(withinRange(availableTests.size(),ch))
+			{
+				availableTests.get(ch).tabulateData();
+				System.out.println();
+			}
+		}
+	}
+	
+	public void gradeTest()
+	{
+		if(availableTests.isEmpty())
+		{
+			System.out.println("There are no tests to grade. Create or load a new test to grade.");
+		
+		}
+		else{
+			
+			System.out.println("Select the Test you want to grade: ");
+			listTests();
+			
+			String choice = getResponse();
+			
+			int ch = string2int(choice) - 1;
+			if(withinRange(availableTests.size(),ch))
+			{
+				availableTests.get(ch).getGrade();
+				System.out.println();
+			}
 		}
 	}
 	

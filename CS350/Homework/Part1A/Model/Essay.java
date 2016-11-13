@@ -31,6 +31,26 @@ public class Essay extends Question {
     public void getWordCount() {
         // TODO implement here
     }
+    
+    public void editQuestion()
+    {
+    	System.out.println("Choose what you would like to edit:");
+    	String options[] = {"Edit Prompt", "Quit"};
+    	for(int i = 0; i < options.length; i++)
+    	{
+    		int x = i+1;
+    		System.out.println(x+") " +options[i]);
+    	}
+    	String choice = getUserResponse();
+    	switch(choice)
+    	{
+    	case "1": editPrompt();
+    	break;
+    	case "2": return;
+    	default: System.out.println("Invalid Input...");
+    	break;
+    	}
+    }
 
     /*
      * returns the string of the question format
