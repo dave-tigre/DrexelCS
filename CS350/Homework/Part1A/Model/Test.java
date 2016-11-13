@@ -20,7 +20,6 @@ public class Test extends Survey {
     public Test() {
     }
 
-    private HashMap<String, Response>  userReponses = new HashMap<String, Response>(); //responses of test taker
     public String testName;
     private HashMap<String, Response>  correctResponses = new HashMap<String, Response>(); //responses of test creator
     private double grade; // grading score when test is taken
@@ -86,8 +85,9 @@ public class Test extends Survey {
      * Method to be used to grade test
      * @param grade
      */
-    public void setGrade(double grade) {
+    public void calculateGrade() {
         // TODO implement here
+    	
     }
 
     /**
@@ -98,14 +98,4 @@ public class Test extends Survey {
         // TODO implement here
         return 0.0;
     }
-
-    /**
-     * Method to be used to add test taker response 
-     * @param question 
-     * @param response
-     */
-    public void addResponse(Question question, Response response) {
-        // TODO implement here
-    }
-
 }

@@ -83,6 +83,29 @@ public class Survey implements Serializable {
     }
 
     /**
+     * Method to display a survey
+     */
+    public void takeSurvey() {
+        // TODO implement here
+    	if(Questions.size() < 1)
+    	{
+    		System.out.println("There are no questions...\n");
+    		return;
+    	}
+    	for(int i = 0; i < Questions.size();i++)
+    	{
+    		int x = i+1;
+    		System.out.print(x + ") ");
+    		Questions.get(i).display();
+    		System.out.println("\nEnter Your Response: ");
+    		Questions.get(i).setResponse();
+        	Response userResponse = Questions.get(i).getResponse();
+    		addResponse(Questions.get(i), userResponse);
+    		System.out.println("\n");
+    	}
+    	System.out.println("\n");
+    }
+    /**
      * Method to be used to take in survey taker response
      * @param question 
      * @param response

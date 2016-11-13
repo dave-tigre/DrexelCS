@@ -14,7 +14,8 @@ import java.util.ArrayList;
 public class SurveyMenu extends Menu{
 
 	public String options1[] = {"1) Create a new Survey","2) Display a Survey",
-			"3) Load a Survey","4) Save a Survey", "5) Quit"};
+			"3) Load a Survey","4) Save a Survey","5) Modify an existing Survey",
+			"6) Take a Survey", "7) Tabulate a Survey", "8) Quit"};
 	
 	private ArrayList<Survey> availableSurveys = new ArrayList<Survey>();
 	
@@ -48,7 +49,13 @@ public class SurveyMenu extends Menu{
 			break;
 			case "4": saveSurvey();
 			break;
-			case "5": invalid_count = 10;
+			case "5": modifySurvey();
+			break;
+			case "6": takeSurvey();
+			break;
+			case "7": tabulateSurvey();
+			break;
+			case "8": invalid_count = 10;
 			break;
 			default: System.out.println("Invalid Input");
 			invalid_count++;
@@ -82,12 +89,8 @@ public class SurveyMenu extends Menu{
 			
 		}
 		else{
-			System.out.println("Select the Survey you wish to display: ");
-			for(int i = 0; i < availableSurveys.size(); i++)
-			{
-				int x = i+1;
-				System.out.println(x +") " + availableSurveys.get(i).getName());
-			}
+			System.out.println("Select the Survey you want to display: ");
+			listSurveys();
 			String choice = getResponse();		
 			int ch = string2int(choice) - 1;
 			
@@ -147,12 +150,8 @@ public class SurveyMenu extends Menu{
 		}
 		else{
 			
-			System.out.println("Select the Survey you with to save: ");
-			for(int i = 0; i < availableSurveys.size(); i++)
-			{
-				int x = i+1;
-				System.out.println(x +") " + availableSurveys.get(i).getName());
-			}
+			System.out.println("Select the Survey you want to save: ");
+			listSurveys();
 			String choice = getResponse();
 			
 			int ch = string2int(choice) - 1;
@@ -163,6 +162,66 @@ public class SurveyMenu extends Menu{
 				serializeObj.serializeSurvey(savedSurvey,surveyFolder);
 				System.out.println();
 			}
+		}
+	}
+	
+	public void modifySurvey()
+	{
+		if(availableSurveys.isEmpty())
+		{
+			System.out.println("There are no surveys to modify. Create or load a new survey to modify.");
+		
+		}
+		else{
+			
+			System.out.println("Select the Survey you want to modify: ");
+			listSurveys();
+		}
+	}
+	
+	public void takeSurvey()
+	{
+		if(availableSurveys.isEmpty())
+		{
+			System.out.println("There are no surveys to take. Create or load a new survey to take.");
+		
+		}
+		else{
+			
+			System.out.println("Select the Survey you want to take: ");
+			listSurveys();
+			
+			String choice = getResponse();
+			
+			int ch = string2int(choice) - 1;
+			if(withinRange(availableSurveys.size(),ch))
+			{
+				availableSurveys.get(ch).takeSurvey();
+				System.out.println();
+			}
+		}
+	}
+	
+	public void tabulateSurvey()
+	{
+		if(availableSurveys.isEmpty())
+		{
+			System.out.println("There are no surveys to tabulate. Create or load a new survey to tabulate.");
+		
+		}
+		else{
+			
+			System.out.println("Select the Survey you want to tabulate: ");
+			listSurveys();
+		}
+	}
+	
+	public void listSurveys()
+	{
+		for(int i = 0; i < availableSurveys.size(); i++)
+		{
+			int x = i+1;
+			System.out.println(x +") " + availableSurveys.get(i).getName());
 		}
 	}
 	

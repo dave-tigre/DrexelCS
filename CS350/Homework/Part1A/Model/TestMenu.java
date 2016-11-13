@@ -11,7 +11,8 @@ import java.util.ArrayList;
 public class TestMenu extends Menu {
 
 	public String options1[] = {"1) Create a new Test","2) Display a Test",
-			"3) Load a Test","4) Save a Test", "5) Quit"};
+			"3) Load a Test","4) Save a Test","5) Modify an existing Test","6) Take a Test",
+			"7) Tabulate a Test","8) Grade a Test", "9) Quit"};
 	
 	private ArrayList<Test> availableTests = new ArrayList<Test>();
 	
@@ -44,7 +45,13 @@ public class TestMenu extends Menu {
 			break;
 			case "4": saveTest();
 			break;
-			case "5": invalid_count = 10;
+			case "5": modifyTest();
+			break;
+			case "6": takeTest();
+			break;
+			case "7": tabulateTest();
+			break;
+			case "8": invalid_count = 10;
 			break;
 			default: System.out.println("Invalid Input");
 			invalid_count++;
@@ -75,11 +82,7 @@ public class TestMenu extends Menu {
 			
 		
 			System.out.println("Select the Test you wish to display: ");
-			for(int i = 0; i < availableTests.size(); i++)
-			{
-				int x = i+1;
-				System.out.println(x +") " + availableTests.get(i).getName());
-			}
+			listTests();
 			String choice = getResponse();
 			int ch = string2int(choice) - 1;
 			
@@ -133,11 +136,7 @@ public class TestMenu extends Menu {
 		else{
 			
 			System.out.println("Select the Test you with to save: ");
-			for(int i = 0; i < availableTests.size(); i++)
-			{
-				int x = i+1;
-				System.out.println(x +") " + availableTests.get(i).getName());
-			}
+			listTests();
 			String choice = getResponse();
 			int ch = string2int(choice) - 1;
 			if(withinRange(availableTests.size(),ch))
@@ -148,6 +147,66 @@ public class TestMenu extends Menu {
 				System.out.println();
 			}
 			
+		}
+	}
+	
+	public void modifyTest()
+	{
+		if(availableTests.isEmpty())
+		{
+			System.out.println("There are no tests to modify. Create or load a new test to modify.");
+		
+		}
+		else{
+			
+			System.out.println("Select the Test you want to modify: ");
+			listTests();
+		}
+	}
+	
+	public void takeTest()
+	{
+		if(availableTests.isEmpty())
+		{
+			System.out.println("There are no tests to take. Create or load a new test to take.");
+		
+		}
+		else{
+			
+			System.out.println("Select the Test you want to take: ");
+			listTests();
+			
+			String choice = getResponse();
+			
+			int ch = string2int(choice) - 1;
+			if(withinRange(availableTests.size(),ch))
+			{
+				availableTests.get(ch).takeSurvey();
+				System.out.println();
+			}
+		}
+	}
+	
+	public void tabulateTest()
+	{
+		if(availableTests.isEmpty())
+		{
+			System.out.println("There are no tests to tabulate. Create or load a new test to tabulate.");
+		
+		}
+		else{
+			
+			System.out.println("Select the Test you want to tabulate: ");
+			listTests();
+		}
+	}
+	
+	public void listTests()
+	{
+		for(int i = 0; i < availableTests.size(); i++)
+		{
+			int x = i+1;
+			System.out.println(x +") " + availableTests.get(i).getName());
 		}
 	}
 	
