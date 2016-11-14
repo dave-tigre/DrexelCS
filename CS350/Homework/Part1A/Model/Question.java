@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -12,6 +13,7 @@ public abstract class Question implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	protected String prompt;
+	protected ArrayList<String> prompts = new ArrayList<String>();
 	protected Response qResponse; //response to this question
 	
 	
@@ -29,6 +31,7 @@ public abstract class Question implements Serializable {
 	public void setPrompt(String prompt)
 	{
 		this.prompt = prompt;
+		prompts.add(prompt);
 	}
 	
 	/*
@@ -105,6 +108,13 @@ public abstract class Question implements Serializable {
     	qResponse = new Response();
     	qResponse.setUserResponse();
     }
+    
+    public void setReponse(Response response)
+    {
+    	qResponse = response;
+    }
+    
+    public abstract void displayResponse();
     
     /*
      * @return the response to a question.

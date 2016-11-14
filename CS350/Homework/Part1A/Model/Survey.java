@@ -141,30 +141,47 @@ public class Survey implements Serializable {
     	{
     		System.out.println("Question #"+count+":");
     		q.display();
-    		System.out.println("\n\nReplies: ");
+    		System.out.println("\nReplies: ");
     		for(Response r : userResponses.get(q))
     		{
-    			System.out.println(r.getResponse());
+    			q.setReponse(r);
+    			q.displayResponse();
     		}
-    		
     		System.out.println("Tabulation:");
+    		tabulate(q);
     		System.out.println();
+    		
     		count++;
     	}
-    	
-    	
     }
     
-    public void tabulate()
+    public void tabulate(Question q)
     {
-    	for(Question q : userResponses.keySet())
-    	{
-    		for(Response r : userResponses.get(q))
-    		{
-    			String response[] = r.getResponse().split(" ");
-    			
-    		}
+    	HashMap<String,Integer> responseCount = new HashMap<String,Integer>();
+    	int count = 1;
+		for(Response r : userResponses.get(q))
+		{
+			if(responseCount.containsKey(r.getResponse()))
+			{
+				count++;
+				responseCount.put(r.getResponse(), count);
+			}
+			else
+			{
+				responseCount.put(r.getResponse(), count);
+			}
+			
+		}
+		for(String re : responseCount.keySet())
+		{
+			Response tabResponse = new Response();
+			tabResponse.setUserResponse(re);
+			q.setReponse(tabResponse);
+			System.out.println(responseCount.get(re).intValue()+") ");
+			q.displayResponse();
+			System.out.println();
     	}
+    	
     }
     
     public void modifySurvey()

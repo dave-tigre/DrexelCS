@@ -24,6 +24,11 @@ public class Essay extends Question {
     public void display() {
         super.display();
     }
+    
+    public void displayResponse()
+    {
+    	System.out.println(getResponse().getResponse());
+    }
 
     /**
      * To be used when tabulating data

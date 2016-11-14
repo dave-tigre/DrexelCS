@@ -43,7 +43,7 @@ public class Matching extends Question {
     {
     	for(int i = 1; i <= numOfprch; i++)
     	{
-    		System.out.println("Enter Choice #"+i);
+    		System.out.println("Enter Choice "+alpha[i-1]+")");
     		choices.add(getUserResponse());
     	}
     }
@@ -72,15 +72,10 @@ public class Matching extends Question {
     public void display() {
         // TODO implement here
     	System.out.println(getPrompt());
+    	int space = 0;
     	for(int i = 1; i <= premises.size(); i++)
     	{
-    		System.out.println("____ " + premises.get(i-1));
-    	}
-    	
-    	System.out.print(alpha[0] + ") " + choices.get(0));
-    	for(int i = 1; i < choices.size(); i++)
-    	{
-    		System.out.print("	" + alpha[i] + ") " + choices.get(i));
+    		System.out.printf("%s) %-6s  %6d) %s%n",alpha[i-1],premises.get(i-1),i,choices.get(i-1));
     	}
     }
 
@@ -91,26 +86,26 @@ public class Matching extends Question {
     @Override
     public void setResponse()
     {
-    	String rankingOrder = "Matching Order From top to bottom: ";
+    	String rankingOrder = "";// = "Matching Order From top to bottom: ";
     	//loop through to obtain matching choice to each premise
     	for(int i = 0; i< premises.size(); i++)
     	{
-    		int x = i+1;
-    		System.out.println("Enter Matching Answer of Premise #" +x + " "+premises.get(i) +": ");
+    		System.out.println("Enter Matching Answer of " +alpha[i] + ") "+premises.get(i) +": ");
     		rankingOrder +=getUserResponse()+" ";
     	}
     	qResponse = new Response();
     	qResponse.setUserResponse(rankingOrder);
     }
     
-    /*
-     * (non-Javadoc)
-     * @see Question#getResponse()
-     */
-    @Override
-    public Response getResponse()
+    public void displayResponse()
     {
-    	return qResponse;
+    	String response[] = getResponse().getResponse().split(" ");
+    	for(int i = 0; i < response.length; i++)
+    	{
+    		System.out.println(alpha[i] +" " + response[i]);
+    	}
+    	System.out.println();
+    	
     }
     
     public void editQuestion()

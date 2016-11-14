@@ -28,17 +28,7 @@ public class Ranking extends Matching {
     	// loop through to display premises first.
     	for(int i = 1; i <= premises.size(); i++)
     	{
-    		System.out.println("____ " + premises.get(i-1));
-    	}
-    	
-    	/*
-    	 * loop through to display the choices, since it is ranking, just display number options
-    	 */
-    	System.out.print(alpha[0] + ") " + 1);
-    	for(int i = 1; i < premises.size(); i++)
-    	{
-    		int x = i+1;
-    		System.out.print("	" +alpha[i] + ") "  + x);
+    		System.out.printf("%s) %-10s  %10d) %d%n",alpha[i-1],premises.get(i-1),i,i);
     	}
     }
 
@@ -49,12 +39,12 @@ public class Ranking extends Matching {
     @Override
     public void setResponse()
     {
-    	String rankingOrder = "Ranking Order From top to bottom: ";
+    	String rankingOrder =  "";// = "Ranking Order From top to bottom: ";
     	for(int i = 0; i< premises.size(); i++)
     	{
     		//loop through to input ranking to each option
     		int x = i+1;
-    		System.out.println("Enter ranking of Premise #" +x + " "+premises.get(i) +": ");
+    		System.out.println("Enter ranking of " +alpha[i] + ") "+premises.get(i) +": ");
     		rankingOrder +=getUserResponse()+" ";
     	}
     	qResponse = new Response();

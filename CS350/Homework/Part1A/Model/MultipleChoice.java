@@ -28,7 +28,7 @@ public class MultipleChoice extends Question {
     	
     	for(int i = 1; i <= numOfChoices; i++)
     	{
-    		System.out.println("Enter Choice #"+i);
+    		System.out.println("Enter Choice "+alpha[i-1]+")");
     		choices.add(getUserResponse());
     	}
     	
@@ -87,6 +87,11 @@ public class MultipleChoice extends Question {
     	System.out.println("Enter Choice" + choice +")");
     	choices.set(ch, getUserResponse());
     	
+    }
+    
+    public void displayResponse()
+    {
+    	System.out.println(getResponse().getResponse());
     }
 
     /*
