@@ -71,11 +71,12 @@ public class Matching extends Question {
     @Override
     public void display() {
         // TODO implement here
+    	System.out.println(getQuestionFormat()+" Question"); 
     	System.out.println(getPrompt());
-    	int space = 0;
+    	
     	for(int i = 1; i <= premises.size(); i++)
     	{
-    		System.out.printf("%s) %-6s  %6d) %s%n",alpha[i-1],premises.get(i-1),i,choices.get(i-1));
+    		System.out.printf("%s) %-15s  %15d) %s%n",alpha[i-1],premises.get(i-1),i,choices.get(i-1));
     	}
     }
 
@@ -118,18 +119,28 @@ public class Matching extends Question {
     		System.out.println(x+") " +options[i]);
     	}
     	String choice = getUserResponse();
-    	switch(choice)
+    	boolean cont = true;
+    	while(cont)
     	{
-    	case "1": editPrompt();
-    	break;
-    	case "2": editPremises();
-    	break;
-    	case "3": editChoices();
-    	break;
-    	case "4": return;
-    	default: System.out.println("Invalid Input...");
-    	break;
+    		switch(choice)
+        	{
+        	case "1": editPrompt();
+        	editQuestion();
+        	break;
+        	case "2": editPremises();
+        	editQuestion();
+        	break;
+        	case "3": editChoices();
+        	editQuestion();
+        	break;
+        	case "4": cont = false;
+        	break;
+        	default: System.out.println("Invalid Input...");
+        	editQuestion();
+        	break;
+        	}
     	}
+    	
     }
     
     public void editChoices()

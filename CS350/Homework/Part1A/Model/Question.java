@@ -13,7 +13,6 @@ public abstract class Question implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	protected String prompt;
-	protected ArrayList<String> prompts = new ArrayList<String>();
 	protected Response qResponse; //response to this question
 	
 	
@@ -31,7 +30,6 @@ public abstract class Question implements Serializable {
 	public void setPrompt(String prompt)
 	{
 		this.prompt = prompt;
-		prompts.add(prompt);
 	}
 	
 	/*
@@ -55,6 +53,7 @@ public abstract class Question implements Serializable {
      * Method to display the question.
      */
     public void display(){
+    	System.out.println(getQuestionFormat()+" Question ");
     	System.out.println(prompt);
     }
     

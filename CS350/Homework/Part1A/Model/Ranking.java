@@ -23,12 +23,13 @@ public class Ranking extends Matching {
     @Override
     public void display() {
         // TODO implement here
+    	System.out.println(getQuestionFormat()+" Question"); 
     	System.out.println(getPrompt());
 
     	// loop through to display premises first.
     	for(int i = 1; i <= premises.size(); i++)
     	{
-    		System.out.printf("%s) %-10s  %10d) %d%n",alpha[i-1],premises.get(i-1),i,i);
+    		System.out.printf("%s) %-15s  %15d) %d%n",alpha[i-1],premises.get(i-1),i,i);
     	}
     }
 

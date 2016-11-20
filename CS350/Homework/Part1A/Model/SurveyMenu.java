@@ -263,14 +263,17 @@ public class SurveyMenu extends Menu{
 						System.out.println("Enter number of choices for your multiple choice question: ");
 						newMC.choiceAmount();
 						newMC.addChoices();
+						newMC.setNumOfResponseOptions();
 						currentSurvey.addQuestion(newMC);
 						creationMenu();
 			case "3": ShortAnswer newSA = new ShortAnswer();
 						createNewQuestion(newSA);
+						newSA.numOfResponses();
 						currentSurvey.addQuestion(newSA);
 						creationMenu();
 			case "4": Essay newEssay = new Essay();
 						createNewQuestion(newEssay);
+						newEssay.numOfResponses();
 						currentSurvey.addQuestion(newEssay);
 						creationMenu();
 			case "5": Ranking newRank = new Ranking();

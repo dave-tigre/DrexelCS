@@ -177,7 +177,7 @@ public class Survey implements Serializable {
 			Response tabResponse = new Response();
 			tabResponse.setUserResponse(re);
 			q.setReponse(tabResponse);
-			System.out.println(responseCount.get(re).intValue()+") ");
+			System.out.println("Response Count: " + responseCount.get(re).intValue());
 			q.displayResponse();
 			System.out.println();
     	}
@@ -187,12 +187,12 @@ public class Survey implements Serializable {
     public void modifySurvey()
     {
     	int count = 1;
-    	System.out.println("What question do you want to modify?");
+    	System.out.println("What question do you want to modify?\n");
     	for(Question q : Questions)
     	{
-    		System.out.println("\nQuestion " +count+")");
+    		System.out.print(count+") ");
     		q.display();
-    		System.out.println();
+    		System.out.println("\n");
     		count++;
     		
     	}
@@ -217,7 +217,6 @@ public class Survey implements Serializable {
     public Response getCurrentResponse(Question q)
     {
     	return currentResponses.get(q);
-    	
     }
     
     /*
