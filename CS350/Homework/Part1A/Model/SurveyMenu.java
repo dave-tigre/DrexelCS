@@ -153,7 +153,6 @@ public class SurveyMenu extends Menu{
 			System.out.println("Select the Survey you want to save: ");
 			listSurveys();
 			String choice = getResponse();
-			
 			int ch = string2int(choice) - 1;
 			if(withinRange(availableSurveys.size(),ch))
 			{
@@ -165,6 +164,9 @@ public class SurveyMenu extends Menu{
 		}
 	}
 	
+	/*
+	 * Modify an available survey
+	 */
 	public void modifySurvey()
 	{
 		if(availableSurveys.isEmpty())
@@ -189,6 +191,9 @@ public class SurveyMenu extends Menu{
 		}
 	}
 	
+	/*
+	 * Take an available survey
+	 */
 	public void takeSurvey()
 	{
 		if(availableSurveys.isEmpty())
@@ -212,6 +217,9 @@ public class SurveyMenu extends Menu{
 		}
 	}
 	
+	/*
+	 * Tabulate an available survey
+	 */
 	public void tabulateSurvey()
 	{
 		if(availableSurveys.isEmpty())
@@ -235,6 +243,9 @@ public class SurveyMenu extends Menu{
 		}
 	}
 	
+	/*
+	 * List the available surveys
+	 */
 	public void listSurveys()
 	{
 		for(int i = 0; i < availableSurveys.size(); i++)

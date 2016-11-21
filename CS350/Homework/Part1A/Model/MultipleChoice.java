@@ -55,32 +55,28 @@ public class MultipleChoice extends Question {
 
     public void editQuestion()
     {
-    	System.out.println("Choose what you would like to edit:");
-    	String options[] = {"Edit Prompt", "Edit Choice","Enter number of input choices", "Quit"};
-    	for(int i = 0; i < options.length; i++)
+    	int cont = 0;
+    	while(cont < 3)
     	{
-    		int x = i+1;
-    		System.out.println(x+") " +options[i]);
-    	}
-    	boolean cont = true;
-    	while(cont)
-    	{
+    		System.out.println("Choose what you would like to edit:");
+        	String options[] = {"Edit Prompt", "Edit Choice","Enter number of input choices", "Quit"};
+        	for(int i = 0; i < options.length; i++)
+        	{
+        		int x = i+1;
+        		System.out.println(x+") " +options[i]);
+        	}
     		String choice = getUserResponse();
         	switch(choice)
         	{
         	case "1": editPrompt();
-        	editQuestion();
         	break;
         	case "2": editChoices();
-        	editQuestion();
         	break;
         	case "3": setNumOfResponseOptions();
-        	editQuestion();
         	break;
-        	case "4": cont = false;
+        	case "4": cont = 10;
         	break;
-        	default: System.out.println("Invalid Input... Try Again..."); 
-        	editQuestion();
+        	default: System.out.println("Invalid Input... Try Again..."); cont++;
         	break;
         	}
     	}
@@ -161,7 +157,7 @@ public class MultipleChoice extends Question {
     		for(int i = 0; i< numOfResponseOptions; i++)
     		{
     			System.out.println("Enter Choice #" + (i+1));
-    			response +=getUserResponse();
+    			response +=getUserResponse()+" ";
     			
     		}
     		qResponse.setUserResponse(response);

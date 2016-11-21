@@ -53,21 +53,6 @@ public class Survey implements Serializable {
         
     }
 
-
-    /**
-     * 
-     */
-    public void removeQuestion() {
-        // TODO implement here
-    }
-
-    /**
-     * 
-     */
-    public void editQuestion() {
-        // TODO implement here
-    }
-
     /**
      * Method to display a survey
      */
@@ -139,7 +124,7 @@ public class Survey implements Serializable {
     	int count = 1;
     	for(Question q : userResponses.keySet())
     	{
-    		System.out.println("Question #"+count+":");
+    		System.out.print(count + ") ");
     		q.display();
     		System.out.println("\nReplies: ");
     		for(Response r : userResponses.get(q))
@@ -147,7 +132,7 @@ public class Survey implements Serializable {
     			q.setReponse(r);
     			q.displayResponse();
     		}
-    		System.out.println("Tabulation:");
+    		System.out.println("\nTabulation:");
     		tabulate(q);
     		System.out.println();
     		
@@ -177,7 +162,7 @@ public class Survey implements Serializable {
 			Response tabResponse = new Response();
 			tabResponse.setUserResponse(re);
 			q.setReponse(tabResponse);
-			System.out.println("Response Count: " + responseCount.get(re).intValue());
+			System.out.println("Count: " + responseCount.get(re).intValue());
 			q.displayResponse();
 			System.out.println();
     	}
@@ -196,10 +181,15 @@ public class Survey implements Serializable {
     		count++;
     		
     	}
+    	System.out.println("Enter the number of the question you want to modify: ");
     	System.out.println();
     	String choice = getUserResponse();
     	int ch = string2int(choice) - 1;
-    	Questions.get(ch).editQuestion();
+    	if(withinRange(Questions.size(),ch))
+    	{
+    		Questions.get(ch).editQuestion();
+    	}
+    	
     	
     }
     
@@ -241,6 +231,22 @@ public class Survey implements Serializable {
     	}
 		
 		return number;
+	}
+	
+	/*
+	 * Error handling to check whether a number is in range of options
+	 */
+	public boolean withinRange(int arrayListSize, int num)
+	{
+		if(num < arrayListSize)
+		{
+			return true;
+		}
+		else
+		{
+			System.out.println("Input was not a valid integer...");
+			return false;
+		}
 	}
 
 }

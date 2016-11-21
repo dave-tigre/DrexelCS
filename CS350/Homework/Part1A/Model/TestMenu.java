@@ -238,7 +238,7 @@ public class TestMenu extends Menu {
 			int ch = string2int(choice) - 1;
 			if(withinRange(availableTests.size(),ch))
 			{
-				availableTests.get(ch).getGrade();
+				availableTests.get(ch).printGrade();
 				System.out.println();
 			}
 		}
@@ -271,16 +271,19 @@ public class TestMenu extends Menu {
 						System.out.println("Enter number of choices for your multiple choice question: ");
 						newMC.choiceAmount();
 						newMC.addChoices();
+						newMC.setNumOfResponseOptions();
 						currentTest.addQuestion(newMC);
 						currentTest.setCorrectResponse(newMC);
 						creationMenu();
 			case "3": ShortAnswer newSA = new ShortAnswer();
 						createNewQuestion(newSA);
+						newSA.numOfResponses();
 						currentTest.addQuestion(newSA);
 						currentTest.setCorrectResponse(newSA);
 						creationMenu();
 			case "4": Essay newEssay = new Essay();
 						createNewQuestion(newEssay);
+						newEssay.numOfResponses();
 						currentTest.addQuestion(newEssay);
 						currentTest.setCorrectResponse(newEssay);
 						creationMenu();

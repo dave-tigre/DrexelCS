@@ -19,6 +19,32 @@ public class TrueFalse extends MultipleChoice {
     	choices.add("False");
     }
     
+    @Override
+    public void editQuestion()
+    {
+    	int cont = 0;
+    	while(cont < 3)
+    	{
+    		System.out.println("Choose what you would like to edit:");
+        	String options[] = {"Edit Prompt", "Quit"};
+        	for(int i = 0; i < options.length; i++)
+        	{
+        		int x = i+1;
+        		System.out.println(x+") " +options[i]);
+        	}
+    		String choice = getUserResponse();
+        	switch(choice)
+        	{
+        	case "1": editPrompt();
+        	break;
+        	case "2": cont = 10;
+        	break;
+        	default: System.out.println("Invalid Input... Try Again..."); cont++;
+        	break;
+        	}
+    	}
+    	
+    }
     /*
      * (non-Javadoc)
      * @see MultipleChoice#getQuestionFormat()

@@ -29,7 +29,7 @@ public class Ranking extends Matching {
     	// loop through to display premises first.
     	for(int i = 1; i <= premises.size(); i++)
     	{
-    		System.out.printf("%s) %-15s  %15d) %d%n",alpha[i-1],premises.get(i-1),i,i);
+    		System.out.printf("%s) %-30s  %d) %d%n",alpha[i-1],premises.get(i-1),i,i);
     	}
     }
 
@@ -74,24 +74,30 @@ public class Ranking extends Matching {
     @Override
     public void editQuestion()
     {
-    	System.out.println("Choose what you would like to edit:");
-    	String options[] = {"Edit Prompt", "Edit Premise", "Quit"};
-    	for(int i = 0; i < options.length; i++)
+    	int cont = 0;
+    	while(cont < 3)
     	{
-    		int x = i+1;
-    		System.out.println(x+") " +options[i]);
+    		System.out.println("Choose what you would like to edit:");
+        	String options[] = {"Edit Prompt", "Edit Premise", "Quit"};
+        	for(int i = 0; i < options.length; i++)
+        	{
+        		int x = i+1;
+        		System.out.println(x+") " +options[i]);
+        	}
+    		String choice = getUserResponse();
+        	switch(choice)
+        	{
+        	case "1": editPrompt();
+        	break;
+        	case "2": editPremises();
+        	break;
+        	case "3": cont = 10;
+        	break;
+        	default: System.out.println("Invalid Input...Try again..."); cont++;
+        	break;
+        	}
     	}
-    	String choice = getUserResponse();
-    	switch(choice)
-    	{
-    	case "1": editPrompt();
-    	break;
-    	case "2": editPremises();
-    	break;
-    	case "3": return;
-    	default: System.out.println("Invalid Input...");
-    	break;
-    	}
+    	
     }
 
 }

@@ -31,7 +31,7 @@ public class Matching extends Question {
     {
     	for(int i = 1; i <= numOfprch; i++)
     	{
-    		System.out.println("Enter Premise #"+i);
+    		System.out.println("Enter Premise "+alpha[i-1]+") ");
     		premises.add(getUserResponse());
     	}
     }
@@ -43,7 +43,7 @@ public class Matching extends Question {
     {
     	for(int i = 1; i <= numOfprch; i++)
     	{
-    		System.out.println("Enter Choice "+alpha[i-1]+")");
+    		System.out.println("Enter Choice "+i+")");
     		choices.add(getUserResponse());
     	}
     }
@@ -73,10 +73,9 @@ public class Matching extends Question {
         // TODO implement here
     	System.out.println(getQuestionFormat()+" Question"); 
     	System.out.println(getPrompt());
-    	
     	for(int i = 1; i <= premises.size(); i++)
     	{
-    		System.out.printf("%s) %-15s  %15d) %s%n",alpha[i-1],premises.get(i-1),i,choices.get(i-1));
+    		System.out.printf("%s) %-30s  %d) %s%n",alpha[i-1],premises.get(i-1),i,choices.get(i-1));
     	}
     }
 
@@ -111,32 +110,28 @@ public class Matching extends Question {
     
     public void editQuestion()
     {
-    	System.out.println("Choose what you would like to edit:");
-    	String options[] = {"Edit Prompt", "Edit Premise",  "Edit Choice", "Quit"};
-    	for(int i = 0; i < options.length; i++)
+    	int cont = 0;
+    	while(cont < 3)
     	{
-    		int x = i+1;
-    		System.out.println(x+") " +options[i]);
-    	}
-    	String choice = getUserResponse();
-    	boolean cont = true;
-    	while(cont)
-    	{
+    		System.out.println("Choose what you would like to edit:");
+        	String options[] = {"Edit Prompt", "Edit Premise",  "Edit Choice", "Quit"};
+        	for(int i = 0; i < options.length; i++)
+        	{
+        		int x = i+1;
+        		System.out.println(x+") " +options[i]);
+        	}
+        	String choice = getUserResponse();
     		switch(choice)
         	{
         	case "1": editPrompt();
-        	editQuestion();
         	break;
         	case "2": editPremises();
-        	editQuestion();
         	break;
         	case "3": editChoices();
-        	editQuestion();
         	break;
-        	case "4": cont = false;
+        	case "4": cont = 10;
         	break;
-        	default: System.out.println("Invalid Input...");
-        	editQuestion();
+        	default: System.out.println("Invalid Input...Try again..."); cont++;
         	break;
         	}
     	}

@@ -97,30 +97,26 @@ public class Essay extends Question {
     
     public void editQuestion()
     {
-    	System.out.println("Choose what you would like to edit:");
-    	String options[] = {"Edit Prompt", "Edit number of responses","Quit"};
-    	for(int i = 0; i < options.length; i++)
+    	int cont = 0;
+    	while(cont < 3)
     	{
-    		int x = i+1;
-    		System.out.println(x+") " +options[i]);
-    	}
-    	
-    	boolean cont = true;
-    	while(cont)
-    	{
+    		System.out.println("Choose what you would like to edit:");
+        	String options[] = {"Edit Prompt", "Edit number of responses","Quit"};
+        	for(int i = 0; i < options.length; i++)
+        	{
+        		int x = i+1;
+        		System.out.println(x+") " +options[i]);
+        	}
     		String choice = getUserResponse();
     		switch(choice)
         	{
         	case "1": editPrompt();
-        	editQuestion();
         	break;
         	case "2": numOfResponses();
-        	editQuestion();
         	break;
-        	case "3": cont = false;
+        	case "3": cont = 10;
         	break;
-        	default: System.out.println("Invalid Input...Try again..."); 
-        	editQuestion();
+        	default: System.out.println("Invalid Input...Try again..."); cont++;
         	break;
         	}
     	}
@@ -142,7 +138,7 @@ public class Essay extends Question {
     		for(int i = 0; i< numOfResponses; i++)
     		{
     			System.out.println(alpha[i] + ") ");
-    			response +=getUserResponse();
+    			response +=getUserResponse() + "\n" ;
     			
     		}
     		qResponse.setUserResponse(response);

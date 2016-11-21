@@ -55,7 +55,8 @@ public class Test extends Survey {
      */
     public void setCorrectResponse(Question question) {
         // TODO implement here
-    	System.out.println("Enter Correct Response: ");
+    	question.display();
+    	System.out.println("\nEnter Correct Response: ");
     	question.setResponse();
     	Response correctResponse = question.getResponse();
     	correctResponses.put(question, correctResponse);
@@ -65,8 +66,9 @@ public class Test extends Survey {
     public void editCorrectResponse(Question q)
     {
     	System.out.println("Enter Correct Response: ");
-    	Response correctResponse = new Response();
-    	correctResponse.setUserResponse(getUserResponse());
+    	q.setResponse();
+    	Response correctResponse = q.getResponse();
+    	//correctResponse.setUserResponse(getUserResponse());
     	correctResponses.replace(q, correctResponse);
     }
     
@@ -77,21 +79,26 @@ public class Test extends Survey {
     	System.out.println("What question do you want to modify?");
     	for(Question q : Questions)
     	{
-    		System.out.println("\nQuestion " +count+")");
+    		System.out.print(count+") ");
     		q.display();
     		System.out.println("\nThe Correct Response: " + correctResponses.get(q).getResponse());
-    		System.out.println();
+    		System.out.println("\n");
     		count++;
     		
     	}
+    	System.out.println("Enter the number of the question you want to modify: ");
     	System.out.println();
     	String choice = getUserResponse();
     	int ch = string2int(choice) - 1;
-    	Questions.get(ch).editQuestion();
-    	System.out.println("Do you want to edit the Correct Response (y/n)? ");
-    	choice = getUserResponse();
-    	if(choice.equals("y") || choice.equals("Y"))
-    		editCorrectResponse(Questions.get(ch));
+    	if(withinRange(Questions.size(),ch))
+    	{
+    		Questions.get(ch).editQuestion();
+        	System.out.println("Do you want to edit the Correct Response (y/n)? ");
+        	choice = getUserResponse();
+        	if(choice.equals("y") || choice.equals("Y"))
+        		editCorrectResponse(Questions.get(ch));
+    	}
+    	
     	
     	
     }
@@ -116,13 +123,6 @@ public class Test extends Survey {
     }
 
     /**
-     * method to be used to edit responses
-     */
-    public void editResponse() {
-        // TODO implement here
-    }
-
-    /**
      * Method to be used to grade test
      * @param grade
      */
@@ -136,6 +136,7 @@ public class Test extends Survey {
 				user++;
 
     	}
+    	grade = (user/total)*100;
     	return (user/total)*100;
     	
     }
@@ -171,7 +172,11 @@ public class Test extends Survey {
      */
     public double getGrade() {
         // TODO implement here
-    	grade = calculateGrade();
-        return calculateGrade();
+        return grade;
+    }
+    
+    public void printGrade()
+    {
+    	System.out.println("Grade: "+grade +"%");
     }
 }
