@@ -97,6 +97,10 @@ public class Matching extends Question {
     	qResponse.setUserResponse(rankingOrder);
     }
     
+    /*
+     * (non-Javadoc)
+     * @see Question#displayResponse()
+     */
     public void displayResponse()
     {
     	String response[] = getResponse().getResponse().split(" ");
@@ -108,6 +112,10 @@ public class Matching extends Question {
     	
     }
     
+    /*
+     * (non-Javadoc)
+     * @see Question#editQuestion()
+     */
     public void editQuestion()
     {
     	int cont = 0;
@@ -138,6 +146,9 @@ public class Matching extends Question {
     	
     }
     
+    /*
+     * Method to edit choices
+     */
     public void editChoices()
     {
     	System.out.println("Select the choice option you want to edit: ");
@@ -153,6 +164,9 @@ public class Matching extends Question {
     	
     }
     
+    /*
+     * Edit premises
+     */
     public void editPremises()
     {
     	System.out.println("Select the premise option you want to edit: ");

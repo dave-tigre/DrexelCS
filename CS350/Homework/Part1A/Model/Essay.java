@@ -74,26 +74,6 @@ public class Essay extends Question {
 	   super.editPrompt();
 	  
     }
-   
-   /*public void editResponseNum()
-   {
-	   System.out.println("Enter number of ");
-		String choice = getUserResponse();
-		if(choice.equals("Y") || choice.equals("y"))
-		{
-			System.out.println("Enter number of responses:\n");
-			String numCh = getUserResponse();
-			try
-			{
-				numOfResponses = Integer.parseInt(numCh);
-			}
-			catch(NumberFormatException nfe)
-			{
-				System.out.println("Input was not a valid integer... Try again..");
-				editResponseNum();
-			}
-		}
-   }*/
     
     public void editQuestion()
     {

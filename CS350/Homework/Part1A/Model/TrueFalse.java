@@ -19,6 +19,10 @@ public class TrueFalse extends MultipleChoice {
     	choices.add("False");
     }
     
+    /*
+     * (non-Javadoc)
+     * @see MultipleChoice#editQuestion()
+     */
     @Override
     public void editQuestion()
     {

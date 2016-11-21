@@ -63,6 +63,9 @@ public class Test extends Survey {
     	
     }
     
+    /*
+     * Method to edit correct response
+     */
     public void editCorrectResponse(Question q)
     {
     	System.out.println("Enter Correct Response: ");
@@ -72,6 +75,10 @@ public class Test extends Survey {
     	correctResponses.replace(q, correctResponse);
     }
     
+    /*
+     * (non-Javadoc)
+     * @see Survey#modifySurvey()
+     */
     @Override
     public void modifySurvey()
     {
@@ -175,6 +182,9 @@ public class Test extends Survey {
         return grade;
     }
     
+    /*
+     * Method to print grade to console
+     */
     public void printGrade()
     {
     	System.out.println("Grade: "+grade +"%");

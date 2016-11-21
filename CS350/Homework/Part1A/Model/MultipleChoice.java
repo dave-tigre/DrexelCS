@@ -53,6 +53,10 @@ public class MultipleChoice extends Question {
     }
 
 
+    /*
+     * (non-Javadoc)
+     * @see Question#editQuestion()
+     */
     public void editQuestion()
     {
     	int cont = 0;
@@ -83,6 +87,9 @@ public class MultipleChoice extends Question {
     	
     }
     
+    /*
+     * Method to edit chocies
+     */
     public void editChoices()
     {
     	System.out.println("Select the choice option you want to edit: ");
@@ -99,6 +106,9 @@ public class MultipleChoice extends Question {
     }
     
 
+    /*
+     * Method to set the number of responses
+     */
     public void setNumOfResponseOptions()
     {
     	System.out.println("Enter number of options taker needs to enter: ");
@@ -115,6 +125,10 @@ public class MultipleChoice extends Question {
     	
     }
     
+    /*
+     * (non-Javadoc)
+     * @see Question#displayResponse()
+     */
     public void displayResponse()
     {
     	String response[] = getResponse().getResponse().split(" ");

@@ -62,6 +62,9 @@ public abstract class Question implements Serializable {
      */
     public abstract String getQuestionFormat();
     
+    /*
+     * Abstract method for each question to have its own way to edit
+     */
     public abstract void editQuestion();
     
     /*
@@ -108,6 +111,9 @@ public abstract class Question implements Serializable {
     	qResponse.setUserResponse();
     }
     
+    /*
+     * 
+     */
     public void setReponse(Response response)
     {
     	qResponse = response;

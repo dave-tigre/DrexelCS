@@ -64,6 +64,9 @@ public class TestMenu extends Menu {
 		startMenu();
 	}
 	
+	/*
+	 * Method to create a new test
+	 */
 	public void createNewTest()
 	{
 		currentTest = new Test();
@@ -73,6 +76,9 @@ public class TestMenu extends Menu {
 		creationMenu();
 	}
 	
+	/*
+	 * Method to display a test
+	 */
 	public void displayTest()
 	{
 		if(availableTests.isEmpty())
@@ -96,6 +102,9 @@ public class TestMenu extends Menu {
 		}
 	}
 	
+	/*
+	 * Method to load test
+	 */
 	public void loadTest()
 	{
 		ArrayList<String> listOfFiles = listFiles(testFolder);
@@ -128,6 +137,9 @@ public class TestMenu extends Menu {
 		
 	}
 	
+	/*
+	 * Method to save test
+	 */
 	public void saveTest()
 	{
 		if(availableTests.isEmpty())
@@ -152,6 +164,9 @@ public class TestMenu extends Menu {
 		}
 	}
 	
+	/*
+	 * Method to modify test
+	 */
 	public void modifyTest()
 	{
 		if(availableTests.isEmpty())
@@ -175,6 +190,9 @@ public class TestMenu extends Menu {
 		}
 	}
 	
+	/*
+	 * Method to take test
+	 */
 	public void takeTest()
 	{
 		if(availableTests.isEmpty())
@@ -198,6 +216,9 @@ public class TestMenu extends Menu {
 		}
 	}
 	
+	/*
+	 * Method to tabulate test
+	 */
 	public void tabulateTest()
 	{
 		if(availableTests.isEmpty())
@@ -221,6 +242,9 @@ public class TestMenu extends Menu {
 		}
 	}
 	
+	/*
+	 * Method to return grade test from last known taken test
+	 */
 	public void gradeTest()
 	{
 		if(availableTests.isEmpty())
@@ -238,12 +262,24 @@ public class TestMenu extends Menu {
 			int ch = string2int(choice) - 1;
 			if(withinRange(availableTests.size(),ch))
 			{
-				availableTests.get(ch).printGrade();
+				if(availableTests.get(ch).getGrade() < 0)
+				{
+					System.out.println("This test has yet to be taken.");
+				}				
+				else
+				{
+					System.out.println("Results from last time this test was taken: ");
+					availableTests.get(ch).printGrade();
+				}
+				
 				System.out.println();
 			}
 		}
 	}
 	
+	/*
+	 * Method to list tests
+	 */
 	public void listTests()
 	{
 		for(int i = 0; i < availableTests.size(); i++)
@@ -253,6 +289,9 @@ public class TestMenu extends Menu {
 		}
 	}
 	
+	/*
+	 * Method used to create new questions and perform tasks based on choice
+	 */
 	public void creationMenu()
 	{
 		

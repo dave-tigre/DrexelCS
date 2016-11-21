@@ -71,6 +71,10 @@ public class Ranking extends Matching {
     	return "Ranking";
     }
     
+    /*
+     * (non-Javadoc)
+     * @see Matching#editQuestion()
+     */
     @Override
     public void editQuestion()
     {
