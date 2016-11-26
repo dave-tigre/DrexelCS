@@ -31,7 +31,7 @@ public class Matching extends Question {
     {
     	for(int i = 1; i <= numOfprch; i++)
     	{
-    		System.out.println("Enter Premise "+alpha[i-1]+") ");
+    		voice.printOutput("\nEnter Premise "+alpha[i-1]+") ");
     		premises.add(getUserResponse());
     	}
     }
@@ -43,7 +43,7 @@ public class Matching extends Question {
     {
     	for(int i = 1; i <= numOfprch; i++)
     	{
-    		System.out.println("Enter Choice "+i+")");
+    		voice.printOutput("\nEnter Choice "+i+")");
     		choices.add(getUserResponse());
     	}
     }
@@ -60,7 +60,7 @@ public class Matching extends Question {
     	}
     	catch(NumberFormatException nfe)
     	{
-    		System.out.println("Input was not a valid integer... Try again..");
+    		voice.printOutput("\nInput was not a valid integer... Try again..");
     		prchAmount();
     	}
     }
@@ -71,12 +71,31 @@ public class Matching extends Question {
     @Override
     public void display() {
         // TODO implement here
-    	System.out.println(getQuestionFormat()+" Question"); 
-    	System.out.println(getPrompt());
+    	voice.printOutput(getQuestionFormat()+" Question"); 
+    	voice.printOutput("\n"+getPrompt());
+    	System.out.println();
+    	
     	for(int i = 1; i <= premises.size(); i++)
     	{
     		System.out.printf("%s) %-30s  %d) %s%n",alpha[i-1],premises.get(i-1),i,choices.get(i-1));
     	}
+    }
+    
+    /**
+     * speak a matching question
+     */
+    public void audio() {
+        // TODO implement here
+    	voice.voiceOutput(getQuestionFormat()+" Question"); 
+    	voice.voiceOutput("\n"+getPrompt());
+    	System.out.println();
+    	
+    	for(int i = 1; i <= premises.size(); i++)
+    	{
+    		System.out.printf("%s) %-30s  %d) %s%n",alpha[i-1],premises.get(i-1),i,choices.get(i-1));
+    	}
+    	voice.voicePremises(premises);
+    	voice.voiceChoices(choices);
     }
 
     /*
@@ -90,7 +109,20 @@ public class Matching extends Question {
     	//loop through to obtain matching choice to each premise
     	for(int i = 0; i< premises.size(); i++)
     	{
-    		System.out.println("Enter Matching Answer of " +alpha[i] + ") "+premises.get(i) +": ");
+    		voice.printOutput("\nEnter Matching Answer of " +alpha[i] + ") "+premises.get(i) +": ");
+    		rankingOrder +=getUserResponse()+" ";
+    	}
+    	qResponse = new Response();
+    	qResponse.setUserResponse(rankingOrder);
+    }
+    
+    public void audioResponse()
+    {
+    	String rankingOrder = "";// = "Matching Order From top to bottom: ";
+    	//loop through to obtain matching choice to each premise
+    	for(int i = 0; i< premises.size(); i++)
+    	{
+    		voice.voiceOutput("\nEnter Matching Answer of " +alpha[i] + ") "+premises.get(i) +": ");
     		rankingOrder +=getUserResponse()+" ";
     	}
     	qResponse = new Response();
@@ -106,7 +138,7 @@ public class Matching extends Question {
     	String response[] = getResponse().getResponse().split(" ");
     	for(int i = 0; i < response.length; i++)
     	{
-    		System.out.println(alpha[i] +" " + response[i]);
+    		voice.printOutput("\n"+alpha[i] +" " + response[i]);
     	}
     	System.out.println();
     	
@@ -121,12 +153,12 @@ public class Matching extends Question {
     	int cont = 0;
     	while(cont < 3)
     	{
-    		System.out.println("Choose what you would like to edit:");
+    		voice.printOutput("\nChoose what you would like to edit:");
         	String options[] = {"Edit Prompt", "Edit Premise",  "Edit Choice", "Quit"};
         	for(int i = 0; i < options.length; i++)
         	{
         		int x = i+1;
-        		System.out.println(x+") " +options[i]);
+        		voice.printOutput("\n"+x+") " +options[i]);
         	}
         	String choice = getUserResponse();
     		switch(choice)
@@ -139,7 +171,7 @@ public class Matching extends Question {
         	break;
         	case "4": cont = 10;
         	break;
-        	default: System.out.println("Invalid Input...Try again..."); cont++;
+        	default: voice.printOutput("\nInvalid Input...Try again..."); cont++;
         	break;
         	}
     	}
@@ -151,16 +183,31 @@ public class Matching extends Question {
      */
     public void editChoices()
     {
-    	System.out.println("Select the choice option you want to edit: ");
+    	voice.printOutput("\nSelect the choice option you want to edit: ");
     	for(int i = 0; i < choices.size(); i++)
     	{
-    		System.out.println(alpha[i] +") " + choices.get(i));
+    		voice.printOutput("\n"+alpha[i] +") " + choices.get(i));
     	}
     	
     	String choice = getUserResponse();
-    	int ch = Arrays.asList(alpha).indexOf(choice);
-    	System.out.println("Enter Choice " + choice +")");
-    	choices.set(ch, getUserResponse());
+    	if(Arrays.asList(alpha).contains(choice))
+    	{
+    		int ch = Arrays.asList(alpha).indexOf(choice);
+    		if(ch < choices.size())
+    		{
+    			voice.printOutput("\nEnter Choice " + choice +")");
+            	choices.set(ch, getUserResponse());
+    		}
+    		else
+        	{
+        		voice.printOutput("\nInvalid input... ");
+        	}
+    	}
+    	else
+    	{
+    		voice.printOutput("\nInvalid input... ");
+    	}
+    	
     	
     }
     
@@ -169,16 +216,30 @@ public class Matching extends Question {
      */
     public void editPremises()
     {
-    	System.out.println("Select the premise option you want to edit: ");
+    	voice.printOutput("\nSelect the premise option you want to edit: ");
     	for(int i = 0; i < premises.size(); i++)
     	{
-    		System.out.println(alpha[i] +") " + premises.get(i));
+    		voice.printOutput("\n"+alpha[i] +") " + premises.get(i));
     	}
     	
     	String premise = getUserResponse();
-    	int ch = Arrays.asList(alpha).indexOf(premise);
-    	System.out.println("Enter Choice " + premise +")");
-    	premises.set(ch, getUserResponse());
+    	if(Arrays.asList(alpha).contains(premise))
+    	{
+    		int ch = Arrays.asList(alpha).indexOf(premise);
+    		if(ch < premises.size())
+    		{
+    			voice.printOutput("\nEnter Choice " + premise +")");
+            	premises.set(ch, getUserResponse());
+    		}
+    		else
+        	{
+        		voice.printOutput("\nInvalid input... ");
+        	}
+    	}
+    	else
+    	{
+    		voice.printOutput("\nInvalid input... ");
+    	}
     }
 
     /*

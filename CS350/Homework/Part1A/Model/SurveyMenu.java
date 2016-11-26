@@ -35,7 +35,8 @@ public class SurveyMenu extends Menu{
 		int invalid_count = 0;
 		while(invalid_count < 3)
 		{
-			System.out.println("\nSurvey Menu");
+			//System.out.println("\nSurvey Menu");
+			voice.printOutput("\nSurvey Menu");
 			display(options1);
 			System.out.println();
 			String choice = getResponse();
@@ -57,12 +58,12 @@ public class SurveyMenu extends Menu{
 			break;
 			case "8": invalid_count = 10;
 			break;
-			default: System.out.println("Invalid Input");
+			default: voice.printOutput("\nInvalid Input");
 			invalid_count++;
 			break;
 			}
 		}
-		System.out.println("Returning to Main Menu..."); 
+		voice.printOutput("\nReturning to Main Menu..."); 
 		startMenu();
 	}
 	
@@ -72,7 +73,7 @@ public class SurveyMenu extends Menu{
 	public void createNewSurvey()
 	{
 		currentSurvey = new Survey();
-		System.out.println("Name this Survey: ");
+		voice.printOutput("\nName this Survey: ");
 		currentSurvey.setName(getResponse());
 		availableSurveys.add(currentSurvey);
 		creationMenu();
@@ -85,11 +86,11 @@ public class SurveyMenu extends Menu{
 	{
 		if(availableSurveys.isEmpty())
 		{
-			System.out.println("There are no surveys to display. Create or load a new survey to display");
+			voice.printOutput("There are no surveys to display. Create or load a new survey to display");
 			
 		}
 		else{
-			System.out.println("Select the Survey you want to display: ");
+			voice.printOutput("\nSelect the Survey you want to display: ");
 			listSurveys();
 			String choice = getResponse();		
 			int ch = string2int(choice) - 1;
@@ -110,18 +111,18 @@ public class SurveyMenu extends Menu{
 		ArrayList<String> listOfFiles = listFiles(surveyFolder);
 		if(listOfFiles.size() < 1)
 		{
-			System.out.println("There are no surveys to load...");
+			voice.printOutput("\nThere are no surveys to load...");
 			return;
 		}
 		else{
-			System.out.println("Select the survey you want to load: ");
+			voice.printOutput("\nSelect the survey you want to load: ");
 			
 			for(int i = 0; i < listOfFiles.size(); i++)
 			{
 				int x = i+1;
 				String fileName = listOfFiles.get(i);
 				fileName = fileName.replace(".ser", "");
-				System.out.println(x +") " + fileName);
+				voice.printOutput("\n"+x +") " + fileName);
 			}
 			String choice = getResponse();
 			int ch = string2int(choice) - 1;
@@ -133,7 +134,7 @@ public class SurveyMenu extends Menu{
 			}
 			else
 			{
-				System.out.println("Input was not a valid integer...");
+				voice.printOutput("\nInput was not a valid integer...");
 			}
 		}	
 	}
@@ -145,12 +146,12 @@ public class SurveyMenu extends Menu{
 	{
 		if(availableSurveys.isEmpty())
 		{
-			System.out.println("There are no surveys to save. Create a new survey to save.");
+			voice.printOutput("\nThere are no surveys to save. Create a new survey to save.");
 		
 		}
 		else{
 			
-			System.out.println("Select the Survey you want to save: ");
+			voice.printOutput("\nSelect the Survey you want to save: ");
 			listSurveys();
 			String choice = getResponse();
 			int ch = string2int(choice) - 1;
@@ -171,12 +172,12 @@ public class SurveyMenu extends Menu{
 	{
 		if(availableSurveys.isEmpty())
 		{
-			System.out.println("There are no surveys to modify. Create or load a new survey to modify.");
+			voice.printOutput("\nThere are no surveys to modify. Create or load a new survey to modify.");
 		
 		}
 		else{
 			
-			System.out.println("Select the Survey you want to modify: ");
+			voice.printOutput("\nSelect the Survey you want to modify: ");
 			listSurveys();
 			
 			String choice = getResponse();
@@ -198,12 +199,12 @@ public class SurveyMenu extends Menu{
 	{
 		if(availableSurveys.isEmpty())
 		{
-			System.out.println("There are no surveys to take. Create or load a new survey to take.");
+			voice.printOutput("\nThere are no surveys to take. Create or load a new survey to take.");
 		
 		}
 		else{
 			
-			System.out.println("Select the Survey you want to take: ");
+			voice.printOutput("\nSelect the Survey you want to take: ");
 			listSurveys();
 			
 			String choice = getResponse();
@@ -224,12 +225,12 @@ public class SurveyMenu extends Menu{
 	{
 		if(availableSurveys.isEmpty())
 		{
-			System.out.println("There are no surveys to tabulate. Create or load a new survey to tabulate.");
+			voice.printOutput("\nThere are no surveys to tabulate. Create or load a new survey to tabulate.");
 		
 		}
 		else{
 			
-			System.out.println("Select the Survey you want to tabulate: ");
+			voice.printOutput("\nSelect the Survey you want to tabulate: ");
 			listSurveys();
 			
 			String choice = getResponse();
@@ -251,7 +252,7 @@ public class SurveyMenu extends Menu{
 		for(int i = 0; i < availableSurveys.size(); i++)
 		{
 			int x = i+1;
-			System.out.println(x +") " + availableSurveys.get(i).getName());
+			voice.printOutput("\n"+ x +") " + availableSurveys.get(i).getName());
 		}
 	}
 	
@@ -271,7 +272,7 @@ public class SurveyMenu extends Menu{
 						creationMenu();
 			case "2": MultipleChoice newMC = new MultipleChoice();
 						createNewQuestion(newMC);
-						System.out.println("Enter number of choices for your multiple choice question: ");
+						voice.printOutput("\nEnter number of choices for your multiple choice question: ");
 						newMC.choiceAmount();
 						newMC.addChoices();
 						newMC.setNumOfResponseOptions();
@@ -289,22 +290,22 @@ public class SurveyMenu extends Menu{
 						creationMenu();
 			case "5": Ranking newRank = new Ranking();
 						createNewQuestion(newRank);
-						System.out.println("Enter the number of premises for your ranking question");
+						voice.printOutput("\nEnter the number of premises for your ranking question");
 						newRank.prchAmount();
 						newRank.addPremises();
 						currentSurvey.addQuestion(newRank);
 						creationMenu();
 			case "6":  Matching newMatch = new Matching();
 						createNewQuestion(newMatch);
-						System.out.println("Enter the number of premises for your matching question");
+						voice.printOutput("\nEnter the number of premises for your matching question");
 						newMatch.prchAmount();
 						newMatch.addPremises();
 						newMatch.addChoices();
 						currentSurvey.addQuestion(newMatch);
 						creationMenu();
-			case "7": System.out.println("Terminating Survey Maker...");
+			case "7": voice.printOutput("\nTerminating Survey Maker...");
 						surveyMenu();
-			default: System.out.println("Invalid Input please Try again");
+			default: voice.printOutput("\nInvalid Input please Try again");
 						creationMenu();
 		}
 	}

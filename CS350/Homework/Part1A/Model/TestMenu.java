@@ -31,7 +31,7 @@ public class TestMenu extends Menu {
 		int invalid_count = 0;
 		while(invalid_count < 3)
 		{
-			System.out.println("\nTest Menu");
+			voice.printOutput("\n\nTest Menu");
 			display(options1);
 			System.out.println();
 			String choice = getResponse();
@@ -55,12 +55,12 @@ public class TestMenu extends Menu {
 			break;
 			case "9": invalid_count = 10;
 			break;
-			default: System.out.println("Invalid Input");
+			default: voice.printOutput("\nInvalid Input");
 			invalid_count++;
 			break;
 			}
 		}
-		System.out.println("Returning to Main Menu..."); 
+		voice.printOutput("\nReturning to Main Menu..."); 
 		startMenu();
 	}
 	
@@ -70,7 +70,7 @@ public class TestMenu extends Menu {
 	public void createNewTest()
 	{
 		currentTest = new Test();
-		System.out.println("Name this Test: ");
+		voice.printOutput("\nName this Test: ");
 		currentTest.setName(getResponse());
 		availableTests.add(currentTest);
 		creationMenu();
@@ -83,13 +83,13 @@ public class TestMenu extends Menu {
 	{
 		if(availableTests.isEmpty())
 		{
-			System.out.println("There are no Tests to display. Create or load a new Test to display");
+			voice.printOutput("\nThere are no Tests to display. Create or load a new Test to display");
 			
 		}
 		else{
 			
 		
-			System.out.println("Select the Test you wish to display: ");
+			voice.printOutput("\nSelect the Test you wish to display: ");
 			listTests();
 			String choice = getResponse();
 			int ch = string2int(choice) - 1;
@@ -110,18 +110,18 @@ public class TestMenu extends Menu {
 		ArrayList<String> listOfFiles = listFiles(testFolder);
 		if(listOfFiles.size() < 1)
 		{
-			System.out.println("There are no tests to load...");
+			voice.printOutput("\nThere are no tests to load...");
 			return;
 		}
 		else{
-			System.out.println("Select the test you want to load: ");
+			voice.printOutput("\nSelect the test you want to load: ");
 			
 			for(int i = 0; i < listOfFiles.size(); i++)
 			{
 				int x = i+1;
 				String fileName = listOfFiles.get(i);
 				fileName = fileName.replace(".ser", "");
-				System.out.println(x +") " + fileName);
+				voice.printOutput("\n"+x +") " + fileName);
 			}
 			String choice = getResponse();
 			int ch = string2int(choice) - 1;
@@ -144,12 +144,12 @@ public class TestMenu extends Menu {
 	{
 		if(availableTests.isEmpty())
 		{
-			System.out.println("There are no tests to save. Create a new test to save.");
+			voice.printOutput("\nThere are no tests to save. Create a new test to save.");
 		
 		}
 		else{
 			
-			System.out.println("Select the Test you with to save: ");
+			voice.printOutput("\nSelect the Test you with to save: ");
 			listTests();
 			String choice = getResponse();
 			int ch = string2int(choice) - 1;
@@ -171,12 +171,12 @@ public class TestMenu extends Menu {
 	{
 		if(availableTests.isEmpty())
 		{
-			System.out.println("There are no tests to modify. Create or load a new test to modify.");
+			voice.printOutput("\nThere are no tests to modify. Create or load a new test to modify.");
 		
 		}
 		else{
 			
-			System.out.println("Select the Test you want to modify: ");
+			voice.printOutput("\nSelect the Test you want to modify: ");
 			listTests();
 			
 			String choice = getResponse();
@@ -197,12 +197,12 @@ public class TestMenu extends Menu {
 	{
 		if(availableTests.isEmpty())
 		{
-			System.out.println("There are no tests to take. Create or load a new test to take.");
+			voice.printOutput("\nThere are no tests to take. Create or load a new test to take.");
 		
 		}
 		else{
 			
-			System.out.println("Select the Test you want to take: ");
+			voice.printOutput("\nSelect the Test you want to take: ");
 			listTests();
 			
 			String choice = getResponse();
@@ -223,12 +223,12 @@ public class TestMenu extends Menu {
 	{
 		if(availableTests.isEmpty())
 		{
-			System.out.println("There are no tests to tabulate. Create or load a new test to tabulate.");
+			voice.printOutput("\nThere are no tests to tabulate. Create or load a new test to tabulate.");
 		
 		}
 		else{
 			
-			System.out.println("Select the Test you want to tabulate: ");
+			voice.printOutput("\nSelect the Test you want to tabulate: ");
 			listTests();
 			
 			String choice = getResponse();
@@ -249,12 +249,12 @@ public class TestMenu extends Menu {
 	{
 		if(availableTests.isEmpty())
 		{
-			System.out.println("There are no tests to grade. Create or load a new test to grade.");
+			voice.printOutput("\nThere are no tests to grade. Create or load a new test to grade.");
 		
 		}
 		else{
 			
-			System.out.println("Select the Test you want to grade: ");
+			voice.printOutput("\nSelect the Test you want to grade: ");
 			listTests();
 			
 			String choice = getResponse();
@@ -264,11 +264,11 @@ public class TestMenu extends Menu {
 			{
 				if(availableTests.get(ch).getGrade() < 0)
 				{
-					System.out.println("This test has yet to be taken.");
+					voice.printOutput("\nThis test has yet to be taken.");
 				}				
 				else
 				{
-					System.out.println("Results from last time this test was taken: ");
+					voice.printOutput("\nResults from last time this test was taken: ");
 					availableTests.get(ch).printGrade();
 				}
 				
@@ -285,7 +285,7 @@ public class TestMenu extends Menu {
 		for(int i = 0; i < availableTests.size(); i++)
 		{
 			int x = i+1;
-			System.out.println(x +") " + availableTests.get(i).getName());
+			voice.printOutput("\n"+x +") " + availableTests.get(i).getName());
 		}
 	}
 	
@@ -307,7 +307,7 @@ public class TestMenu extends Menu {
 						creationMenu();
 			case "2": MultipleChoice newMC = new MultipleChoice();
 						createNewQuestion(newMC);
-						System.out.println("Enter number of choices for your multiple choice question: ");
+						voice.printOutput("\nEnter number of choices for your multiple choice question: ");
 						newMC.choiceAmount();
 						newMC.addChoices();
 						newMC.setNumOfResponseOptions();
@@ -328,7 +328,7 @@ public class TestMenu extends Menu {
 						creationMenu();
 			case "5": Ranking newRank = new Ranking();
 						createNewQuestion(newRank);
-						System.out.println("Enter the number of premises for your ranking question");
+						voice.printOutput("\nEnter the number of premises for your ranking question");
 						newRank.prchAmount();
 						newRank.addPremises();
 						currentTest.addQuestion(newRank);
@@ -336,16 +336,16 @@ public class TestMenu extends Menu {
 						creationMenu();
 			case "6":  Matching newMatch = new Matching();
 						createNewQuestion(newMatch);
-						System.out.println("Enter the number of premises for your matching question");
+						voice.printOutput("\nEnter the number of premises for your matching question");
 						newMatch.prchAmount();
 						newMatch.addPremises();
 						newMatch.addChoices();
 						currentTest.addQuestion(newMatch);
 						currentTest.setCorrectResponse(newMatch);
 						creationMenu();
-			case "7": System.out.println("Terminating Test Maker...");
+			case "7": voice.printOutput("\nTerminating Test Maker...");
 						testMenu();
-			default: System.out.println("Invalid Input please Try again");
+			default: voice.printOutput("\nInvalid Input please Try again");
 						creationMenu();
 		}
 		

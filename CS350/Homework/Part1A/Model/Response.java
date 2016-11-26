@@ -12,6 +12,7 @@ public class Response implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private String response;
+	public static Output voice = new Output();
 
     /**
      * Default constructor
@@ -25,6 +26,7 @@ public class Response implements Serializable{
     @SuppressWarnings("resource")
 	public void setUserResponse() {
         // TODO implement here
+    	System.out.println();
     	Scanner input = new Scanner(System.in);
     	String resp = input.nextLine();
     	this.response = resp;
@@ -52,7 +54,7 @@ public class Response implements Serializable{
      */
     public void display() {
         // TODO implement here
-    	System.out.println(response);
+    	voice.printOutput("\n"+response);
     }
 
 }

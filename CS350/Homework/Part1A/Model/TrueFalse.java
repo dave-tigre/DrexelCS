@@ -29,12 +29,12 @@ public class TrueFalse extends MultipleChoice {
     	int cont = 0;
     	while(cont < 3)
     	{
-    		System.out.println("Choose what you would like to edit:");
+    		voice.printOutput("\nChoose what you would like to edit:");
         	String options[] = {"Edit Prompt", "Quit"};
         	for(int i = 0; i < options.length; i++)
         	{
         		int x = i+1;
-        		System.out.println(x+") " +options[i]);
+        		voice.printOutput("\n"+x+") " +options[i]);
         	}
     		String choice = getUserResponse();
         	switch(choice)
@@ -43,7 +43,7 @@ public class TrueFalse extends MultipleChoice {
         	break;
         	case "2": cont = 10;
         	break;
-        	default: System.out.println("Invalid Input... Try Again..."); cont++;
+        	default: voice.printOutput("\nInvalid Input... Try Again..."); cont++;
         	break;
         	}
     	}
@@ -55,7 +55,7 @@ public class TrueFalse extends MultipleChoice {
      */
     @Override
     public String getQuestionFormat() {
-    	return "True/False";
+    	return "True or False";
     }
 
 }

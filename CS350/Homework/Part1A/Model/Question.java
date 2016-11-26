@@ -1,5 +1,4 @@
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -14,6 +13,7 @@ public abstract class Question implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String prompt;
 	protected Response qResponse; //response to this question
+	public static Output voice = new Output();
 	
 	
 	public final String alpha[] = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O",
@@ -45,7 +45,7 @@ public abstract class Question implements Serializable {
 	 */
 	public void editPrompt()
 	{
-		System.out.println("Enter the new prompt:\n");
+		voice.printOutput("\nEnter the new prompt:\n");
 		this.prompt = getUserResponse();
 	}
 	
@@ -53,8 +53,17 @@ public abstract class Question implements Serializable {
      * Method to display the question.
      */
     public void display(){
-    	System.out.println(getQuestionFormat()+" Question ");
-    	System.out.println(prompt);
+    	voice.printOutput(getQuestionFormat()+" Question ");
+    	voice.printOutput("\n"+prompt);
+    }
+    
+    
+    /**
+     * Method to display the question.
+     */
+    public void audio(){
+    	voice.voiceOutput(getQuestionFormat()+" Question ");
+    	voice.voiceOutput("\n"+prompt);
     }
     
     /*
@@ -73,6 +82,7 @@ public abstract class Question implements Serializable {
     @SuppressWarnings("resource")
 	public String getUserResponse()
     {
+    	System.out.println();
     	Scanner input = new Scanner(System.in);
 		String choice = input.nextLine();
 		return choice;
@@ -96,7 +106,7 @@ public abstract class Question implements Serializable {
       	}
       	catch(NumberFormatException nfe)
       	{
-      		System.out.println("Input was not a valid integer... Try again..");
+      		voice.printOutput("\nInput was not a valid integer... Try again..");
       	}
   		
   		return number;
@@ -106,6 +116,12 @@ public abstract class Question implements Serializable {
      * Method to set the response to a question.
      */
     public void setResponse()
+    {
+    	qResponse = new Response();
+    	qResponse.setUserResponse();
+    }
+    
+    public void audioResponse()
     {
     	qResponse = new Response();
     	qResponse.setUserResponse();

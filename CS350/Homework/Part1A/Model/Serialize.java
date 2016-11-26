@@ -16,6 +16,8 @@ public class Serialize {
     /**
      * Default constructor
      */
+	
+	public static Output voice = new Output();
     public Serialize() {
     }
 
@@ -33,11 +35,11 @@ public class Serialize {
     		out.writeObject(current);
     		out.close();
     		fileOut.close();
-    		System.out.println("The '" +current.getName() +"' survey has been serialized and saved in the '" + folderName +"' folder.");
+    		voice.printOutput("\nThe '" +current.getName() +"' survey has been serialized and saved in the '" + folderName +"' folder.");
     	}
     	catch(IOException i)
     	{
-    		System.out.println("Error with saving survey... Try again....");
+    		voice.printOutput("\nError with saving survey... Try again....");
     		return;
     	}
     }
@@ -55,16 +57,16 @@ public class Serialize {
     		loadSurvey = (Survey) in.readObject();
     		in.close();
     		fileIn.close();
-    		System.out.println("The " + loadSurvey.getName() +" survey has been loaded...");
+    		voice.printOutput("\nThe " + loadSurvey.getName() +" survey has been loaded...");
     	}
     	catch(IOException i)
     	{
-    		System.out.println("Error with loading survey... Try again....");
+    		voice.printOutput("\nError with loading survey... Try again....");
     		//i.printStackTrace();
     	}
     	catch(ClassNotFoundException c)
     	{
-    		System.out.println("Survey not found");
+    		voice.printOutput("\nSurvey not found");
     	}
     	
     	return loadSurvey;
@@ -84,11 +86,11 @@ public class Serialize {
     		out.writeObject(current);
     		out.close();
     		fileOut.close();
-    		System.out.println("The '" +current.getName() +"' test has been serialized and saved in the '" + folderName +"' folder.");
+    		voice.printOutput("\nThe '" +current.getName() +"' test has been serialized and saved in the '" + folderName +"' folder.");
     	}
     	catch(IOException i)
     	{
-    		System.out.println("Error with saving test... Try again....");
+    		voice.printOutput("\nError with saving test... Try again....");
     		//i.printStackTrace();
     	}
     }
@@ -106,15 +108,15 @@ public class Serialize {
     		loadTest = (Test) in.readObject();
     		in.close();
     		fileIn.close();
-    		System.out.println("The " + loadTest.getName() +" test has been loaded...");
+    		voice.printOutput("\nThe " + loadTest.getName() +" test has been loaded...");
     	}
     	catch(IOException i)
     	{
-    		System.out.println("Error with laoding test... Try again....");
+    		voice.printOutput("\nError with laoding test... Try again....");
     	}
     	catch(ClassNotFoundException c)
     	{
-    		System.out.println("Survey not found");
+    		voice.printOutput("\nTest not found");
     	}
     	return loadTest;
     	

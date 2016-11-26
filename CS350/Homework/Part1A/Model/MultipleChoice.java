@@ -29,7 +29,7 @@ public class MultipleChoice extends Question {
     	
     	for(int i = 1; i <= numOfChoices; i++)
     	{
-    		System.out.println("Enter Choice "+alpha[i-1]+")");
+    		voice.printOutput("\nEnter Choice "+alpha[i-1]+")");
     		choices.add(getUserResponse());
     	}
     	
@@ -47,7 +47,7 @@ public class MultipleChoice extends Question {
     	}
     	catch(NumberFormatException nfe)
     	{
-    		System.out.println("Input was not a valid integer... Try again..");
+    		voice.printOutput("\nInput was not a valid integer... Try again..");
     		choiceAmount();
     	}
     }
@@ -62,12 +62,12 @@ public class MultipleChoice extends Question {
     	int cont = 0;
     	while(cont < 3)
     	{
-    		System.out.println("Choose what you would like to edit:");
+    		voice.printOutput("\nChoose what you would like to edit:");
         	String options[] = {"Edit Prompt", "Edit Choice","Enter number of input choices", "Quit"};
         	for(int i = 0; i < options.length; i++)
         	{
         		int x = i+1;
-        		System.out.println(x+") " +options[i]);
+        		voice.printOutput("\n"+x+") " +options[i]);
         	}
     		String choice = getUserResponse();
         	switch(choice)
@@ -80,7 +80,7 @@ public class MultipleChoice extends Question {
         	break;
         	case "4": cont = 10;
         	break;
-        	default: System.out.println("Invalid Input... Try Again..."); cont++;
+        	default: voice.printOutput("\nInvalid Input... Try Again..."); cont++;
         	break;
         	}
     	}
@@ -92,16 +92,30 @@ public class MultipleChoice extends Question {
      */
     public void editChoices()
     {
-    	System.out.println("Select the choice option you want to edit: ");
+    	voice.printOutput("\nSelect the choice option you want to edit: ");
     	for(int i = 0; i < choices.size(); i++)
     	{
-    		System.out.println(alpha[i] +") " + choices.get(i));
+    		voice.printOutput("\n"+alpha[i] +") " + choices.get(i));
     	}
     	
     	String choice = getUserResponse();
-    	int ch = Arrays.asList(alpha).indexOf(choice);
-    	System.out.println("Enter Choice " + choice +")");
-    	choices.set(ch, getUserResponse());
+    	if(Arrays.asList(alpha).contains(choice))
+    	{
+    		int ch = Arrays.asList(alpha).indexOf(choice);
+    		if(ch < choices.size())
+    		{
+    			voice.printOutput("\nEnter Choice " + choice +")");
+            	choices.set(ch, getUserResponse());
+    		}
+    		else
+        	{
+        		voice.printOutput("\nInvalid input... ");
+        	}
+    	}
+    	else
+    	{
+    		voice.printOutput("\nInvalid input... ");
+    	}
     	
     }
     
@@ -111,7 +125,7 @@ public class MultipleChoice extends Question {
      */
     public void setNumOfResponseOptions()
     {
-    	System.out.println("Enter number of options taker needs to enter: ");
+    	voice.printOutput("\nEnter number of options taker needs to enter: ");
     	String numCh = getUserResponse();
     	try
     	{
@@ -119,7 +133,7 @@ public class MultipleChoice extends Question {
     	}
     	catch(NumberFormatException nfe)
     	{
-    		System.out.println("Input was not a valid integer... Try again..");
+    		voice.printOutput("\nInput was not a valid integer... Try again..");
     		setNumOfResponseOptions();
     	}
     	
@@ -134,7 +148,7 @@ public class MultipleChoice extends Question {
     	String response[] = getResponse().getResponse().split(" ");
     	for(int i = 0; i < response.length; i++)
     	{
-    		System.out.println(response[i]);
+    		voice.printOutput("\n"+response[i]);
     	}
     	System.out.println();
     }
@@ -146,16 +160,32 @@ public class MultipleChoice extends Question {
     @Override
     public void display() {
         // TODO implement here
-    	System.out.println(getQuestionFormat()+" Question"); 
-    	System.out.println(getPrompt());
-    	System.out.print(alpha[0] + ") " + choices.get(0));
+    	voice.printOutput(getQuestionFormat()+" Question"); 
+    	voice.printOutput("\n"+getPrompt());
+    	System.out.println();
+    	voice.printOutput(alpha[0] + ") " + choices.get(0));
     	for(int i = 1; i < choices.size(); i++)
     	{
-    		System.out.print("	" +alpha[i] + ") " + choices.get(i));
+    		voice.printOutput("	" +alpha[i] + ") " + choices.get(i));
     	}
     	if(numOfResponseOptions > 1)
-    		System.out.println("\nPlease enter "+ numOfResponseOptions + " choices:");
+    		voice.printOutput("\n\nPlease enter "+ numOfResponseOptions + " choices:");
     }
+    
+    public void audio() {
+        // TODO implement here
+    	voice.voiceOutput(getQuestionFormat()+" Question"); 
+    	voice.voiceOutput("\n"+getPrompt());
+    	System.out.println();
+    	voice.voiceOutput(alpha[0] + ") " + choices.get(0));
+    	for(int i = 1; i < choices.size(); i++)
+    	{
+    		voice.voiceOutput("	" +alpha[i] + ") " + choices.get(i));
+    	}
+    	if(numOfResponseOptions > 1)
+    		voice.voiceOutput("\n\nPlease enter "+ numOfResponseOptions + " choices:");
+    }
+    
     
     /*
      * Method to set the response to a question.
@@ -170,7 +200,29 @@ public class MultipleChoice extends Question {
     		qResponse = new Response();
     		for(int i = 0; i< numOfResponseOptions; i++)
     		{
-    			System.out.println("Enter Choice #" + (i+1));
+    			voice.printOutput("\nEnter Choice #" + (i+1));
+    			response +=getUserResponse()+" ";
+    			
+    		}
+    		qResponse.setUserResponse(response);
+    	}
+    	else
+    	{
+    		super.setResponse();
+    	}
+    	
+    }
+    
+    public void audioResponse()
+    {
+    	
+    	if(numOfResponseOptions > 1)
+    	{
+    		String response = "";
+    		qResponse = new Response();
+    		for(int i = 0; i< numOfResponseOptions; i++)
+    		{
+    			voice.voiceOutput("\nEnter Choice #" + (i+1));
     			response +=getUserResponse()+" ";
     			
     		}

@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.HashMap;
 
 /**
@@ -34,15 +36,15 @@ public class Test extends Survey {
     	 // TODO implement here
     	if(Questions.size() < 1)
     	{
-    		System.out.println("This test has no questions...\n");
+    		voice.voiceOutput("\nThis test has no questions...\n");
     		return;
     	}
     	for(int i = 0; i < Questions.size();i++)
     	{
     		int x = i+1;
-    		System.out.print(x + ") ");
-    		Questions.get(i).display();		
-    		System.out.println("\nThe Correct Response: " + correctResponses.get(Questions.get(i)).getResponse());
+    		voice.voiceOutput(x + ") ");
+    		Questions.get(i).audio();		
+    		voice.voiceOutput("\n\nThe Correct Response: " + correctResponses.get(Questions.get(i)).getResponse());
     		System.out.println("\n");
     	}
     	System.out.println();
@@ -56,7 +58,7 @@ public class Test extends Survey {
     public void setCorrectResponse(Question question) {
         // TODO implement here
     	question.display();
-    	System.out.println("\nEnter Correct Response: ");
+    	voice.printOutput("\n\nEnter Correct Response: ");
     	question.setResponse();
     	Response correctResponse = question.getResponse();
     	correctResponses.put(question, correctResponse);
@@ -68,7 +70,7 @@ public class Test extends Survey {
      */
     public void editCorrectResponse(Question q)
     {
-    	System.out.println("Enter Correct Response: ");
+    	voice.printOutput("\nEnter Correct Response: ");
     	q.setResponse();
     	Response correctResponse = q.getResponse();
     	//correctResponse.setUserResponse(getUserResponse());
@@ -83,24 +85,24 @@ public class Test extends Survey {
     public void modifySurvey()
     {
     	int count = 1;
-    	System.out.println("What question do you want to modify?");
+    	voice.printOutput("\nWhat question do you want to modify?");
     	for(Question q : Questions)
     	{
-    		System.out.print(count+") ");
+    		voice.printOutput(count+") ");
     		q.display();
-    		System.out.println("\nThe Correct Response: " + correctResponses.get(q).getResponse());
+    		voice.printOutput("\n\nThe Correct Response: " + correctResponses.get(q).getResponse());
     		System.out.println("\n");
     		count++;
     		
     	}
-    	System.out.println("Enter the number of the question you want to modify: ");
+    	voice.printOutput("\nEnter the number of the question you want to modify: ");
     	System.out.println();
     	String choice = getUserResponse();
     	int ch = string2int(choice) - 1;
     	if(withinRange(Questions.size(),ch))
     	{
     		Questions.get(ch).editQuestion();
-        	System.out.println("Do you want to edit the Correct Response (y/n)? ");
+    		voice.printOutput("\nDo you want to edit the Correct Response? Enter (y) for yes or (n) for no: ");
         	choice = getUserResponse();
         	if(choice.equals("y") || choice.equals("Y"))
         		editCorrectResponse(Questions.get(ch));
@@ -155,21 +157,22 @@ public class Test extends Survey {
         // TODO implement here
     	if(Questions.size() < 1)
     	{
-    		System.out.println("There are no questions...\n");
+    		voice.voiceOutput("\nThere are no questions...\n");
     		return;
     	}
     	for(int i = 0; i < Questions.size();i++)
     	{
     		int x = i+1;
-    		System.out.print(x + ") ");
-    		Questions.get(i).display();
-    		System.out.println("\nEnter Your Response: ");
-    		Questions.get(i).setResponse();
+    		voice.voiceOutput(x + ") ");
+    		Questions.get(i).audio();
+    		voice.voiceOutput("\n\nEnter Your Response: ");
+    		Questions.get(i).audioResponse();
         	Response userResponse = Questions.get(i).getResponse();
     		addResponse(Questions.get(i), userResponse);
     		System.out.println("\n");
     	}
-    	System.out.println("Grade: "+calculateGrade() +"%");
+    	NumberFormat formatter = new DecimalFormat("#0.00");   
+    	voice.voiceOutput("\nGrade: "+formatter.format(calculateGrade()) +"%");
     	System.out.println("\n");
     }
 
@@ -187,6 +190,7 @@ public class Test extends Survey {
      */
     public void printGrade()
     {
-    	System.out.println("Grade: "+grade +"%");
+    	NumberFormat formatter = new DecimalFormat("#0.00");
+    	voice.printOutput("\nGrade: "+formatter.format(grade) +"%");
     }
 }

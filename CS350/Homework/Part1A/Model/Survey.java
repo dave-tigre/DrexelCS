@@ -19,6 +19,7 @@ public class Survey implements Serializable {
     protected HashMap<Question, Response> currentResponses = new HashMap<Question, Response>();
     public String name;
     public int numberOfQuestions;
+    public static Output voice = new Output();
     
 	/**
      * Default constructor
@@ -60,14 +61,14 @@ public class Survey implements Serializable {
         // TODO implement here
     	if(Questions.size() < 1)
     	{
-    		System.out.println("This survey has no questions...\n");
+    		voice.voiceOutput("\nThis survey has no questions...\n");
     		return;
     	}
     	for(int i = 0; i < Questions.size();i++)
     	{
     		int x = i+1;
-    		System.out.print(x + ") ");
-    		Questions.get(i).display();
+    		voice.voiceOutput(x + ") ");
+    		Questions.get(i).audio();
     		System.out.println("\n");
     	}
     	System.out.println("\n");
@@ -80,16 +81,16 @@ public class Survey implements Serializable {
         // TODO implement here
     	if(Questions.size() < 1)
     	{
-    		System.out.println("There are no questions...\n");
+    		voice.voiceOutput("\nThere are no questions...\n");
     		return;
     	}
     	for(int i = 0; i < Questions.size();i++)
     	{
     		int x = i+1;
-    		System.out.print(x + ") ");
-    		Questions.get(i).display();
-    		System.out.println("\nEnter Your Response: ");
-    		Questions.get(i).setResponse();
+    		voice.voiceOutput(x + ") ");
+    		Questions.get(i).audio();
+    		voice.voiceOutput("\n\nEnter Your Response: ");
+    		Questions.get(i).audioResponse();
         	Response userResponse = Questions.get(i).getResponse();
     		addResponse(Questions.get(i), userResponse);
     		System.out.println("\n");
@@ -122,18 +123,18 @@ public class Survey implements Serializable {
     public void tabulateData() {
         // TODO implement here
     	int count = 1;
-    	for(Question q : userResponses.keySet())
+    	for(int i = 0; i < Questions.size();i++)
     	{
-    		System.out.print(count + ") ");
-    		q.display();
-    		System.out.println("\nReplies: ");
-    		for(Response r : userResponses.get(q))
+    		voice.printOutput("\n"+count + ") ");
+    		Questions.get(i).display();
+    		voice.printOutput("\n\nReplies: ");
+    		for(Response r : userResponses.get(Questions.get(i)))
     		{
-    			q.setReponse(r);
-    			q.displayResponse();
+    			Questions.get(i).setReponse(r);
+    			Questions.get(i).displayResponse();
     		}
-    		System.out.println("\nTabulation:");
-    		tabulate(q);
+    		voice.printOutput("\n\nTabulation:");
+    		tabulate(Questions.get(i));
     		System.out.println();
     		
     		count++;
@@ -162,7 +163,7 @@ public class Survey implements Serializable {
 			Response tabResponse = new Response();
 			tabResponse.setUserResponse(re);
 			q.setReponse(tabResponse);
-			System.out.println("Count: " + responseCount.get(re).intValue());
+			voice.printOutput("\nThis reponse was given: " + responseCount.get(re).intValue()+" time(s):");
 			q.displayResponse();
 			System.out.println();
     	}
@@ -172,16 +173,16 @@ public class Survey implements Serializable {
     public void modifySurvey()
     {
     	int count = 1;
-    	System.out.println("What question do you want to modify?\n");
+    	voice.printOutput("\nWhat question do you want to modify?\n");
     	for(Question q : Questions)
     	{
-    		System.out.print(count+") ");
+    		voice.printOutput(count+") ");
     		q.display();
     		System.out.println("\n");
     		count++;
     		
     	}
-    	System.out.println("Enter the number of the question you want to modify: ");
+    	voice.printOutput("\nEnter the number of the question you want to modify: ");
     	System.out.println();
     	String choice = getUserResponse();
     	int ch = string2int(choice) - 1;
@@ -227,7 +228,7 @@ public class Survey implements Serializable {
     	}
     	catch(NumberFormatException nfe)
     	{
-    		System.out.println("Input was not a valid integer... Try again..");
+    		voice.printOutput("\nInput was not a valid integer... Try again..");
     	}
 		
 		return number;
@@ -244,7 +245,7 @@ public class Survey implements Serializable {
 		}
 		else
 		{
-			System.out.println("Input was not a valid integer...");
+			voice.printOutput("\nInput was not a valid integer...");
 			return false;
 		}
 	}

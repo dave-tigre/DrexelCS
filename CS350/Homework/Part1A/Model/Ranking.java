@@ -23,15 +23,29 @@ public class Ranking extends Matching {
     @Override
     public void display() {
         // TODO implement here
-    	System.out.println(getQuestionFormat()+" Question"); 
-    	System.out.println(getPrompt());
-
+    	voice.printOutput(getQuestionFormat()+" Question"); 
+    	voice.printOutput("\n"+getPrompt());
+    	System.out.println();
     	// loop through to display premises first.
     	for(int i = 1; i <= premises.size(); i++)
     	{
     		System.out.printf("%s) %-30s  %d) %d%n",alpha[i-1],premises.get(i-1),i,i);
     	}
     }
+    
+    public void audio() {
+        // TODO implement here
+    	voice.voiceOutput(getQuestionFormat()+" Question"); 
+    	voice.voiceOutput("\n"+getPrompt());
+    	System.out.println();
+    	// loop through to display premises first.
+    	for(int i = 1; i <= premises.size(); i++)
+    	{
+    		System.out.printf("%s) %-30s  %d) %d%n",alpha[i-1],premises.get(i-1),i,i);
+    	}
+    	voice.voicePremises(premises);
+    }
+    
 
     /*
      * (non-Javadoc)
@@ -45,7 +59,21 @@ public class Ranking extends Matching {
     	{
     		//loop through to input ranking to each option
     		int x = i+1;
-    		System.out.println("Enter ranking of " +alpha[i] + ") "+premises.get(i) +": ");
+    		voice.printOutput("\nEnter ranking of " +alpha[i] + ") "+premises.get(i) +": ");
+    		rankingOrder +=getUserResponse()+" ";
+    	}
+    	qResponse = new Response();
+    	qResponse.setUserResponse(rankingOrder);
+    }
+    
+    public void audioResponse()
+    {
+    	String rankingOrder =  "";// = "Ranking Order From top to bottom: ";
+    	for(int i = 0; i< premises.size(); i++)
+    	{
+    		//loop through to input ranking to each option
+    		int x = i+1;
+    		voice.voiceOutput("\nEnter ranking of " +alpha[i] + ") "+premises.get(i) +": ");
     		rankingOrder +=getUserResponse()+" ";
     	}
     	qResponse = new Response();
@@ -81,12 +109,12 @@ public class Ranking extends Matching {
     	int cont = 0;
     	while(cont < 3)
     	{
-    		System.out.println("Choose what you would like to edit:");
+    		voice.printOutput("\nChoose what you would like to edit:");
         	String options[] = {"Edit Prompt", "Edit Premise", "Quit"};
         	for(int i = 0; i < options.length; i++)
         	{
         		int x = i+1;
-        		System.out.println(x+") " +options[i]);
+        		voice.printOutput("\n"+x+") " +options[i]);
         	}
     		String choice = getUserResponse();
         	switch(choice)
@@ -97,7 +125,7 @@ public class Ranking extends Matching {
         	break;
         	case "3": cont = 10;
         	break;
-        	default: System.out.println("Invalid Input...Try again..."); cont++;
+        	default: voice.printOutput("\nInvalid Input...Try again..."); cont++;
         	break;
         	}
     	}

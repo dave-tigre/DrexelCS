@@ -29,11 +29,11 @@ public class Essay extends Question {
     	
     	if(numOfResponses > 1)
     	{
-    		System.out.println(getQuestionFormat()+" Question"); 
-    		System.out.println(getPrompt());
+    		voice.printOutput(getQuestionFormat()+" Question"); 
+    		voice.printOutput("\n"+getPrompt());
     		for(int i = 0; i < numOfResponses; i++)
     		{
-    			System.out.println(alpha[i] + ") ");
+    			voice.printOutput("\n"+alpha[i] + ") ");
     		}
     	}
     	else
@@ -41,9 +41,25 @@ public class Essay extends Question {
     	
     }
     
+    public void audio() {
+    	
+    	if(numOfResponses > 1)
+    	{
+    		voice.voiceOutput(getQuestionFormat()+" Question"); 
+    		voice.voiceOutput("\n"+getPrompt());
+    		for(int i = 0; i < numOfResponses; i++)
+    		{
+    			voice.voiceOutput("\n"+alpha[i] + ") ");
+    		}
+    	}
+    	else
+    		super.audio();
+    	
+    }
+    
     public void displayResponse()
     {
-    	System.out.println(getResponse().getResponse());
+    	voice.printOutput("\n"+getResponse().getResponse());
     }
 
     /**
@@ -55,7 +71,7 @@ public class Essay extends Question {
     
     public void numOfResponses()
     {
-    	System.out.println("Enter number of responses: ");
+    	voice.printOutput("\nEnter number of responses: ");
     	String numCh = getUserResponse();
     	try
     	{
@@ -63,7 +79,7 @@ public class Essay extends Question {
     	}
     	catch(NumberFormatException nfe)
     	{
-    		System.out.println("Input was not a valid integer... Try again..");
+    		voice.printOutput("\nInput was not a valid integer... Try again..");
     		numOfResponses();
     	}
     }
@@ -80,12 +96,12 @@ public class Essay extends Question {
     	int cont = 0;
     	while(cont < 3)
     	{
-    		System.out.println("Choose what you would like to edit:");
+    		voice.printOutput("\nChoose what you would like to edit:");
         	String options[] = {"Edit Prompt", "Edit number of responses","Quit"};
         	for(int i = 0; i < options.length; i++)
         	{
         		int x = i+1;
-        		System.out.println(x+") " +options[i]);
+        		voice.printOutput("\n"+x+") " +options[i]);
         	}
     		String choice = getUserResponse();
     		switch(choice)
@@ -96,7 +112,7 @@ public class Essay extends Question {
         	break;
         	case "3": cont = 10;
         	break;
-        	default: System.out.println("Invalid Input...Try again..."); cont++;
+        	default: voice.printOutput("\nInvalid Input...Try again..."); cont++;
         	break;
         	}
     	}
@@ -117,7 +133,29 @@ public class Essay extends Question {
     		qResponse = new Response();
     		for(int i = 0; i< numOfResponses; i++)
     		{
-    			System.out.println(alpha[i] + ") ");
+    			voice.printOutput("\n"+alpha[i] + ") ");
+    			response +=getUserResponse() + "\n" ;
+    			
+    		}
+    		qResponse.setUserResponse(response);
+    	}
+    	else
+    	{
+    		super.setResponse();
+    	}
+    	
+    }
+    
+    public void audioResponse()
+    {
+    	
+    	if(numOfResponses > 1)
+    	{
+    		String response = "";
+    		qResponse = new Response();
+    		for(int i = 0; i< numOfResponses; i++)
+    		{
+    			voice.voiceOutput("\n"+alpha[i] + ") ");
     			response +=getUserResponse() + "\n" ;
     			
     		}

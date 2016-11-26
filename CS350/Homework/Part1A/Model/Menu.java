@@ -20,13 +20,14 @@ public class Menu {
 	 * Option choices for main menu and creation of new question menu.
 	 */
 	public String options[] = {"1) Survey Menu", "2) Test Menu", "3) Quit"};
-	public String creationOptions[] = {"1) Add a new T/F question", "2) Add new multiple choice questions",
+	public String creationOptions[] = {"1) Add a new true or false question", "2) Add new multiple choice question",
 			"3) Add a new short answer question","4) Add a new essay question", 
 			"5) Add a new ranking question", "6) Add a new matching question",
 			"7) Quit"};
 	
 	public static SurveyMenu sMenu = new SurveyMenu(); //instantiated survey menu
 	public static TestMenu tMenu = new TestMenu(); //instantiated test menu
+	public static Output voice = new Output();
 	
 	/*
 	 * Default Constructor
@@ -40,19 +41,17 @@ public class Menu {
 	 */
 	public void startMenu()
 	{
-		System.out.println("\nMain Menu");
-		for(String option: options)
-		{
-			System.out.println(option);
-		}
+		//System.out.println("\nMain Menu");
+		voice.printOutput("\nMain Menu");
+		display(options);
 		String choice = getResponse();
 		int ch = string2int(choice);
 		switch(ch)
 		{
 		case 1: sMenu.surveyMenu();
 		case 2: tMenu.testMenu();
-		case 3: System.out.println("Terminating Survey System..."); System.exit(0);
-		default: System.out.println("Invalid Input...."); startMenu();
+		case 3: voice.printOutput("\nTerminating Survey System..."); System.exit(0);
+		default: voice.printOutput("\nInvalid Input...."); startMenu();
 		}
 	}
 	
@@ -63,7 +62,8 @@ public class Menu {
 	{
 		for(String option: options)
 		{
-			System.out.println(option);
+			//System.out.println(option);
+			voice.printOutput("\n"+option);
 		}
 	}
 	
@@ -74,6 +74,7 @@ public class Menu {
 	@SuppressWarnings("resource")
 	public String getResponse()
 	{
+		System.out.println();
 		Scanner input = new Scanner(System.in);
 		String choice = input.nextLine();
 		return choice;
@@ -86,7 +87,7 @@ public class Menu {
 	 */
 	public void createNewQuestion(Question q)
 	{
-		System.out.println("Enter the prompt for your "+q.getQuestionFormat() + " question: ");
+		voice.printOutput("\nEnter the prompt for your "+q.getQuestionFormat() + " question: ");
 		q.setPrompt(getResponse());
 	}
 	
@@ -132,7 +133,7 @@ public class Menu {
     	}
     	catch(NumberFormatException nfe)
     	{
-    		System.out.println("Input was not a valid integer... Try again..");
+    		voice.printOutput("\nInput was not a valid integer... Try again..");
     	}
 		
 		return number;
@@ -149,7 +150,7 @@ public class Menu {
 		}
 		else
 		{
-			System.out.println("Input was not a valid integer...");
+			voice.printOutput("\nInput was not a valid integer...");
 			return false;
 		}
 	}
@@ -162,7 +163,7 @@ public class Menu {
     public static void main(String[] args) {
         // TODO implement here
     	
-    	System.out.println("Starting Survey Maker...");
+    	voice.printOutput("Starting Survey Maker...");
     	Menu test = new Menu();
     	test.startMenu();
        
