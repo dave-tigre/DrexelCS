@@ -1,0 +1,46 @@
+David Tigreros
+CS-260 Section 003
+Dr. Nowak
+Programming Assignment 2
+
+Contact:
+dt458@drexel.edu
+
+Submission files contains:
+- problems
+- README
+- Makefile
+- pointerqueue.py
+	-pointerqueue_test.py
+- loctree.py
+	-loctree_test.py
+- lcrstree.py
+	lcrstree_test.py
+- timing.py
+- mergelists.py
+- listconcat.py
+- levelorder.py
+- preorder.py
+- postorder.py
+- pointerlist.py
+- arraylist.py
+
+If any of these files are missing please let me know.
+
+Notes:
+1) Having some issues with the Makefile. It is only running the first
+program on the target list. Not sure if this is something with the way I
+created it or an issue with my computer. When the files are run
+individually, they all work properly.
+
+2) For timing the trees:
+	Preorder traversal was done as modeled from the books preorder traversal
+(page 83).
+	I could not however figure out a correct form of post order traversal
+method in time for submission. The book did not have an example that I could
+find, after a few trials, I was not able to create a working method.
+	
+3) For merge list, it works for the most part, however for the beginning of
+some lists, it does not sort some numbers correctly. Same for the list
+concatenate.I think it has something to do with how I have my INSERT
+method.

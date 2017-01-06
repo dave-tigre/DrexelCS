@@ -1,0 +1,30 @@
+David Tigreros
+CS-260 Section 003
+Dr. Nowak
+Programming Assignment 1
+
+Contact:
+dt458@drexel.edu
+
+Submission files contains:
+- arraylist.py
+- arraystack.py
+- pointerlist.py
+- pointerstack.py
+- timing.py
+- timing.pdf
+- Makefile
+
+If any of these files are missing please let me know.
+
+Notes:
+All test code is in the respective implementation file.
+
+pointerlist:
+	had some trouble with the delete function. several if statements were
+placed in order to adjust and make code work, not as clean as I would have
+liked though.
+
+timing:
+	used the timer function to time function execution. result is in seconds
+so  multiplied by 1000 to get milliseconds.

@@ -1,0 +1,32 @@
+Programming Assignment 3
+8/22/2016
+CS-260 Section-003
+Dr. Nowak
+
+Group Members:
+David Tigreros
+William Fligor
+Tyler Reynolds
+
+Submission:
+- openhash.py
+- closedhash.py
+- bst.py
+- trie.py
+	-pointerlist.py
+- dijkstra.cpp
+- floyd.py
+- dfs.py
+- problems
+- group
+- Makefile
+- README
+
+*If any of these files are missing, please let me know
+
+Contact:
+David Tigreros
+dt458@drexel.edu
+
+Notes:
+Everything should work, just use make and the target name.
