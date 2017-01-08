@@ -60,6 +60,7 @@ private:
 	int num_sentences;
 	string file_name;
 	
+	
 };
 
 #endif READABILITY_INDEX_H

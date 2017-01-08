@@ -8,7 +8,6 @@ Readability_Index::Readability_Index()
 	num_words = 0;
 	num_syllables = 0;
 	num_sentences = 0;
-	usage_message();
 }
 
 
@@ -54,7 +53,7 @@ void Readability_Index::input_file(const char * fn)
 }
 void Readability_Index::read_textfile(istream& in) const
 {
-	string current_line = "";
+	string current_line;
 	string current_word = "";
 	
 	while (!in.eof())

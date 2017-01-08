@@ -7,7 +7,7 @@ int main()
 {
 
 	Readability_Index test;
-	//test.usage_message();
+	test.usage_message();
 
 	return 0;
 }
