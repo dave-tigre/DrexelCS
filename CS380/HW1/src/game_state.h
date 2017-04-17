@@ -30,3 +30,5 @@ private:
   std::vector<vector<int> > puzzleMatrix; // game puzzle matrix
 
 };
+
+#endif //_GAME_STATE_H_
