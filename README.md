@@ -6,3 +6,4 @@ Course work for my computer science minor at Drexel University
 - CS265: Advanced Programming Techniques
 - CS260: Data Structures and Algorithms
 - CS350: Software Design
+- CS380: Artificial Intelligence
