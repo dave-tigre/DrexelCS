@@ -1,0 +1,111 @@
+  i i i i i i i       ooooo    o        ooooooo   ooooo   ooooo
+  I I I I I I I      8     8   8           8     8     o  8    8
+  I  \ `+' /  I      8         8           8     8        8    8
+   \  `-+-'  /       8         8           8      ooooo   8oooo
+    `-__|__-'        8         8           8           8  8
+        |            8     o   8           8     o     8  8
+  ------+------       ooooo    8oooooo  ooo8ooo   ooooo   8
+
+Welcome to GNU CLISP 2.49 (2010-07-07) <http://clisp.cons.org/>
+
+Copyright (c) Bruno Haible, Michael Stoll 1992, 1993
+Copyright (c) Bruno Haible, Marcus Daniels 1994-1997
+Copyright (c) Bruno Haible, Pierpaolo Bernardi, Sam Steingold 1998
+Copyright (c) Bruno Haible, Sam Steingold 1999-2000
+Copyright (c) Sam Steingold, Bruno Haible 2001-2010
+
+Type :h and hit Enter for context help.
+
+[1]> (setf vowels '(a e i o u))
+(A E I O U)
+[2]> (setf word "pickle")
+"pickle"
+[3]> (setf word2 "Pickle")
+"Pickle"
+[4]> (peanut butter jelly)
+
+*** - EVAL: undefined function PEANUT
+The following restarts are available:
+USE-VALUE      :R1      Input a value to be used instead of (FDEFINITION 'PEANUT
+).
+RETRY          :R2      Retry
+STORE-VALUE    :R3      Input a new value for (FDEFINITION 'PEANUT).
+ABORT          :R4      Abort main loop
+Break 1 [5]> :R4
+[6]> (quote (peanut butter jelly))
+(PEANUT BUTTER JELLY)
+[7]> (setf sandwich (quote (peanut butter jelly)))
+(PEANUT BUTTER JELLY)
+[8]> sandwich
+(PEANUT BUTTER JELLY)
+[9]> vowels
+(A E I O U)
+[10]> word
+"pickle"
+[11]> word2
+"Pickle"
+[12]> (setf fluffernutter (peanut butter (marshmallow jelly)))
+
+*** - EVAL: undefined function PEANUT
+The following restarts are available:
+USE-VALUE      :R1      Input a value to be used instead of (FDEFINITION 'PEANUT
+).
+RETRY          :R2      Retry
+STORE-VALUE    :R3      Input a new value for (FDEFINITION 'PEANUT).
+ABORT          :R4      Abort main loop
+Break 1 [13]> :r4
+[14]> (setf fluffernutter '(peanut butter (marshmallow jelly)))
+(PEANUT BUTTER (MARSHMALLOW JELLY))
+[15]> fluffernutter
+(PEANUT BUTTER (MARSHMALLOW JELLY))
+[16]> (car fluffernutter)
+PEANUT
+[17]> (cadr fluffernutter)
+BUTTER
+[18]> (cdr fluffernutter)
+(BUTTER (MARSHMALLOW JELLY))
+[19]> (caddr fluffernutter)
+(MARSHMALLOW JELLY)
+[20]> (caaddr fluffernutter)
+MARSHMALLOW
+[21]> (setf state '((farmer fox goose corn)()))
+((FARMER FOX GOOSE CORN) NIL)
+[22]> (car state)
+(FARMER FOX GOOSE CORN)
+[23]> (defun leftBank (state)
+        (car state)
+      )
+LEFTBANK
+[24]> (leftBank state)
+(FARMER FOX GOOSE CORN)
+[25]> (defun rightBank (state)
+         (cdr state)
+       )
+RIGHTBANK
+[26]> (rightBank state)
+(NIL)
+[27]> (defun rightBank (state)
+        (car (cdr state))
+      )
+RIGHTBANK
+[28]> (rightBank state)
+NIL
+[29]> (setf otherState '((farmer goose)(fox corn)))
+((FARMER GOOSE) (FOX CORN))
+[30]> (leftBank otherState)
+(FARMER GOOSE)
+[31]> (rightBank otherState)
+(FOX CORN)
+[32]> sandwich
+(PEANUT BUTTER JELLY)
+[33]> (setf J (cons 'apple sandwich))
+(APPLE PEANUT BUTTER JELLY)
+[34]> (setf K (cons apple sandwich))
+
+*** - SETQ: variable APPLE has no value
+The following restarts are available:
+USE-VALUE      :R1      Input a value to be used instead of APPLE.
+STORE-VALUE    :R2      Input a new value for APPLE.
+ABORT          :R3      Abort main loop
+Break 1 [35]> :r3
+[36]>

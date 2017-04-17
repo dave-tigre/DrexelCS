@@ -1,0 +1,437 @@
+*** Python 2.7.3 (default, Apr 10 2012, 23:24:47) [MSC v.1500 64 bit (AMD64)] on win32. ***
+>>> 
+*** Remote Interpreter Reinitialized  ***
+>>> 
+
+1: ======
+state=[[ farmer fox goose corn ][ ]]
+There are 1 applicable rules
+0: -- Move farmer and goose from Left to Right
+Choosing rule[0]=Move farmer and goose from Left to Right
+
+2: ======
+state=[[ fox corn ][ farmer goose ]]
+There are 2 applicable rules
+0: -- Move farmer from Right to Left
+1: -- Move farmer and goose from Right to Left
+Choosing rule[1]=Move farmer and goose from Right to Left
+
+3: ======
+state=[[ farmer fox goose corn ][ ]]
+There are 1 applicable rules
+0: -- Move farmer and goose from Left to Right
+Choosing rule[0]=Move farmer and goose from Left to Right
+
+4: ======
+state=[[ fox corn ][ farmer goose ]]
+There are 2 applicable rules
+0: -- Move farmer from Right to Left
+1: -- Move farmer and goose from Right to Left
+Choosing rule[0]=Move farmer from Right to Left
+
+5: ======
+state=[[ farmer fox corn ][ goose ]]
+There are 3 applicable rules
+0: -- Move farmer from Left to Right
+1: -- Move farmer and fox from Left to Right
+2: -- Move farmer and corn from Left to Right
+Choosing rule[1]=Move farmer and fox from Left to Right
+
+6: ======
+state=[[ corn ][ farmer fox goose ]]
+There are 2 applicable rules
+0: -- Move farmer and fox from Right to Left
+1: -- Move farmer and goose from Right to Left
+Choosing rule[0]=Move farmer and fox from Right to Left
+
+7: ======
+state=[[ farmer fox corn ][ goose ]]
+There are 3 applicable rules
+0: -- Move farmer from Left to Right
+1: -- Move farmer and fox from Left to Right
+2: -- Move farmer and corn from Left to Right
+Choosing rule[0]=Move farmer from Left to Right
+
+8: ======
+state=[[ fox corn ][ farmer goose ]]
+There are 2 applicable rules
+0: -- Move farmer from Right to Left
+1: -- Move farmer and goose from Right to Left
+Choosing rule[0]=Move farmer from Right to Left
+
+9: ======
+state=[[ farmer fox corn ][ goose ]]
+There are 3 applicable rules
+0: -- Move farmer from Left to Right
+1: -- Move farmer and fox from Left to Right
+2: -- Move farmer and corn from Left to Right
+Choosing rule[2]=Move farmer and corn from Left to Right
+
+10: ======
+state=[[ fox ][ farmer goose corn ]]
+There are 2 applicable rules
+0: -- Move farmer and goose from Right to Left
+1: -- Move farmer and corn from Right to Left
+Choosing rule[0]=Move farmer and goose from Right to Left
+
+11: ======
+state=[[ farmer fox goose ][ corn ]]
+There are 2 applicable rules
+0: -- Move farmer and fox from Left to Right
+1: -- Move farmer and goose from Left to Right
+Choosing rule[1]=Move farmer and goose from Left to Right
+
+12: ======
+state=[[ fox ][ farmer goose corn ]]
+There are 2 applicable rules
+0: -- Move farmer and goose from Right to Left
+1: -- Move farmer and corn from Right to Left
+Choosing rule[0]=Move farmer and goose from Right to Left
+
+13: ======
+state=[[ farmer fox goose ][ corn ]]
+There are 2 applicable rules
+0: -- Move farmer and fox from Left to Right
+1: -- Move farmer and goose from Left to Right
+Choosing rule[0]=Move farmer and fox from Left to Right
+
+14: ======
+state=[[ goose ][ farmer fox corn ]]
+There are 3 applicable rules
+0: -- Move farmer from Right to Left
+1: -- Move farmer and fox from Right to Left
+2: -- Move farmer and corn from Right to Left
+Choosing rule[1]=Move farmer and fox from Right to Left
+
+15: ======
+state=[[ farmer fox goose ][ corn ]]
+There are 2 applicable rules
+0: -- Move farmer and fox from Left to Right
+1: -- Move farmer and goose from Left to Right
+Choosing rule[0]=Move farmer and fox from Left to Right
+
+16: ======
+state=[[ goose ][ farmer fox corn ]]
+There are 3 applicable rules
+0: -- Move farmer from Right to Left
+1: -- Move farmer and fox from Right to Left
+2: -- Move farmer and corn from Right to Left
+Choosing rule[2]=Move farmer and corn from Right to Left
+
+17: ======
+state=[[ farmer goose corn ][ fox ]]
+There are 2 applicable rules
+0: -- Move farmer and goose from Left to Right
+1: -- Move farmer and corn from Left to Right
+Choosing rule[1]=Move farmer and corn from Left to Right
+
+18: ======
+state=[[ goose ][ farmer fox corn ]]
+There are 3 applicable rules
+0: -- Move farmer from Right to Left
+1: -- Move farmer and fox from Right to Left
+2: -- Move farmer and corn from Right to Left
+Choosing rule[2]=Move farmer and corn from Right to Left
+
+19: ======
+state=[[ farmer goose corn ][ fox ]]
+There are 2 applicable rules
+0: -- Move farmer and goose from Left to Right
+1: -- Move farmer and corn from Left to Right
+Choosing rule[1]=Move farmer and corn from Left to Right
+
+20: ======
+state=[[ goose ][ farmer fox corn ]]
+There are 3 applicable rules
+0: -- Move farmer from Right to Left
+1: -- Move farmer and fox from Right to Left
+2: -- Move farmer and corn from Right to Left
+Choosing rule[0]=Move farmer from Right to Left
+
+21: ======
+state=[[ farmer goose ][ fox corn ]]
+There are 2 applicable rules
+0: -- Move farmer from Left to Right
+1: -- Move farmer and goose from Left to Right
+Choosing rule[0]=Move farmer from Left to Right
+
+22: ======
+state=[[ goose ][ farmer fox corn ]]
+There are 3 applicable rules
+0: -- Move farmer from Right to Left
+1: -- Move farmer and fox from Right to Left
+2: -- Move farmer and corn from Right to Left
+Choosing rule[1]=Move farmer and fox from Right to Left
+
+23: ======
+state=[[ farmer fox goose ][ corn ]]
+There are 2 applicable rules
+0: -- Move farmer and fox from Left to Right
+1: -- Move farmer and goose from Left to Right
+Choosing rule[1]=Move farmer and goose from Left to Right
+
+24: ======
+state=[[ fox ][ farmer goose corn ]]
+There are 2 applicable rules
+0: -- Move farmer and goose from Right to Left
+1: -- Move farmer and corn from Right to Left
+Choosing rule[0]=Move farmer and goose from Right to Left
+
+25: ======
+state=[[ farmer fox goose ][ corn ]]
+There are 2 applicable rules
+0: -- Move farmer and fox from Left to Right
+1: -- Move farmer and goose from Left to Right
+Choosing rule[1]=Move farmer and goose from Left to Right
+
+26: ======
+state=[[ fox ][ farmer goose corn ]]
+There are 2 applicable rules
+0: -- Move farmer and goose from Right to Left
+1: -- Move farmer and corn from Right to Left
+Choosing rule[1]=Move farmer and corn from Right to Left
+
+27: ======
+state=[[ farmer fox corn ][ goose ]]
+There are 3 applicable rules
+0: -- Move farmer from Left to Right
+1: -- Move farmer and fox from Left to Right
+2: -- Move farmer and corn from Left to Right
+Choosing rule[2]=Move farmer and corn from Left to Right
+
+28: ======
+state=[[ fox ][ farmer goose corn ]]
+There are 2 applicable rules
+0: -- Move farmer and goose from Right to Left
+1: -- Move farmer and corn from Right to Left
+Choosing rule[0]=Move farmer and goose from Right to Left
+
+29: ======
+state=[[ farmer fox goose ][ corn ]]
+There are 2 applicable rules
+0: -- Move farmer and fox from Left to Right
+1: -- Move farmer and goose from Left to Right
+Choosing rule[1]=Move farmer and goose from Left to Right
+
+30: ======
+state=[[ fox ][ farmer goose corn ]]
+There are 2 applicable rules
+0: -- Move farmer and goose from Right to Left
+1: -- Move farmer and corn from Right to Left
+Choosing rule[1]=Move farmer and corn from Right to Left
+
+31: ======
+state=[[ farmer fox corn ][ goose ]]
+There are 3 applicable rules
+0: -- Move farmer from Left to Right
+1: -- Move farmer and fox from Left to Right
+2: -- Move farmer and corn from Left to Right
+Choosing rule[2]=Move farmer and corn from Left to Right
+
+32: ======
+state=[[ fox ][ farmer goose corn ]]
+There are 2 applicable rules
+0: -- Move farmer and goose from Right to Left
+1: -- Move farmer and corn from Right to Left
+Choosing rule[1]=Move farmer and corn from Right to Left
+
+33: ======
+state=[[ farmer fox corn ][ goose ]]
+There are 3 applicable rules
+0: -- Move farmer from Left to Right
+1: -- Move farmer and fox from Left to Right
+2: -- Move farmer and corn from Left to Right
+Choosing rule[1]=Move farmer and fox from Left to Right
+
+34: ======
+state=[[ corn ][ farmer fox goose ]]
+There are 2 applicable rules
+0: -- Move farmer and fox from Right to Left
+1: -- Move farmer and goose from Right to Left
+Choosing rule[0]=Move farmer and fox from Right to Left
+
+35: ======
+state=[[ farmer fox corn ][ goose ]]
+There are 3 applicable rules
+0: -- Move farmer from Left to Right
+1: -- Move farmer and fox from Left to Right
+2: -- Move farmer and corn from Left to Right
+Choosing rule[0]=Move farmer from Left to Right
+
+36: ======
+state=[[ fox corn ][ farmer goose ]]
+There are 2 applicable rules
+0: -- Move farmer from Right to Left
+1: -- Move farmer and goose from Right to Left
+Choosing rule[0]=Move farmer from Right to Left
+
+37: ======
+state=[[ farmer fox corn ][ goose ]]
+There are 3 applicable rules
+0: -- Move farmer from Left to Right
+1: -- Move farmer and fox from Left to Right
+2: -- Move farmer and corn from Left to Right
+Choosing rule[0]=Move farmer from Left to Right
+
+38: ======
+state=[[ fox corn ][ farmer goose ]]
+There are 2 applicable rules
+0: -- Move farmer from Right to Left
+1: -- Move farmer and goose from Right to Left
+Choosing rule[0]=Move farmer from Right to Left
+
+39: ======
+state=[[ farmer fox corn ][ goose ]]
+There are 3 applicable rules
+0: -- Move farmer from Left to Right
+1: -- Move farmer and fox from Left to Right
+2: -- Move farmer and corn from Left to Right
+Choosing rule[2]=Move farmer and corn from Left to Right
+
+40: ======
+state=[[ fox ][ farmer goose corn ]]
+There are 2 applicable rules
+0: -- Move farmer and goose from Right to Left
+1: -- Move farmer and corn from Right to Left
+Choosing rule[0]=Move farmer and goose from Right to Left
+
+41: ======
+state=[[ farmer fox goose ][ corn ]]
+There are 2 applicable rules
+0: -- Move farmer and fox from Left to Right
+1: -- Move farmer and goose from Left to Right
+Choosing rule[1]=Move farmer and goose from Left to Right
+
+42: ======
+state=[[ fox ][ farmer goose corn ]]
+There are 2 applicable rules
+0: -- Move farmer and goose from Right to Left
+1: -- Move farmer and corn from Right to Left
+Choosing rule[0]=Move farmer and goose from Right to Left
+
+43: ======
+state=[[ farmer fox goose ][ corn ]]
+There are 2 applicable rules
+0: -- Move farmer and fox from Left to Right
+1: -- Move farmer and goose from Left to Right
+Choosing rule[0]=Move farmer and fox from Left to Right
+
+44: ======
+state=[[ goose ][ farmer fox corn ]]
+There are 3 applicable rules
+0: -- Move farmer from Right to Left
+1: -- Move farmer and fox from Right to Left
+2: -- Move farmer and corn from Right to Left
+Choosing rule[2]=Move farmer and corn from Right to Left
+
+45: ======
+state=[[ farmer goose corn ][ fox ]]
+There are 2 applicable rules
+0: -- Move farmer and goose from Left to Right
+1: -- Move farmer and corn from Left to Right
+Choosing rule[0]=Move farmer and goose from Left to Right
+
+46: ======
+state=[[ corn ][ farmer fox goose ]]
+There are 2 applicable rules
+0: -- Move farmer and fox from Right to Left
+1: -- Move farmer and goose from Right to Left
+Choosing rule[0]=Move farmer and fox from Right to Left
+
+47: ======
+state=[[ farmer fox corn ][ goose ]]
+There are 3 applicable rules
+0: -- Move farmer from Left to Right
+1: -- Move farmer and fox from Left to Right
+2: -- Move farmer and corn from Left to Right
+Choosing rule[2]=Move farmer and corn from Left to Right
+
+48: ======
+state=[[ fox ][ farmer goose corn ]]
+There are 2 applicable rules
+0: -- Move farmer and goose from Right to Left
+1: -- Move farmer and corn from Right to Left
+Choosing rule[0]=Move farmer and goose from Right to Left
+
+49: ======
+state=[[ farmer fox goose ][ corn ]]
+There are 2 applicable rules
+0: -- Move farmer and fox from Left to Right
+1: -- Move farmer and goose from Left to Right
+Choosing rule[0]=Move farmer and fox from Left to Right
+
+50: ======
+state=[[ goose ][ farmer fox corn ]]
+There are 3 applicable rules
+0: -- Move farmer from Right to Left
+1: -- Move farmer and fox from Right to Left
+2: -- Move farmer and corn from Right to Left
+Choosing rule[2]=Move farmer and corn from Right to Left
+
+51: ======
+state=[[ farmer goose corn ][ fox ]]
+There are 2 applicable rules
+0: -- Move farmer and goose from Left to Right
+1: -- Move farmer and corn from Left to Right
+Choosing rule[1]=Move farmer and corn from Left to Right
+
+52: ======
+state=[[ goose ][ farmer fox corn ]]
+There are 3 applicable rules
+0: -- Move farmer from Right to Left
+1: -- Move farmer and fox from Right to Left
+2: -- Move farmer and corn from Right to Left
+Choosing rule[1]=Move farmer and fox from Right to Left
+
+53: ======
+state=[[ farmer fox goose ][ corn ]]
+There are 2 applicable rules
+0: -- Move farmer and fox from Left to Right
+1: -- Move farmer and goose from Left to Right
+Choosing rule[0]=Move farmer and fox from Left to Right
+
+54: ======
+state=[[ goose ][ farmer fox corn ]]
+There are 3 applicable rules
+0: -- Move farmer from Right to Left
+1: -- Move farmer and fox from Right to Left
+2: -- Move farmer and corn from Right to Left
+Choosing rule[1]=Move farmer and fox from Right to Left
+
+55: ======
+state=[[ farmer fox goose ][ corn ]]
+There are 2 applicable rules
+0: -- Move farmer and fox from Left to Right
+1: -- Move farmer and goose from Left to Right
+Choosing rule[0]=Move farmer and fox from Left to Right
+
+56: ======
+state=[[ goose ][ farmer fox corn ]]
+There are 3 applicable rules
+0: -- Move farmer from Right to Left
+1: -- Move farmer and fox from Right to Left
+2: -- Move farmer and corn from Right to Left
+Choosing rule[2]=Move farmer and corn from Right to Left
+
+57: ======
+state=[[ farmer goose corn ][ fox ]]
+There are 2 applicable rules
+0: -- Move farmer and goose from Left to Right
+1: -- Move farmer and corn from Left to Right
+Choosing rule[1]=Move farmer and corn from Left to Right
+
+58: ======
+state=[[ goose ][ farmer fox corn ]]
+There are 3 applicable rules
+0: -- Move farmer from Right to Left
+1: -- Move farmer and fox from Right to Left
+2: -- Move farmer and corn from Right to Left
+Choosing rule[0]=Move farmer from Right to Left
+
+59: ======
+state=[[ farmer goose ][ fox corn ]]
+There are 2 applicable rules
+0: -- Move farmer from Left to Right
+1: -- Move farmer and goose from Left to Right
+Choosing rule[1]=Move farmer and goose from Left to Right
+Stopped at state [[ ][ farmer fox goose corn ]]
