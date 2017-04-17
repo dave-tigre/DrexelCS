@@ -44,11 +44,9 @@ public:
 	void FRES_calc(int words, int syllables, int sentences);
 
 	/**
-		Method to calculate the Flesch-Kincaid Reading Age (FKRA) 
+		Method to calculate the Flesch-Kincaid Reading Age (FKRA)
 	*/
 	void FKRA_calc(int words, int syllables, int sentences);
-
-	
 
 private:
 	float FRES_score;
@@ -59,8 +57,6 @@ private:
 	int num_syllables;
 	int num_sentences;
 	string file_name;
-	
-	
 };
 
 #endif READABILITY_INDEX_H

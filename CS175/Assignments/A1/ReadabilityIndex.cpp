@@ -10,7 +10,6 @@ Readability_Index::Readability_Index()
 	num_sentences = 0;
 }
 
-
 void Readability_Index::usage_message()
 {
 	string file_name;
@@ -20,15 +19,14 @@ void Readability_Index::usage_message()
 	if (file_name == "QUIT")
 	{
 		cout << "Program Terminated..." << endl;
-		terminate();
+		exit(1);
 	}
 	else
 	{
 		input_file(file_name.c_str());
 	}
-	
-
 }
+
 void Readability_Index::input_file(const char * fn)
 {
 	string file_name = fn;
@@ -37,7 +35,7 @@ void Readability_Index::input_file(const char * fn)
 		cout << "I'm sorry, the file \"" << file_name << "\" has an invalid extension." << endl;
 		usage_message();
 	}
-	
+
 	ifstream database_file;
 	database_file.open(file_name.c_str());
 	if (database_file.fail())
@@ -51,20 +49,20 @@ void Readability_Index::input_file(const char * fn)
 		read_textfile(database_file);
 	}
 }
+
 void Readability_Index::read_textfile(istream& in) const
 {
 	string current_line;
 	string current_word = "";
-	
+
 	while (!in.eof())
 	{
 		if (in.eof())
 			break;
 		getline(in, current_line);
-		
+
 
 	}
-
 }
 
 void Readability_Index::print_result() const
@@ -85,4 +83,3 @@ void Readability_Index::FKRA_calc(int words, int syllables, int sentences)
 {
 	FKRA_value = 11.8* (syllables) / (words)+0.39 * (words) / (sentences)-15.59;
 }
-
