@@ -1,11 +1,14 @@
 #ifndef _GAME_STATE_H_
 #define _GAME_STATE_H_
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 
+using namespace std;
 
 class SlidingBlockSolver{
 
@@ -18,19 +21,29 @@ public:
   ~SlidingBlockSolver();
 
   /**
+  * Usage Message
+  */
+  void usageMessage();
+  /**
   * Load Puzzle
   */
   void loadGame(const string filename);
 
   /**
+  * Create Puzzle Board
+  */
+
+  void createPuzzle(istream& in);
+
+  /**
   * Display Game
   */
-  void displayGame();
+  void displayPuzzle();
 
   /**
   * Determine if the puzzle is complete
   */
-  bool gameCheck(const vector<vector<int> >);
+  bool gameCheck(const vector<vector<int> > puzzle);
 
   /**
   * Move generation
@@ -48,7 +61,8 @@ public:
   void randomWalk();
 
 private:
-  std::vector<vector<int> > puzzleMatrix; // game puzzle matrix
+  vector<vector<int> > puzzleMatrix; // game puzzle matrix
+  string filename;
 
 };
 
