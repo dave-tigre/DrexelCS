@@ -36,34 +36,65 @@ void SlidingBlockSolver::loadGame(const string filename)
     {
       cout << "File Found...\n" << "Creating Puzzle..." << endl;
 		  createPuzzle(puzzle_file);
+      puzzle_file.close();
     }
 }
+
+/**
+     * Generic split string function.
+     * Args:
+     *     keep_empty (bool): Retain empty strings in the returned vector if set to true.
+     *         Defaults to true.
+     */
+    static std::vector<std::string> split(const std::string& s, const std::string& delim,
+            const bool keep_empty=true){
+        std::vector<std::string> parts;
+        size_t pos = 0, last_pos = 0;
+        std::string token;
+        while ((pos = s.find(delim, last_pos)) != std::string::npos) {
+            token = s.substr(last_pos, pos - last_pos);
+            if (keep_empty || token.length() > 0){
+                parts.push_back(token);
+            }
+            last_pos = pos + 1;
+        }
+        token = s.substr(last_pos);
+        if (keep_empty || token.length() > 0){
+            parts.push_back(token);
+        }
+        return parts;
+    }
 
 void SlidingBlockSolver::createPuzzle(istream& in)
 {
   string current_line;
-	string current_word = "";
 
-  int row = 0;
-  int col = 0;
+  vector<std::string> parts;
+  getline(in,current_line);
+  parts = split(current_line, ",");
 
-	while (!in.eof())
-	{
-		if (in.eof())
-			break;
-		getline(in, current_line,',');
-    row = stoi(current_line);
-    getline(in, current_line,',');
-    col = stoi(current_line);
-    break;
-	}
+  int col = stoi(parts[0]);
+  int row = stoi(parts[1]);
   // allocate puzzle matrix space
-  puzzleMatrix.resize(row);
-  for(int i = 0 ; i < row ; ++i)
+  puzzleMatrix.resize(col);
+  for(int i = 0 ; i < col ; ++i)
   {
       //Grow Columns by n
-      a[i].resize(col);
+      puzzleMatrix[i].resize(row);
   }
+
+  for(int i = 0; i < row; i++)
+  {
+    getline(in,current_line);
+    parts = split(current_line, ",", false);
+    for(int j = 0; j < col; j++)
+    {
+      puzzleMatrix[i][j] = std::stoi(parts[j]);
+      cout << puzzleMatrix[i][j] << " ";
+    }
+    cout << "\n";
+  }
+
   cout << "rows: " << row << " col: " << col << endl;
 }
 
