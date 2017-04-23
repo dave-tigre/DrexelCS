@@ -73,8 +73,8 @@ void SlidingBlockSolver::createPuzzle(istream& in)
   getline(in,current_line);
   parts = split(current_line, ",");
 
-  int col = stoi(parts[0]);
-  int row = stoi(parts[1]);
+  col = stoi(parts[0]);
+  row = stoi(parts[1]);
   // allocate puzzle matrix space
   puzzleMatrix.resize(col);
   for(int i = 0 ; i < col ; ++i)
@@ -90,12 +90,8 @@ void SlidingBlockSolver::createPuzzle(istream& in)
     for(int j = 0; j < col; j++)
     {
       puzzleMatrix[i][j] = std::stoi(parts[j]);
-      cout << puzzleMatrix[i][j] << " ";
     }
-    cout << "\n";
   }
-
-  cout << "rows: " << row << " col: " << col << endl;
 }
 
 void SlidingBlockSolver::displayPuzzle()
@@ -104,6 +100,15 @@ void SlidingBlockSolver::displayPuzzle()
   * TODO:
   * use string formatting to display game puzzle matrix
   */
+  cout << fixed << setprecision(2);
+  for(int i = 0; i < row; i++)
+  {
+    for(int j = 0; j < col; j++)
+    {
+      cout << setw(5) << puzzleMatrix[i][j];
+    }
+    cout << "\n";
+  }
 }
 
 bool SlidingBlockSolver::gameCheck(const vector<vector<int> > puzzle)

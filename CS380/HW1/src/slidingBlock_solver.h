@@ -9,6 +9,7 @@
 #include <vector>
 #include <sstream>
 #include <set>
+#include <iomanip>
 
 using namespace std;
 
@@ -65,6 +66,8 @@ public:
 private:
   vector<vector<int> > puzzleMatrix; // game puzzle matrix
   string filename;
+  int row;
+  int col;
 
 };
 

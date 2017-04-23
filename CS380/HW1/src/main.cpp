@@ -3,6 +3,7 @@
 int main()
 {
   SlidingBlockSolver test;
-  test.loadGame("SBP-level0.txt");
+  test.loadGame("../gameboards/SBP-level1.txt");
+  test.displayPuzzle();
   return 0;
 }
