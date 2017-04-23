@@ -2,21 +2,27 @@
 
 using namespace std;
 
-SlidingBlockSolver::SlidingBlockSolver(){
-  printf("Puzzle Game Initiated...");
+/*
+============================================================================
+==========================  GAME STATE CLASS  ==============================
+============================================================================
+*/
+
+GameState::GameState(){
+  printf("Puzzle Game Initiated...\n\n");
 }
 
-SlidingBlockSolver::~SlidingBlockSolver()
+GameState::~GameState()
 {
-  printf("Game Terminated...");
+  printf("\nGame Terminated...");
 }
 
-void SlidingBlockSolver::usageMessage()
+void GameState::usageMessage()
 {
 
 }
 
-void SlidingBlockSolver::loadGame(const string filename)
+void GameState::loadGame(const string filename)
 {
   /**
   * TODO:
@@ -48,85 +54,167 @@ void SlidingBlockSolver::loadGame(const string filename)
      */
     static std::vector<std::string> split(const std::string& s, const std::string& delim,
             const bool keep_empty=true){
-        std::vector<std::string> parts;
+        std::vector<std::string> elems; // vector of string elements
         size_t pos = 0, last_pos = 0;
         std::string token;
         while ((pos = s.find(delim, last_pos)) != std::string::npos) {
             token = s.substr(last_pos, pos - last_pos);
             if (keep_empty || token.length() > 0){
-                parts.push_back(token);
+                elems.push_back(token);
             }
             last_pos = pos + 1;
         }
         token = s.substr(last_pos);
         if (keep_empty || token.length() > 0){
-            parts.push_back(token);
+            elems.push_back(token);
         }
-        return parts;
+        return elems;
     }
 
-void SlidingBlockSolver::createPuzzle(istream& in)
+void GameState::createPuzzle(istream& in)
 {
   string current_line;
 
-  vector<std::string> parts;
+  vector<std::string> elems;
   getline(in,current_line);
-  parts = split(current_line, ",");
+  elems = split(current_line, ",");
 
-  col = stoi(parts[0]);
-  row = stoi(parts[1]);
+  col = stoi(elems[0]);
+  row = stoi(elems[1]);
   // allocate puzzle matrix space
   puzzleMatrix.resize(col);
-  for(int i = 0 ; i < col ; ++i)
+  for(int c = 0; c < col; c++)
   {
       //Grow Columns by n
-      puzzleMatrix[i].resize(row);
+      puzzleMatrix[c].resize(row);
   }
 
-  for(int i = 0; i < row; i++)
+  for(int r = 0; r < row; r++)
   {
     getline(in,current_line);
-    parts = split(current_line, ",", false);
-    for(int j = 0; j < col; j++)
+    elems = split(current_line, ",", false);
+    for(int c = 0; c < col; c++)
     {
-      puzzleMatrix[i][j] = std::stoi(parts[j]);
+      puzzleMatrix[r][c] = std::stoi(elems[c]);
     }
   }
 }
 
-void SlidingBlockSolver::displayPuzzle()
+void GameState::displayPuzzle()
 {
   /**
   * TODO:
   * use string formatting to display game puzzle matrix
   */
   cout << fixed << setprecision(2);
-  for(int i = 0; i < row; i++)
+  for(int r = 0; r < row; r++)
   {
-    for(int j = 0; j < col; j++)
+    for(int c = 0; c < col; c++)
     {
-      cout << setw(5) << puzzleMatrix[i][j];
+      cout << setw(5) << puzzleMatrix[r][c];
     }
     cout << "\n";
   }
 }
 
-bool SlidingBlockSolver::gameCheck(const vector<vector<int> > puzzle)
+void GameState::displayPuzzle(const vector<vector <int> > puzzle)
+{
+  cout << fixed << setprecision(2);
+  for(int r = 0; r < row; r++)
+  {
+    for(int c = 0; c < col; c++)
+    {
+      cout << setw(5) << puzzle[r][c];
+    }
+    cout << "\n";
+  }
+}
+
+vector<vector <int> > GameState::getPuzzle()
+{
+  return puzzleMatrix;
+}
+
+vector<vector <int> > GameState::cloneState(const vector<vector <int> > original)
+{
+  vector<vector <int> > clone;
+
+  clone.resize(col);
+  for(int c = 0; c < col; c++)
+  {
+      //Grow Columns by n
+      clone[c].resize(row);
+  }
+
+  for(int r = 0; r < row; r++)
+  {
+    for(int c = 0; c < col; c++)
+    {
+      clone[r][c] = puzzleMatrix[r][c];
+    }
+  }
+
+  return clone;
+}
+
+bool GameState::gameCheck(const vector<vector<int> > puzzle)
+{
+  for(int r = 0; r < row; r++)
+  {
+    for(int c = 0; c < col; c++)
+    {
+      if(puzzle[r][c] == -1)
+      {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+void GameState::compareState()
 {
 
 }
 
-void SlidingBlockSolver::moveBlock()
+void GameState::randomWalk()
 {
 
 }
 
-void SlidingBlockSolver::compareState()
+/*
+============================================================================
+==========================  MOVE CLASS  ==============================
+============================================================================
+*/
+
+Move::Move()
 {
 
 }
 
-void SlidingBlockSolver::randomWalk()
+Move::~Move()
 {
+
+}
+
+vector< DIRECTION > Move::possibleMoves(const vector<vector <int>> state, int piece)
+{
+  vector < DIRECTION > possibleMoves;
+  col = state.size();
+  row = state[1].size();
+
+  int r_pos = 0;
+  int c_pos = 0;
+
+  for(int c = 0; c < col; c++)
+  {
+    for(int r = 0; r < row; r++)
+    {
+
+    }
+  }
+
 
 }

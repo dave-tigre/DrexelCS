@@ -1,5 +1,5 @@
-#ifndef _GAME_STATE_H_
-#define _GAME_STATE_H_
+#ifndef _SLIDING_BLOCK_H_
+#define _SLIDING_BLOCK_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,16 +12,17 @@
 #include <iomanip>
 
 using namespace std;
+enum DIRECTION {UP, DOWN, LEFT, RIGHT};
 
-class SlidingBlockSolver{
+class GameState{
 
 public:
 
   /**
   * Constructor and Destructor
   */
-  SlidingBlockSolver();
-  ~SlidingBlockSolver();
+  GameState();
+  ~GameState();
 
   /**
   * Usage Message
@@ -39,19 +40,29 @@ public:
   void createPuzzle(istream& in);
 
   /**
+  * Clone State
+  */
+  vector<vector <int> >  cloneState(const vector<vector <int> > original);
+
+  /**
   * Display Game
   */
   void displayPuzzle();
 
   /**
+  * Display Game for given puzzle
+  */
+  void displayPuzzle(const vector<vector<int> > puzzle);
+
+  /**
+  * Get Puzzle Matrix
+  */
+  vector<vector <int> > getPuzzle();
+
+  /**
   * Determine if the puzzle is complete
   */
   bool gameCheck(const vector<vector<int> > puzzle);
-
-  /**
-  * Move generation
-  */
-  void moveBlock();
 
   /**
   * State Comparison
@@ -71,4 +82,33 @@ private:
 
 };
 
-#endif //_GAME_STATE_H_
+class Move{
+
+
+public:
+  /**
+  * Constructor and Destructor
+  */
+  Move();
+  ~Move();
+
+  /**
+  *
+  */
+  vector< DIRECTION > possibleMoves(const vector<vector <int>> state, int piece);
+
+  /**
+  * Move generation
+  * return:
+  */
+  void moveBlock(const int piece, const DIRECTION direction);
+
+
+private:
+
+  int row;
+  int col;
+
+};
+
+#endif //_SLIDING_BLOCK_H_
