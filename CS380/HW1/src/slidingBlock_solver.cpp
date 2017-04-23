@@ -185,7 +185,7 @@ void GameState::randomWalk()
 
 /*
 ============================================================================
-==========================  MOVE CLASS  ==============================
+=============================  MOVE CLASS  =================================
 ============================================================================
 */
 
@@ -205,16 +205,21 @@ vector< DIRECTION > Move::possibleMoves(const vector<vector <int>> state, int pi
   col = state.size();
   row = state[1].size();
 
-  int r_pos = 0;
-  int c_pos = 0;
+  vector<int> r_pos;
+  vector<int> c_pos;
 
-  for(int c = 0; c < col; c++)
+  for(int r = 0; r < row; r++)
   {
-    for(int r = 0; r < row; r++)
+    for(int c = 0; c < col; c++)
     {
-
+      if(state[r][c] == piece){
+        r_pos.push_back(r);
+        c_pos.push_back(c);
+      }
     }
   }
+
+
 
 
 }
