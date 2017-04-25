@@ -8,16 +8,11 @@ using namespace std;
 ============================================================================
 */
 
-GameState::GameState(){
-  printf("Puzzle Game Initiated...\n\n");
+GameState::GameState(const string filename){
+  loadGame(filename);
 }
 
 GameState::~GameState()
-{
-  printf("\nGame Terminated...");
-}
-
-void GameState::usageMessage()
 {
 
 }
@@ -81,6 +76,7 @@ void GameState::createPuzzle(istream& in)
 
   col = stoi(elems[0]);
   row = stoi(elems[1]);
+
   // allocate puzzle matrix space
   puzzleMatrix.resize(col);
   for(int c = 0; c < col; c++)
@@ -91,12 +87,17 @@ void GameState::createPuzzle(istream& in)
 
   for(int r = 0; r < row; r++)
   {
+    if(in.eof())
+      break;
     getline(in,current_line);
+    cout << current_line << endl;
     elems = split(current_line, ",", false);
+
     for(int c = 0; c < col; c++)
     {
       puzzleMatrix[r][c] = std::stoi(elems[c]);
     }
+
   }
 }
 
@@ -135,7 +136,7 @@ vector<vector <int> > GameState::getPuzzle()
   return puzzleMatrix;
 }
 
-vector<vector <int> > GameState::cloneState(const vector<vector <int> > original)
+vector<vector <int> > GameState::cloneState()
 {
   vector<vector <int> > clone;
 
@@ -173,6 +174,44 @@ bool GameState::gameCheck(const vector<vector<int> > puzzle)
   return true;
 }
 
+void GameState::normalizeState()
+{
+  int nextIdx = 3;
+  for(int r = 0; r < row; r++)
+  {
+    for(int c = 0 ; c < col; c++)
+    {
+      if(puzzleMatrix[r][c] == nextIdx)
+      {
+        nextIdx++;
+      }
+      else if(puzzleMatrix[r][c] > nextIdx)
+      {
+        swapIdx(nextIdx, puzzleMatrix[r][c]);
+        nextIdx++;
+      }
+    }
+  }
+}
+
+void GameState::swapIdx(int idx1, int idx2)
+{
+  for(int r = 0; r < row; r++)
+  {
+    for(int c = 0; c < col; c++)
+    {
+      if(puzzleMatrix[r][c] == idx1)
+      {
+        puzzleMatrix[r][c] = idx2;
+      }
+      else if (puzzleMatrix[r][c] == idx2)
+      {
+        puzzleMatrix[r][c] = idx1;
+      }
+    }
+  }
+}
+
 void GameState::compareState()
 {
 
@@ -199,27 +238,56 @@ Move::~Move()
 
 }
 
-vector< DIRECTION > Move::possibleMoves(const vector<vector <int>> state, int piece)
+vector< DIRECTION > Move::pieceMoves(const vector<vector <int>> state, int piece)
 {
-  vector < DIRECTION > possibleMoves;
-  col = state.size();
-  row = state[1].size();
+  vector < DIRECTION > possibleMoves; //vector to for list of possible directions for given piece
+  col = state.size(); // get num of coloumns
+  row = state[1].size(); // get num of rows
 
-  vector<int> r_pos;
-  vector<int> c_pos;
+  set<int> r_pos;
+  set<int> c_pos;
+  int sides = 4;
+
+  // return empty list if piece is wall or goal
+  if(piece == 1 || piece == -1)
+  {
+    return possibleMoves;
+  }
 
   for(int r = 0; r < row; r++)
   {
     for(int c = 0; c < col; c++)
     {
       if(state[r][c] == piece){
-        r_pos.push_back(r);
-        c_pos.push_back(c);
+        r_pos.insert(r);
+        c_pos.insert(c);
+      }
+    }
+  }
+  int pos_r = 0;
+  int pos_c = 0;
+
+  // only check if the piece is found
+  if(!r_pos.empty())
+  {
+
+    if(r_pos.size() > c_pos.size())
+    {
+      cout << "row " << r_pos.size() << endl;
+    }
+    else if (c_pos.size() > r_pos.size())
+    {
+      cout << "col " << c_pos.size() << endl;
+    }
+    else
+    {
+      for(int i = 0; i < sides; i++)
+      {
+
       }
     }
   }
 
-
-
+  return possibleMoves;
 
 }

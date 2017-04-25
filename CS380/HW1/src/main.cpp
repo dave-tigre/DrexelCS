@@ -2,16 +2,28 @@
 #include <iostream>
 int main()
 {
-  GameState test;
-  test.loadGame("../gameboards/SBP-level0.txt");
+  GameState test("../gameboards/SBP-level0.txt");
+
   test.displayPuzzle();
 
   cout <<  "\n clone state test: \n" << endl;
-  test.displayPuzzle(test.cloneState(test.getPuzzle()));
-  cout << test.gameCheck(test.cloneState(test.getPuzzle())) << endl;
+  test.displayPuzzle(test.cloneState());
+  cout << test.gameCheck(test.cloneState()) << endl;
 
-  cout << "\n col: " << test.getPuzzle().size() << endl;
-  cout << "\n row: " << test.getPuzzle()[1].size() << endl;
+
+  cout << "\n\n Testing normalization\n" << endl;
+
+  GameState test2("../gameboards/SBP-test-not-normalized.txt");
+
+  test2.displayPuzzle();
+
+  cout << "After normalization\n" << endl;
+  test2.normalizeState();
+  test2.displayPuzzle();
+
+  Move testMove;
+
+  testMove.pieceMoves(test.getPuzzle(), 2);
 
   return 0;
 }

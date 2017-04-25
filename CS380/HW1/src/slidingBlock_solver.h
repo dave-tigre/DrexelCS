@@ -12,7 +12,7 @@
 #include <iomanip>
 
 using namespace std;
-enum DIRECTION {UP, DOWN, LEFT, RIGHT};
+enum DIRECTION {UP=1, DOWN=2, LEFT=3, RIGHT=4};
 
 class GameState{
 
@@ -21,13 +21,9 @@ public:
   /**
   * Constructor and Destructor
   */
-  GameState();
+  GameState(const string filename);
   ~GameState();
 
-  /**
-  * Usage Message
-  */
-  void usageMessage();
   /**
   * Load Puzzle
   */
@@ -42,7 +38,7 @@ public:
   /**
   * Clone State
   */
-  vector<vector <int> >  cloneState(const vector<vector <int> > original);
+  vector<vector <int> >  cloneState();
 
   /**
   * Display Game
@@ -63,6 +59,13 @@ public:
   * Determine if the puzzle is complete
   */
   bool gameCheck(const vector<vector<int> > puzzle);
+
+  /**
+  * Normalize the state
+  */
+  void normalizeState();
+
+  void swapIdx(int idx1, int idx2);
 
   /**
   * State Comparison
@@ -95,13 +98,18 @@ public:
   /**
   *
   */
-  vector< DIRECTION > possibleMoves(const vector<vector <int>> state, int piece);
+  vector< DIRECTION > pieceMoves(const vector<vector <int>> state, int piece);
+
+  /**
+  *
+  */
+
 
   /**
   * Move generation
   * return:
   */
-  void moveBlock(const int piece, const DIRECTION direction);
+  void applyMove(const int piece, const DIRECTION direction);
 
 
 private:
