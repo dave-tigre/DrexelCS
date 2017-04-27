@@ -41,29 +41,29 @@ void GameState::loadGame(const string filename)
 }
 
 /**
-     * Generic split string function.
-     * Args:
-     *     keep_empty (bool): Retain empty strings in the returned vector if set to true.
-     *         Defaults to true.
-     */
-    static std::vector<std::string> split(const std::string& s, const std::string& delim,
-            const bool keep_empty=true){
-        std::vector<std::string> elems; // vector of string elements
-        size_t pos = 0, last_pos = 0;
-        std::string token;
-        while ((pos = s.find(delim, last_pos)) != std::string::npos) {
-            token = s.substr(last_pos, pos - last_pos);
-            if (keep_empty || token.length() > 0){
-                elems.push_back(token);
-            }
-            last_pos = pos + 1;
-        }
-        token = s.substr(last_pos);
+ * Generic split string function.
+ * Args:
+ *     keep_empty (bool): Retain empty strings in the returned vector if set to true.
+ *         Defaults to true.
+ */
+static std::vector<std::string> split(const std::string& s, const std::string& delim,
+        const bool keep_empty=true){
+    std::vector<std::string> elems; // vector of string elements
+    size_t pos = 0, last_pos = 0;
+    std::string token;
+    while ((pos = s.find(delim, last_pos)) != std::string::npos) {
+        token = s.substr(last_pos, pos - last_pos);
         if (keep_empty || token.length() > 0){
             elems.push_back(token);
         }
-        return elems;
+        last_pos = pos + 1;
     }
+    token = s.substr(last_pos);
+    if (keep_empty || token.length() > 0){
+        elems.push_back(token);
+    }
+    return elems;
+}
 
 void GameState::createPuzzle(istream& in)
 {
@@ -216,8 +216,8 @@ vector<Move> GameState::pieceMoves(const int piece)
 {
   vector<Move> possibleMoves; //vector to for list of possible directions for given piece
 
-  vector<int> r_pos;
-  vector<int> c_pos;
+  vector<int> r_pos; // vector to hold row position
+  vector<int> c_pos; // vector to hold coloumn position
 
   // return empty list if piece is wall or goal
   if(piece < 2)
@@ -225,6 +225,7 @@ vector<Move> GameState::pieceMoves(const int piece)
     return possibleMoves;
   }
 
+  // find piece position in puzzle
   for(int r = 0; r < row; r++)
   {
     for(int c = 0; c < col; c++)
@@ -237,26 +238,118 @@ vector<Move> GameState::pieceMoves(const int piece)
   }
 
 
-  // only check if the piece is found
   int num_pos = r_pos.size(); // number of positions found for given piece
+  int width = 1; // width of block given piece
+  int height = 1; // height of block of given piece
+
+  // only check if the piece is found
   if(!r_pos.empty())
   {
+    int start_r = r_pos[0]; // starting row position
+    int start_c = c_pos[0]; // starting column position
     cout << "\nPosition of " << piece <<  ": " << endl;
     for(int i = 0; i < num_pos; i++)
     {
-      cout << "(" << r_pos[i] << "," << c_pos[i] << ") ";
-    }
-    cout << "\n";
+      if(start_r != r_pos[i])
+        height++;
 
-    // check UP side
-    for(int i = 0; i < num_pos; i++)
+      if(start_c != c_pos[i])
+        width++;
+    }
+    cout << "width = " << width << "  height= " << height <<"\n\n";
+
+    //check UP side
+    bool openUp = true;
+    for(int c = start_c; c < start_c + height; c++)
     {
-
+      if(puzzleMatrix[start_r-1][c] != 0)
+      {
+        openUp = false;
+        break;
+      }
     }
 
+    //check Down side
+    bool openDown = true;
+    for(int c = start_c; c < start_c + height; c++)
+    {
+      if(puzzleMatrix[start_r+1][c] != 0)
+      {
+        openDown = false;
+        break;
+      }
+    }
+
+    //check Left side
+    bool openLeft = true;
+    for(int r = start_r; r < start_r + height; r++)
+    {
+      if(puzzleMatrix[r][start_c-1] != 0)
+      {
+        openLeft = false;
+        break;
+      }
+    }
+
+    //check Right side
+    bool openRight = true;
+    for(int r = start_r; r < start_r + height; r++)
+    {
+      if(puzzleMatrix[r][start_c+1] != 0)
+      {
+        openRight = false;
+        break;
+      }
+    }
+
+    // add moves to vector
+    if(openUp)
+      possibleMoves.push_back(Move(piece, UP));
+
+    if(openDown)
+      possibleMoves.push_back(Move(piece, DOWN));
+
+    if(openLeft)
+      possibleMoves.push_back(Move(piece, LEFT));
+
+    if(openRight)
+      possibleMoves.push_back(Move(piece, RIGHT));
+  }
+  return possibleMoves;
+
+}
+
+vector<Move> GameState::puzzleMoves()
+{
+  vector<Move> allMoves;
+  vector<Move> pMoves;
+  int max_num = 0; // highest block number in puzzle
+
+  // find max number in puzzle
+  for(int r = 0; r < row; r++)
+  {
+    for(int c = 0; c < col; c++)
+    {
+      if(puzzleMatrix[r][c] > max_num){
+        max_num = puzzleMatrix[r][c];
+      }
+    }
   }
 
-  return possibleMoves;
+  for(int i = 2; i < (max_num+1); i++)
+  {
+    pMoves = pieceMoves(i);
+    allMoves.insert( allMoves.end(),  pMoves.begin(),  pMoves.end());
+    pMoves.clear();
+  }
+
+
+  for (int p = 0; p < allMoves.size(); p++)
+  {
+    allMoves[p].printMove();
+  }
+
+  return allMoves;
 
 }
 

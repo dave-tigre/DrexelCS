@@ -37,6 +37,23 @@ public:
     return direc;
   }
 
+  void printMove()
+  {
+    string move = "";
+    switch(direc)
+    {
+      case UP:      move = "up";
+                    break;
+      case DOWN:    move = "down";
+                    break;
+      case LEFT:    move = "left";
+                    break;
+      case RIGHT:   move = "right";
+                    break;
+    }
+    cout << setw(2) << "(" << piece << "," << move << ")" << endl;
+  }
+
 private:
 
   int piece;
