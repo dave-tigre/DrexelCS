@@ -2,10 +2,10 @@ CCX=g++ -std=c++11
 RM = rm -f
 
 headers:=				\
-		slidingBlock_solver.h	\
+		slidingBlock_puzzle.h	\
 
 sources:=				\
-		slidingBlock_solver.cpp	\
+		slidingBlock_puzzle.cpp	\
 		main.cpp		\
 
 all: clean test
