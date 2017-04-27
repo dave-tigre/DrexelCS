@@ -2,7 +2,7 @@
 #include <iostream>
 int main()
 {
-  GameState test("../gameboards/SBP-level2.txt");
+  GameState test("../gameboards/SBP-level3.txt");
 
   test.displayPuzzle();
 

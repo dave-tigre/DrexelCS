@@ -247,20 +247,22 @@ vector<Move> GameState::pieceMoves(const int piece)
   {
     int start_r = r_pos[0]; // starting row position
     int start_c = c_pos[0]; // starting column position
-    cout << "\nPosition of " << piece <<  ": " << endl;
+    // cout << "\nPosition of " << piece <<  ": ";
     for(int i = 0; i < num_pos; i++)
     {
+
+      //cout << "(" << c_pos[i] << ", " << r_pos[i] << ")";
       if(start_r != r_pos[i])
         height++;
 
       if(start_c != c_pos[i])
         width++;
     }
-    cout << "width = " << width << "  height= " << height <<"\n\n";
+    //cout << "\nwidth = " << width << "  height= " << height <<"\n\n";
 
     //check UP side
     bool openUp = true;
-    for(int c = start_c; c < start_c + height; c++)
+    for(int c = start_c; c < start_c + width; c++)
     {
       if(puzzleMatrix[start_r-1][c] != 0)
       {
@@ -271,7 +273,7 @@ vector<Move> GameState::pieceMoves(const int piece)
 
     //check Down side
     bool openDown = true;
-    for(int c = start_c; c < start_c + height; c++)
+    for(int c = start_c; c < start_c + width; c++)
     {
       if(puzzleMatrix[start_r+1][c] != 0)
       {
@@ -343,13 +345,40 @@ vector<Move> GameState::puzzleMoves()
     pMoves.clear();
   }
 
-
+  cout << "\n";
   for (int p = 0; p < allMoves.size(); p++)
   {
     allMoves[p].printMove();
   }
 
   return allMoves;
+
+}
+
+void GameState::applyMove(const Move& move)
+{
+  int piece = move.getPiece();
+
+  vector<int> r_pos; // vector to hold row position
+  vector<int> c_pos; // vector to hold coloumn position
+
+  // return empty list if piece is wall or goal
+  if(piece < 2)
+  {
+    return possibleMoves;
+  }
+
+  // find piece position in puzzle
+  for(int r = 0; r < row; r++)
+  {
+    for(int c = 0; c < col; c++)
+    {
+      if(puzzleMatrix[r][c] == piece){
+        r_pos.push_back(r);
+        c_pos.push_back(c);
+      }
+    }
+  }
 
 }
 
