@@ -38,12 +38,12 @@ public:
   /**
   * Search Frontier
   */
-  bool searchFrontier(const queue<StateNode> front, GameState& state);
+  bool searchFrontier(const queue<StateNode>& front, GameState& state);
 
   /**
   * Search Explored
   */
-  bool searchExplored(const set<GameState> expl, GameState& state);
+  bool searchExplored(const set<GameState>& expl, GameState& state);
 
   /**
   * Breadth-First Search
