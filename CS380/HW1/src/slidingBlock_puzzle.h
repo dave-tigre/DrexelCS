@@ -69,7 +69,7 @@ public:
   * Constructor and Destructor
   */
   GameState(const string filename);
-  GameState(const vector<vector<int> > puzzle);
+  GameState(const vector<vector<int> > &puzzle);
   ~GameState();
 
   /**
@@ -86,12 +86,12 @@ public:
   /**
   * Clone State
   */
-  GameState  cloneState();
+  GameState cloneState() const;
 
   /**
   * Display Game
   */
-  void displayPuzzle();
+  void displayPuzzle() const;
 
   /**
   * Get Puzzle Matrix
@@ -134,7 +134,7 @@ public:
   /**
   * State Comparison
   */
-  void compareState();
+  bool compareState();
 
   /**
   * Random Walks

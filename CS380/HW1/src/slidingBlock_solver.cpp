@@ -9,18 +9,18 @@ void GameSolver::randomWalk(const int runtime)
   */
 
   vector<Move> puzzleMoves;
-  //GameState clonedPuzzle = gamePuzzle.cloneState();
+  GameState clonedState = gameState.cloneState();
   cout << "\nOriginal Puzzle" << endl;
-  gamePuzzle.displayPuzzle();
+  gameState.displayPuzzle();
 
   bool gameSolved = false;
 
-  int n = 0;
+  int win_moves = 0;
   for(int n = 0; n < runtime; n++)
   {
-    //gamePuzzle.normalizeState();
+    clonedState.normalizeState();
     puzzleMoves.clear();
-    puzzleMoves = gamePuzzle.puzzleMoves();
+    puzzleMoves = clonedState.puzzleMoves();
 
     int num_moves = puzzleMoves.size();
     int rand_move = rand() % num_moves;
@@ -28,20 +28,25 @@ void GameSolver::randomWalk(const int runtime)
     puzzleMoves[rand_move].printMove();
     cout << "\n";
 
-    gamePuzzle.applyMove(puzzleMoves[rand_move]);
+    clonedState.applyMove(puzzleMoves[rand_move]);
     // cout << "Step: " << n << endl;
-    gamePuzzle.displayPuzzle();
-    gameSolved = gamePuzzle.gameCheck();
+    clonedState.displayPuzzle();
+    gameSolved = clonedState.gameCheck();
+
     if(gameSolved)
+    {
+      win_moves = n;
       break;
+    }
+
   }
 
   if(gameSolved)
   {
-    cout << "\nPuzzle Was Solved with " << n << " moves!" << endl;
+    cout << "\nPuzzle Was Solved with " << win_moves << " moves!" << endl;
   }
   else{
-    
+    cout << "\nPuzzle not solved! " << endl;
   }
 }
 
@@ -51,6 +56,54 @@ void GameSolver::breadFirstSearch()
   * TODO:
     Develop breadth-first search algorithm
   */
+  queue<StateNode> frontier; // queue of unexplored (frontier) nodes
+  set<GameState> explored; // queue of explored nodes
+
+  StateNode parentNode; //starting node
+
+  parentNode.nodeState = &gameState; //set state of the current node
+  frontier.push(parentNode);
+  bool gameSolved = parentNode.nodeState->gameCheck(); //var for solved node
+
+  // check if the current node is the solution
+  if(gameSolved)
+  {
+    cout << "\nPuzzle was solved!" << endl;
+  }
+  else{
+    cout << "\nPuzzle NOT solved!" << endl;
+  }
+
+  /*
+  * TODO:
+      Create search explore and frontier methods
+      find valid return type
+      return solution
+  */
+
+  // while the puzzle is not solved
+  while(!gameSolved)
+  {
+    // if no more nodes to explore, failed
+    if(frontier.empty())
+    {
+      cout << "\nPuzzle not solved!" << endl;
+      break;
+    }
+
+    StateNode currentNode = frontier.pop();
+    explored.insert(currentNode.nodeState);
+
+    int availMoves = currentNode.nodeState->puzzleMoves().size(); //available moves (children)
+    for(int i = 0; i < availMoves; i++)
+    {
+      StateNode childNode = currentNode.nodeState->applyMoveCloning(availMoves[i]);
+
+    }
+
+
+  }
+
 }
 
 void GameSolver::depthFirstSearch()

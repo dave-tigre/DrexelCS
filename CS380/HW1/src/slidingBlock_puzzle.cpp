@@ -12,7 +12,7 @@ GameState::GameState(const string filename){
   loadGame(filename);
 }
 
-GameState::GameState(const vector<vector<int> > puzzle)
+GameState::GameState(const vector<vector<int> > &puzzle)
 {
   col = puzzle.size();
   row = puzzle[1].size();
@@ -116,7 +116,7 @@ void GameState::createPuzzle(istream& in)
   }
 }
 
-void GameState::displayPuzzle()
+void GameState::displayPuzzle() const
 {
   /**
   * TODO:
@@ -139,7 +139,7 @@ vector<vector <int> > GameState::getPuzzle()
   return puzzleMatrix;
 }
 
-GameState GameState::cloneState()
+GameState GameState::cloneState() const
 {
   return GameState(puzzleMatrix);
 }
@@ -426,9 +426,19 @@ GameState GameState::applyMoveCloning(Move& move)
 
 }
 
-void GameState::compareState()
+bool GameState::compareState(GameState& state)
 {
+  for(int r = 0; r < row; r++)
+  {
+    for(int c = 0; c < col; c++)
+    {
+      if(puzzleMatrix[r][c] != state.getPuzzle()[r][c]){
+        return false;
+      }
+    }
+  }
 
+  return true;
 }
 
 void GameState::randomWalk()

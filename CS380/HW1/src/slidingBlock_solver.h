@@ -12,13 +12,21 @@
 #include <sstream>
 #include <set>
 #include <iomanip>
+#include <queue>
 
 using namespace std;
+
+struct StateNode
+{
+  GameState *parentState = NULL; // parent node
+  GameState *nodeState = NULL; // current state
+  Move *action = NULL; // action to get here
+};
 
 class GameSolver
 {
 public:
-  GameSolver(GameState& puzzle): gamePuzzle(puzzle){}
+  GameSolver(GameState& state): gameState(state){}
   ~GameSolver(){}
 
 
@@ -26,6 +34,16 @@ public:
   * Random Walk
   */
   void randomWalk(const int runtime);
+
+  /**
+  * Search Frontier
+  */
+  bool searchFrontier(const queue<StateNode> front, GameState& state);
+
+  /**
+  * Search Explored
+  */
+  bool searchExplored(const set<GameState> expl, GameState& state);
 
   /**
   * Breadth-First Search
@@ -43,6 +61,6 @@ public:
   void iterDeepSearch();
 
 private:
-  GameState gamePuzzle;
+  GameState& gameState;
 };
 #endif // _SLIDING_BLOCK_SOLVER_H_
