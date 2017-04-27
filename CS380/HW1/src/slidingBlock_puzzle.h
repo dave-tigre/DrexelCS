@@ -69,6 +69,7 @@ public:
   * Constructor and Destructor
   */
   GameState(const string filename);
+  GameState(const vector<vector<int> > puzzle);
   ~GameState();
 
   /**
@@ -85,7 +86,7 @@ public:
   /**
   * Clone State
   */
-  vector<vector <int> >  cloneState();
+  GameState  cloneState();
 
   /**
   * Display Game
@@ -133,7 +134,7 @@ public:
   /**
   *
   */
-  void applyMoveCloning(Move& move);
+  GameState applyMoveCloning(Move& move);
 
   /**
   * State Comparison

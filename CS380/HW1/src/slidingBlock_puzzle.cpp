@@ -12,6 +12,23 @@ GameState::GameState(const string filename){
   loadGame(filename);
 }
 
+GameState::GameState(const vector<vector<int> > puzzle)
+{
+  col = puzzle.size();
+  row = puzzle[1].size();
+
+  puzzleMatrix.resize(col);
+  for(int c = 0; c < col; c++)
+  {
+      //Grow Columns by n
+      puzzleMatrix[c].resize(row);
+  }
+
+  puzzleMatrix = puzzle;
+
+
+}
+
 GameState::~GameState()
 {
 
@@ -136,26 +153,9 @@ vector<vector <int> > GameState::getPuzzle()
   return puzzleMatrix;
 }
 
-vector<vector <int> > GameState::cloneState()
+GameState GameState::cloneState()
 {
-  vector<vector <int> > clone;
-
-  clone.resize(col);
-  for(int c = 0; c < col; c++)
-  {
-      //Grow Columns by n
-      clone[c].resize(row);
-  }
-
-  for(int r = 0; r < row; r++)
-  {
-    for(int c = 0; c < col; c++)
-    {
-      clone[r][c] = puzzleMatrix[r][c];
-    }
-  }
-
-  return clone;
+  return GameState(puzzleMatrix);
 }
 
 bool GameState::gameCheck()
@@ -219,10 +219,17 @@ vector<Move> GameState::pieceMoves(const int piece)
   vector<int> r_pos; // vector to hold row position
   vector<int> c_pos; // vector to hold coloumn position
 
+  int boundary = 0;
+
   // return empty list if piece is wall or goal
   if(piece < 2)
   {
     return possibleMoves;
+  }
+
+  if (piece == 2)
+  {
+    boundary = -1;
   }
 
   // find piece position in puzzle
@@ -264,7 +271,7 @@ vector<Move> GameState::pieceMoves(const int piece)
     bool openUp = true;
     for(int c = start_c; c < start_c + width; c++)
     {
-      if(puzzleMatrix[start_r-1][c] != 0)
+      if(puzzleMatrix[start_r-1][c] < boundary || puzzleMatrix[start_r-1][c] > 0)
       {
         openUp = false;
         break;
@@ -275,7 +282,7 @@ vector<Move> GameState::pieceMoves(const int piece)
     bool openDown = true;
     for(int c = start_c; c < start_c + width; c++)
     {
-      if(puzzleMatrix[start_r+1][c] != 0)
+      if(puzzleMatrix[start_r+1][c] < boundary || puzzleMatrix[start_r+1][c] > 0)
       {
         openDown = false;
         break;
@@ -286,7 +293,7 @@ vector<Move> GameState::pieceMoves(const int piece)
     bool openLeft = true;
     for(int r = start_r; r < start_r + height; r++)
     {
-      if(puzzleMatrix[r][start_c-1] != 0)
+      if(puzzleMatrix[r][start_c-1] < boundary || puzzleMatrix[r][start_c-1] > 0)
       {
         openLeft = false;
         break;
@@ -297,7 +304,7 @@ vector<Move> GameState::pieceMoves(const int piece)
     bool openRight = true;
     for(int r = start_r; r < start_r + height; r++)
     {
-      if(puzzleMatrix[r][start_c+1] != 0)
+      if(puzzleMatrix[r][start_c+1] < boundary || puzzleMatrix[r][start_c+1] > 0)
       {
         openRight = false;
         break;
@@ -345,12 +352,12 @@ vector<Move> GameState::puzzleMoves()
     pMoves.clear();
   }
 
-  // debug to view moves output
-  // cout << "\n";
-  // for (int p = 0; p < allMoves.size(); p++)
-  // {
-  //   allMoves[p].printMove();
-  // }
+  //debug to view moves output
+  cout << "\n";
+  for (int p = 0; p < allMoves.size(); p++)
+  {
+    allMoves[p].printMove();
+  }
 
   return allMoves;
 
@@ -396,52 +403,41 @@ void GameState::applyMove(Move& move)
     case UP:
               for(int c = start_c; c < start_c + width; c++)
               {
-                if(puzzleMatrix[start_r-1][c] == 0)
-                {
-                  puzzleMatrix[start_r-1][c] = piece;
-                  puzzleMatrix[start_r][c] = 0;
-
-                }
+                puzzleMatrix[start_r-1][c] = piece;
+                puzzleMatrix[start_r+height-1][c] = 0;
               }
               break;
     case DOWN:
               for(int c = start_c; c < start_c + width; c++)
               {
-                if(puzzleMatrix[start_r+1][c] == 0)
-                {
-                  puzzleMatrix[start_r+1][c] = piece;
-                  puzzleMatrix[start_r][c] = 0;
-
-                }
+                puzzleMatrix[start_r+1][c] = piece;
+                puzzleMatrix[start_r-height+1][c] = 0;
               }
               break;
     case LEFT:
               for(int r = start_r; r < start_r + height; r++)
               {
-                if(puzzleMatrix[r][start_c-1] == 0)
-                {
-                  puzzleMatrix[r][start_c-1] = piece;
-                  puzzleMatrix[r][start_c] = 0;
-                }
+                puzzleMatrix[r][start_c-1] = piece;
+                puzzleMatrix[r][start_c+width-1] = 0;
               }
               break;
      case RIGHT:
              for(int r = start_r; r < start_r + height; r++)
              {
-               if(puzzleMatrix[r][start_c+1] == 0)
-               {
-                 puzzleMatrix[r][start_c+1] = piece;
-                 puzzleMatrix[r][start_c] = 0;
-               }
+               puzzleMatrix[r][start_c+1] = piece;
+               puzzleMatrix[r][start_c-width+1] = 0;
              }
              break;
   }
 
 }
 
-void GameState::applyMoveCloning(Move& move)
+GameState GameState::applyMoveCloning(Move& move)
 {
-  
+    GameState movedState = this->cloneState();
+    movedState.applyMove(move);
+    return movedState;
+
 }
 
 void GameState::compareState()
