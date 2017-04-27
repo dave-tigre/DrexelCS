@@ -3,9 +3,11 @@ RM = rm -f
 
 headers:=				\
 		slidingBlock_puzzle.h	\
+		slidingBlock_solver.h	\
 
 sources:=				\
 		slidingBlock_puzzle.cpp	\
+		slidingBlock_solver.cpp	\
 		main.cpp		\
 
 all: clean test

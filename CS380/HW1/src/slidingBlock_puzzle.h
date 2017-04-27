@@ -94,11 +94,6 @@ public:
   void displayPuzzle();
 
   /**
-  * Display Game for given puzzle
-  */
-  void displayPuzzle(const vector<vector<int> > puzzle);
-
-  /**
   * Get Puzzle Matrix
   */
   vector<vector <int> > getPuzzle();

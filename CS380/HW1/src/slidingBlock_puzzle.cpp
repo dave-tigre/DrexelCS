@@ -36,11 +36,6 @@ GameState::~GameState()
 
 void GameState::loadGame(const string filename)
 {
-  /**
-  * TODO:
-  * find file and load game
-  * enable error handling for misspelled or missing file names
-  */
 
     ifstream puzzle_file;
     puzzle_file.open(filename.c_str());
@@ -101,6 +96,11 @@ void GameState::createPuzzle(istream& in)
       puzzleMatrix[c].resize(row);
   }
 
+  /**
+  * TODO:
+    Fix issue for not being able to load non-normalized puzzle
+  */
+
   for(int r = 0; r < row; r++)
   {
     if(in.eof())
@@ -122,20 +122,6 @@ void GameState::displayPuzzle()
   * TODO:
   * use string formatting to display game puzzle matrix
   */
-  cout << fixed << setprecision(2);
-  cout << setw(2) << col << "," << row << endl;
-  for(int r = 0; r < row; r++)
-  {
-    for(int c = 0; c < col; c++)
-    {
-      cout << setw(2) << puzzleMatrix[r][c] << ",";
-    }
-    cout << "\n";
-  }
-}
-
-void GameState::displayPuzzle(const vector<vector <int> > puzzle)
-{
   cout << fixed << setprecision(2);
   cout << setw(2) << col << "," << row << endl;
   for(int r = 0; r < row; r++)
@@ -219,7 +205,7 @@ vector<Move> GameState::pieceMoves(const int piece)
   vector<int> r_pos; // vector to hold row position
   vector<int> c_pos; // vector to hold coloumn position
 
-  int boundary = 0;
+  int boundary = 0; // boundary to allow master piece(2) to cover 0 and -1 block
 
   // return empty list if piece is wall or goal
   if(piece < 2)
@@ -353,11 +339,11 @@ vector<Move> GameState::puzzleMoves()
   }
 
   //debug to view moves output
-  cout << "\n";
-  for (int p = 0; p < allMoves.size(); p++)
-  {
-    allMoves[p].printMove();
-  }
+  // cout << "\n";
+  // for (int p = 0; p < allMoves.size(); p++)
+  // {
+  //   allMoves[p].printMove();
+  // }
 
   return allMoves;
 
