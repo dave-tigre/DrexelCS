@@ -128,12 +128,12 @@ public:
   * Move generation
   * return:
   */
-  void applyMove(const Move& move);
+  void applyMove(Move& move);
 
   /**
   *
   */
-  void applyMoveCloning(const Move& move);
+  void applyMoveCloning(Move& move);
 
   /**
   * State Comparison

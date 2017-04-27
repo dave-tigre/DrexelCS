@@ -14,6 +14,13 @@ int main()
   // test.pieceMoves(4);
   test.puzzleMoves();
 
+  cout << "\n\n Before Applying Move" << endl;
+  test.puzzleMoves()[1].printMove();
+  cout << "\n After Move" << endl;
+  test.applyMove(test.puzzleMoves()[1]);
+
+  test.displayPuzzle();
+
 
   return 0;
 }
