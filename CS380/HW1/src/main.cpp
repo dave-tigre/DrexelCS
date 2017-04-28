@@ -3,20 +3,21 @@
 #include <iostream>
 int main()
 {
-  GameState state("../gameboards/SBP-level1.txt");
+  GameState state("../gameboards/SBP-level0.txt");
 
-  cout << "Starting Puzzle:\n";
-  state.displayPuzzle();
+
+
 
   //GameState test = state.applyMoveCloning(state.puzzleMoves()[0]);
   //test.displayPuzzle();
   //test.displayPuzzle();
   GameSolver solver(state);
+  solver.breadFirstSearch();
   //
   //solver.randomWalk(50);
   //
   //
-  solver.breadFirstSearch();
+  //
 
   // cout << "Testing clone: Original\n";
   // state.displayPuzzle();

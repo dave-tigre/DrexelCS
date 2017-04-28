@@ -94,7 +94,7 @@ void GameSolver::breadFirstSearch()
   StateNode currentNode;
 
   parentNode.nodeState = gameState.cloneState(); //set state of the current node
-
+  cout << "Starting Puzzle:\n";
   parentNode.nodeState.displayPuzzle();
 
   frontier.push_back(parentNode);
@@ -105,9 +105,6 @@ void GameSolver::breadFirstSearch()
   {
     cout << "\nPuzzle was solved!" << endl;
   }
-  else{
-    cout << "\nPuzzle NOT solved!" << endl;
-  }
 
   /*
   * TODO:
@@ -115,9 +112,10 @@ void GameSolver::breadFirstSearch()
       find valid return type
       return solution
   */
-  vector<Move> availMoves;
+
+  vector<Move> availMoves; // init of vector with available moves list
   //while the puzzle is not solved
-  while(gameSolved == false)
+  while(!gameSolved)
   {
     // if no more nodes to explore, failed
     if(frontier.empty())
@@ -131,29 +129,38 @@ void GameSolver::breadFirstSearch()
 
     // add it to explored "Set"
     if(!searchExplored(explored, currentNode.nodeState))
+    {
       explored.push_back(currentNode.nodeState);
+    }
 
     availMoves.clear();
     availMoves = currentNode.nodeState.puzzleMoves(); //available moves (children)
 
-
+    cout << "\nChildren = " << availMoves.size() << endl;
     for(int i = 0; i < availMoves.size(); i++)
     {
 
       childNode.parentState = currentNode.nodeState;
       availMoves[i].printMove(); // display action
-
       childNode.nodeState = currentNode.nodeState.applyMoveCloning(availMoves[i]);
+      cout << "\n";
+      childNode.nodeState.displayPuzzle();
 
       if(!searchFrontier(frontier, childNode.nodeState) || !searchExplored(explored, childNode.nodeState))
       {
-        frontier.push_back(childNode);
-      }
-      else
-      {
-        gameSolved = childNode.nodeState.gameCheck();
+
+        if(childNode.nodeState.gameCheck())
+        {
+          gameSolved = true;
+        }
+        else
+        {
+          frontier.push_back(childNode);
+        }
+
       }
     }
+    //gameSolved = true;
   }
 
   if(gameSolved)
