@@ -10,8 +10,6 @@ void GameSolver::randomWalk(const int runtime)
 
   vector<Move> puzzleMoves;
   GameState clonedState = gameState.cloneState();
-  cout << "\nOriginal Puzzle" << endl;
-  gameState.displayPuzzle();
 
   bool gameSolved = false;
 
@@ -114,7 +112,6 @@ void GameSolver::breadthFirstSearch()
 
   vector<Move> availMoves; // init of vector with available moves list
   //while the puzzle is not solved
-  int level = 0;
   while(!gameSolved)
   {
     // if no more nodes to explore, failed
@@ -126,6 +123,7 @@ void GameSolver::breadthFirstSearch()
 
     currentNode = frontier.front();
     frontier.pop_front();
+    BFSnodes++;
 
     // add it to explored "Set"
     if(!searchExplored(explored, currentNode.nodeState))
@@ -149,6 +147,7 @@ void GameSolver::breadthFirstSearch()
       if(!(searchFrontier(frontier, childNode.nodeState) || searchExplored(explored, childNode.nodeState)))
       {
         availMoves[i].printMove(); // display action
+        BFSlength++;
         if(childNode.nodeState.gameCheck())
         {
           cout << "\nBFS Solved Puzzle:" << endl;
@@ -163,12 +162,14 @@ void GameSolver::breadthFirstSearch()
 
       }
     }
-    level++;
     //gameSolved = true;
   }
 
-  if(gameSolved)
-    cout << "\nPuzzle was solved! N = " << level << endl;
+  // if(gameSolved)
+  // {
+  //   BFSnodes = explored.size();
+  //
+  // }
 
 }
 
@@ -202,7 +203,7 @@ void GameSolver::depthFirstSearch()
   */
 
   vector<Move> availMoves; // init of vector with available moves list
-  int level = 0;
+
   //while the puzzle is not solved
   while(!gameSolved)
   {
@@ -215,6 +216,7 @@ void GameSolver::depthFirstSearch()
 
     currentNode = frontier.front();
     frontier.pop_front();
+    DFSnodes++;
 
 
     // add it to explored "Set"
@@ -238,6 +240,7 @@ void GameSolver::depthFirstSearch()
       if(!(searchFrontier(frontier, childNode.nodeState) || searchExplored(explored, childNode.nodeState)))
       {
         availMoves[i].printMove(); // display action
+        DFSlength++;
         if(childNode.nodeState.gameCheck())
         {
           cout << "\nDFS Solved Puzzle:" << endl;
@@ -252,11 +255,10 @@ void GameSolver::depthFirstSearch()
 
       }
     }
-    level++;
   }
 
-  if(gameSolved)
-    cout << "\nPuzzle was solved! N = "<< level << endl;
+  // if(gameSolved)
+  //   DFSnodes = explored.size();
 
 }
 
@@ -295,6 +297,12 @@ void GameSolver::iterDeepSearch()
   //while the puzzle is not solved
   while(!gameSolved)
   {
+    // if no more nodes to explore, failed
+    if(frontier.empty())
+    {
+      cout << "\nPuzzle not solved!" << endl;
+      break;
+    }
     level = 0;
     while(level <= cutoff)
     {
@@ -307,7 +315,7 @@ void GameSolver::iterDeepSearch()
 
       currentNode = frontier.front();
       frontier.pop_front();
-
+      IDSnodes++;
 
       // add it to explored "Set"
       if(!searchExplored(explored, currentNode.nodeState))
@@ -330,7 +338,7 @@ void GameSolver::iterDeepSearch()
         if(!(searchFrontier(frontier, childNode.nodeState) || searchExplored(explored, childNode.nodeState)))
         {
           availMoves[i].printMove(); // display action
-          //childNode.nodeState.displayPuzzle();
+          IDSlength++;
           if(childNode.nodeState.gameCheck())
           {
             cout << "\nIDS Solved Puzzle:" << endl;
@@ -350,7 +358,7 @@ void GameSolver::iterDeepSearch()
     }
     cutoff++;
   }
-
-  if(gameSolved)
-    cout << "\nPuzzle was solved! N = "<< cutoff << endl;
+  // 
+  // if(gameSolved)
+  //   IDSnodes = explored.size();
 }

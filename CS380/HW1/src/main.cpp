@@ -13,6 +13,7 @@ int main()
   GameSolver solverRandomWalk(state1);
 
   //Random Walk
+  cout << "\nRandom Walk" << endl;
   int N = 3;
   solverRandomWalk.randomWalk(N);
 
@@ -29,21 +30,24 @@ int main()
   clock_t startBFS = clock();
   solver.breadthFirstSearch();
   double durationBFS = ((clock() - startBFS)/(double) CLOCKS_PER_SEC)*MILLI_PER_SEC;
-  cout << "\nBreadth-First Duration = " << durationBFS << " ms" << endl;
+  cout << "\nBreadth-First Results: "<< solver.getBFSnodes() << " nodes, "
+    << solver.getBFSlength() << " length, " << durationBFS << " ms" << endl;
 
   // Depth-First Search
   cout << "\nDepth-First Search\n" << endl;
   clock_t startDFS = clock();
   solver.depthFirstSearch();
   double durationDFS = ((clock() - startDFS)/(double) CLOCKS_PER_SEC)*MILLI_PER_SEC;
-  cout << "\nDepth-First Duration = " << durationDFS << " ms" << endl;
+  cout << "\nDepth-First Results: "<< solver.getDFSnodes() << " nodes, "
+    << solver.getDFSlength() << " length, " <<  durationDFS << " ms" << endl;
 
   //Iterative Deepening Search
   cout << "\nIterative Deepening Search\n" << endl;
   clock_t startIDS = clock();
   solver.iterDeepSearch();
   double durationIDS = ((clock() - startIDS)/(double) CLOCKS_PER_SEC)*MILLI_PER_SEC;
-  cout << "\nIterative Deepening Duration = " << durationIDS << " ms" << endl;
+  cout << "\nIterative Deepening Results: " << solver.getIDSnodes() << " nodes, "
+    << solver.getIDSlength() << " length, " <<  durationIDS << " ms" << endl;
 
   return 0;
 }

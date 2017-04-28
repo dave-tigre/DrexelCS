@@ -26,7 +26,16 @@ struct StateNode
 class GameSolver
 {
 public:
-  GameSolver(GameState& state): gameState(state){}
+  GameSolver(GameState& state): gameState(state){
+    BFSnodes = 0;
+    BFSlength = 0;
+
+    DFSnodes = 0;
+    DFSlength = 0;
+
+    IDSnodes = 0;
+    IDSlength = 0;
+  }
   ~GameSolver(){}
 
 
@@ -39,18 +48,22 @@ public:
   * Breadth-First Search
   */
   void breadthFirstSearch();
+  int getBFSnodes(){return BFSnodes;}
+  int getBFSlength(){return BFSlength;}
 
   /**
   * Depth-First Search
   */
   void depthFirstSearch();
-
-  void recersiveDepthFirstSearch(int limit, bool useLimit);
+  int getDFSnodes(){return DFSnodes;}
+  int getDFSlength(){return DFSlength;}
 
   /**
   * Iterative Deepening Search
   */
   void iterDeepSearch();
+  int getIDSnodes(){return IDSnodes;}
+  int getIDSlength(){return IDSlength;}
 
 private:
 
@@ -68,5 +81,13 @@ private:
 
 
   GameState& gameState;
+  int BFSnodes;
+  int BFSlength;
+
+  int DFSnodes;
+  int DFSlength;
+
+  int IDSnodes;
+  int IDSlength;
 };
 #endif // _SLIDING_BLOCK_SOLVER_H_
