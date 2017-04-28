@@ -136,19 +136,19 @@ void GameSolver::breadthFirstSearch()
     availMoves.clear();
     availMoves = currentNode.nodeState.puzzleMoves(); //available moves (children)
     // loop through breadth-branches
-    level++;
+
     for(int i = 0; i < availMoves.size(); i++)
     {
 
       childNode.parentState = currentNode.nodeState;
-      availMoves[i].printMove(); // display action
+
       childNode.nodeState = currentNode.nodeState.applyMoveCloning(availMoves[i]);
       //cout << "\n";
       //childNode.nodeState.displayPuzzle();
 
-      if(!searchFrontier(frontier, childNode.nodeState) || !searchExplored(explored, childNode.nodeState))
+      if(!(searchFrontier(frontier, childNode.nodeState) || searchExplored(explored, childNode.nodeState)))
       {
-
+        availMoves[i].printMove(); // display action
         if(childNode.nodeState.gameCheck())
         {
           cout << "\nBFS Solved Puzzle:" << endl;
@@ -163,6 +163,7 @@ void GameSolver::breadthFirstSearch()
 
       }
     }
+    level++;
     //gameSolved = true;
   }
 
@@ -227,21 +228,18 @@ void GameSolver::depthFirstSearch()
 
     availMoves.clear();
     availMoves = currentNode.nodeState.puzzleMoves(); //available moves (children)
-    cout << "\nLevel: " << level << "\n"<< endl;
-    level++;
-    /
+
+
     for(int i = 0; i < availMoves.size(); i++)
     {
 
       childNode.parentState = currentNode.nodeState;
-      cout << "\n";
-      availMoves[i].printMove(); // display action
       childNode.nodeState = currentNode.nodeState.applyMoveCloning(availMoves[i]);
-      childNode.nodeState.displayPuzzle();
 
-      if(!searchFrontier(frontier, childNode.nodeState) || !searchExplored(explored, childNode.nodeState))
+
+      if(!(searchFrontier(frontier, childNode.nodeState) || searchExplored(explored, childNode.nodeState)))
       {
-
+        availMoves[i].printMove(); // display action
         if(childNode.nodeState.gameCheck())
         {
           cout << "\nDFS Solved Puzzle:" << endl;
@@ -256,6 +254,7 @@ void GameSolver::depthFirstSearch()
 
       }
     }
+    level++;
   }
 
   if(gameSolved)
