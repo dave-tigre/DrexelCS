@@ -1,0 +1,281 @@
+
+Starting Puzzle: 
+ 5,4
+ 1,-1,-1, 1, 1,
+ 1, 0, 3, 4, 1,
+ 1, 0, 2, 2, 1,
+ 1, 1, 1, 1, 1,
+
+
+Random Walk
+
+ (3,left)
+
+ 5,4
+ 1,-1,-1, 1, 1,
+ 1, 3, 0, 4, 1,
+ 1, 0, 2, 2, 1,
+ 1, 1, 1, 1, 1,
+
+ (3,right)
+
+ 5,4
+ 1,-1,-1, 1, 1,
+ 1, 0, 3, 4, 1,
+ 1, 0, 2, 2, 1,
+ 1, 1, 1, 1, 1,
+
+ (3,left)
+
+ 5,4
+ 1,-1,-1, 1, 1,
+ 1, 3, 0, 4, 1,
+ 1, 0, 2, 2, 1,
+ 1, 1, 1, 1, 1,
+
+Puzzle not solved! 
+
+Starting Puzzle: 
+ 5,5
+ 1, 1, 1, 1, 1,
+ 1, 3, 2, 2, 1,
+ 1, 0, 4, 5, 1,
+-1, 0, 6, 7, 1,
+ 1, 1, 1, 1, 1,
+
+
+Breadth-First Search
+
+ (3,down)
+ (4,left)
+ (6,left)
+ (2,left)
+ (3,down)
+ (6,left)
+ (4,down)
+ (5,left)
+ (6,up)
+ (6,left)
+ (7,left)
+ (3,down)
+ (5,up)
+ (6,left)
+ (3,left)
+ (7,left)
+ (4,left)
+ (6,left)
+ (7,up)
+ (7,left)
+ (3,left)
+ (4,up)
+ (5,right)
+ (6,left)
+ (7,up)
+ (7,left)
+ (4,left)
+ (4,left)
+ (7,up)
+ (7,left)
+ (4,up)
+ (4,left)
+ (4,right)
+ (7,up)
+ (4,right)
+ (6,up)
+ (6,left)
+ (7,up)
+ (7,left)
+ (2,down)
+ (7,up)
+ (2,down)
+ (6,up)
+ (3,right)
+ (3,left)
+ (3,right)
+ (4,up)
+ (3,left)
+ (4,up)
+ (4,up)
+ (2,left)
+ (5,up)
+ (4,up)
+ (7,up)
+ (3,right)
+ (5,up)
+ (7,up)
+ (6,left)
+ (7,up)
+ (7,right)
+ (5,up)
+ (6,left)
+ (5,up)
+ (7,right)
+ (7,left)
+ (7,right)
+ (6,right)
+ (5,up)
+ (6,left)
+ (7,left)
+ (7,right)
+ (6,right)
+ (6,right)
+ (2,left)
+ (6,left)
+ (7,left)
+ (7,up)
+ (7,up)
+ (6,up)
+ (7,left)
+ (7,right)
+ (7,left)
+ (2,down)
+ (7,left)
+ (2,left)
+
+BFS Solved Puzzle:
+ 5,5
+ 1, 1, 1, 1, 1,
+ 1, 3, 4, 5, 1,
+ 1, 0, 0, 6, 1,
+ 2, 2, 0, 7, 1,
+ 1, 1, 1, 1, 1,
+
+Breadth-First Results: 84 nodes, 85 length, 0.24 seconds
+
+Depth-First Search
+
+ (3,down)
+ (4,left)
+ (6,left)
+ (3,down)
+ (4,down)
+ (4,left)
+ (6,up)
+ (7,left)
+ (3,down)
+ (4,left)
+ (5,down)
+ (6,up)
+ (6,down)
+ (7,left)
+ (6,down)
+ (5,down)
+ (7,left)
+ (2,down)
+ (3,right)
+ (3,right)
+ (4,up)
+ (2,left)
+ (4,right)
+ (5,up)
+ (4,right)
+ (6,left)
+ (4,right)
+ (7,left)
+ (4,right)
+ (3,right)
+ (5,up)
+ (7,right)
+ (5,up)
+ (6,right)
+ (5,up)
+ (5,down)
+ (2,left)
+ (3,left)
+ (4,down)
+ (7,up)
+ (3,left)
+ (7,right)
+ (3,left)
+ (6,right)
+ (3,left)
+ (4,left)
+ (5,up)
+ (6,left)
+ (5,up)
+ (7,left)
+ (5,up)
+ (7,up)
+ (7,right)
+ (7,right)
+ (2,down)
+ (2,left)
+
+DFS Solved Puzzle:
+ 5,5
+ 1, 1, 1, 1, 1,
+ 1, 3, 4, 5, 1,
+ 1, 0, 0, 6, 1,
+ 2, 2, 0, 7, 1,
+ 1, 1, 1, 1, 1,
+
+Depth-First Results: 33 nodes, 56 length, 0.04 seconds
+
+Iterative Deepening Search
+
+ (3,down)
+ (4,left)
+ (6,left)
+ (3,down)
+ (4,down)
+ (4,left)
+ (6,up)
+ (7,left)
+ (3,down)
+ (4,left)
+ (5,down)
+ (6,up)
+ (6,down)
+ (7,left)
+ (6,down)
+ (5,down)
+ (7,left)
+ (2,down)
+ (3,right)
+ (3,right)
+ (4,up)
+ (2,left)
+ (4,right)
+ (5,up)
+ (4,right)
+ (6,left)
+ (4,right)
+ (7,left)
+ (4,right)
+ (3,right)
+ (5,up)
+ (7,right)
+ (5,up)
+ (6,right)
+ (5,up)
+ (5,down)
+ (2,left)
+ (3,left)
+ (4,down)
+ (7,up)
+ (3,left)
+ (7,right)
+ (3,left)
+ (6,right)
+ (3,left)
+ (4,left)
+ (5,up)
+ (6,left)
+ (5,up)
+ (7,left)
+ (5,up)
+ (7,up)
+ (7,right)
+ (7,right)
+ (2,down)
+ (2,left)
+
+IDS Solved Puzzle:
+ 5,5
+ 1, 1, 1, 1, 1,
+ 1, 3, 4, 5, 1,
+ 1, 0, 0, 6, 1,
+ 2, 2, 0, 7, 1,
+ 1, 1, 1, 1, 1,
+
+Iterative Deepening Results: 33 nodes, 56 length, 0.04 seconds
