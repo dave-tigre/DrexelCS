@@ -1,3 +1,12 @@
+/**
+* Author: David Tigreros
+* 4/27/2017
+*
+* CS380 Homework 1
+* main.cpp
+* runs each solver algorithm
+*/
+
 #include "slidingBlock_puzzle.h"
 #include "slidingBlock_solver.h"
 #include <iostream>

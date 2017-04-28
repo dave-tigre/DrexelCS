@@ -1,12 +1,16 @@
+/**
+* Author: David Tigreros
+* 4/27/2017
+*
+* CS380 Homework 1
+*
+* slidingBlock_puzzle.cpp
+* Methods to implement and modify a Game Puzzle State
+*/
+
 #include  "slidingBlock_puzzle.h"
 
 using namespace std;
-
-/*
-============================================================================
-==========================  GAME STATE CLASS  ==============================
-============================================================================
-*/
 
 GameState::GameState(const string filename){
   loadGame(filename);

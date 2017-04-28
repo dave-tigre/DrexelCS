@@ -1,22 +1,28 @@
+/**
+* Author: David Tigreros
+* 4/27/2017
+*
+* CS380 Homework 1
+*
+* slidingBlock_solver.cpp
+* Methods that are used to solve a game puzzle
+*/
+
+
 #include "slidingBlock_solver.h"
 
 void GameSolver::randomWalk(const int runtime)
 {
 
-  /*
-  * TODO:
-    Fix problem with not stopping after next number of iterations
-  */
+  vector<Move> puzzleMoves; //vector of moves
+  GameState clonedState = gameState.cloneState(); //clone the original puzzle
 
-  vector<Move> puzzleMoves;
-  GameState clonedState = gameState.cloneState();
+  bool gameSolved = false; //boolean for solved game
 
-  bool gameSolved = false;
-
-  int win_moves = 0;
+  int solve_moves = 0; //determine number of iterations it needed to solve
   for(int n = 0; n < runtime; n++)
   {
-    clonedState.normalizeState();
+
     puzzleMoves.clear();
     puzzleMoves = clonedState.puzzleMoves();
 
@@ -28,6 +34,7 @@ void GameSolver::randomWalk(const int runtime)
     cout << "\n";
 
     clonedState.applyMove(puzzleMoves[rand_move]); //apply random move
+    clonedState.normalizeState();
 
     clonedState.displayPuzzle();
 
@@ -36,7 +43,7 @@ void GameSolver::randomWalk(const int runtime)
     // check if the game is solved
     if(gameSolved)
     {
-      win_moves = n;
+      solve_moves = n;
       break;
     }
 
@@ -44,7 +51,7 @@ void GameSolver::randomWalk(const int runtime)
 
   if(gameSolved)
   {
-    cout << "\nPuzzle Was Solved with " << win_moves << " moves!" << endl;
+    cout << "\nPuzzle Was Solved with " << solve_moves << " moves!" << endl;
   }
   else{
     cout << "\nPuzzle not solved! " << endl;
@@ -93,7 +100,7 @@ void GameSolver::breadthFirstSearch()
 
   parentNode.nodeState = gameState.cloneState(); //set state of the current node
 
-  frontier.push_back(parentNode);
+  frontier.push_back(parentNode); // FIFO queue, push parent node to the back
   bool gameSolved = parentNode.nodeState.gameCheck(); //var for solved node
 
   // check if the current node is the solution
@@ -103,14 +110,8 @@ void GameSolver::breadthFirstSearch()
     parentNode.nodeState.displayPuzzle();
   }
 
-  /*
-  * TODO:
-      Create search explore and frontier methods
-      find valid return type
-      return solution
-  */
-
   vector<Move> availMoves; // init of vector with available moves list
+
   //while the puzzle is not solved
   while(!gameSolved)
   {
@@ -121,9 +122,9 @@ void GameSolver::breadthFirstSearch()
       break;
     }
 
-    currentNode = frontier.front();
-    frontier.pop_front();
-    BFSnodes++;
+    currentNode = frontier.front(); // get current node from queue
+    frontier.pop_front(); // pop front node
+    BFSnodes++; // count nodes
 
     // add it to explored "Set"
     if(!searchExplored(explored, currentNode.nodeState))
@@ -133,17 +134,18 @@ void GameSolver::breadthFirstSearch()
 
     availMoves.clear();
     availMoves = currentNode.nodeState.puzzleMoves(); //available moves (children)
-    // loop through breadth-branches
 
+    // loop through breadth-branches
     for(int i = 0; i < availMoves.size(); i++)
     {
 
-      childNode.parentState = currentNode.nodeState;
+      childNode.parentState = currentNode.nodeState; // record parent state of child node
 
-      childNode.nodeState = currentNode.nodeState.applyMoveCloning(availMoves[i]);
-      childNode.nodeState.normalizeState();
+      childNode.nodeState = currentNode.nodeState.applyMoveCloning(availMoves[i]); // apply move and clone
+      childNode.nodeState.normalizeState(); // normalize clone
       //cout << "\n";
 
+      // determine if already looked at this node
       if(!(searchFrontier(frontier, childNode.nodeState) || searchExplored(explored, childNode.nodeState)))
       {
         availMoves[i].printMove(); // display action
@@ -162,14 +164,8 @@ void GameSolver::breadthFirstSearch()
 
       }
     }
-    //gameSolved = true;
-  }
 
-  // if(gameSolved)
-  // {
-  //   BFSnodes = explored.size();
-  //
-  // }
+  }
 
 }
 
@@ -185,7 +181,7 @@ void GameSolver::depthFirstSearch()
 
   parentNode.nodeState = gameState.cloneState(); //set state of the current node
 
-  frontier.push_front(parentNode);
+  frontier.push_front(parentNode); // LIFO queue
   bool gameSolved = parentNode.nodeState.gameCheck(); //var for solved node
 
   // check if the current node is the solution
@@ -194,13 +190,6 @@ void GameSolver::depthFirstSearch()
     cout << "\nDFS Solved Puzzle:" << endl;
     parentNode.nodeState.displayPuzzle();
   }
-
-  /*
-  * TODO:
-      Create search explore and frontier methods
-      find valid return type
-      return solution
-  */
 
   vector<Move> availMoves; // init of vector with available moves list
 
@@ -214,9 +203,9 @@ void GameSolver::depthFirstSearch()
       break;
     }
 
-    currentNode = frontier.front();
-    frontier.pop_front();
-    DFSnodes++;
+    currentNode = frontier.front(); // get front node
+    frontier.pop_front(); // pop node
+    DFSnodes++; // count nodes
 
 
     // add it to explored "Set"
@@ -228,19 +217,19 @@ void GameSolver::depthFirstSearch()
     availMoves.clear();
     availMoves = currentNode.nodeState.puzzleMoves(); //available moves (children)
 
-
+    // open deepest node
     for(int i = 0; i < availMoves.size(); i++)
     {
 
-      childNode.parentState = currentNode.nodeState;
-      childNode.nodeState = currentNode.nodeState.applyMoveCloning(availMoves[i]);
-      childNode.nodeState.normalizeState();
+      childNode.parentState = currentNode.nodeState; // set parent to child node
+      childNode.nodeState = currentNode.nodeState.applyMoveCloning(availMoves[i]); // apply move and clone
+      childNode.nodeState.normalizeState(); // normalize clone
 
-
+      // determine if already looked at this node
       if(!(searchFrontier(frontier, childNode.nodeState) || searchExplored(explored, childNode.nodeState)))
       {
         availMoves[i].printMove(); // display action
-        DFSlength++;
+        DFSlength++; // record move length
         if(childNode.nodeState.gameCheck())
         {
           cout << "\nDFS Solved Puzzle:" << endl;
@@ -256,10 +245,6 @@ void GameSolver::depthFirstSearch()
       }
     }
   }
-
-  // if(gameSolved)
-  //   DFSnodes = explored.size();
-
 }
 
 void GameSolver::iterDeepSearch()
@@ -283,15 +268,8 @@ void GameSolver::iterDeepSearch()
     parentNode.nodeState.displayPuzzle();
   }
 
-  /*
-  * TODO:
-      Create search explore and frontier methods
-      find valid return type
-      return solution
-  */
-
   vector<Move> availMoves; // init of vector with available moves list
-  int level = 0; // level it reached
+  int currentLevel = 0; //  current level IDS is on
   int cutoff = 0; //cutoff level
 
   //while the puzzle is not solved
@@ -303,8 +281,8 @@ void GameSolver::iterDeepSearch()
       cout << "\nPuzzle not solved!" << endl;
       break;
     }
-    level = 0;
-    while(level <= cutoff)
+    currentLevel = 0; // reset current level
+    while(currentLevel <= cutoff)
     {
       // if no more nodes to explore, failed
       if(frontier.empty())
@@ -313,9 +291,9 @@ void GameSolver::iterDeepSearch()
         break;
       }
 
-      currentNode = frontier.front();
-      frontier.pop_front();
-      IDSnodes++;
+      currentNode = frontier.front(); //get front node
+      frontier.pop_front(); // pop front node
+      IDSnodes++; // count nodes
 
       // add it to explored "Set"
       if(!searchExplored(explored, currentNode.nodeState))
@@ -326,7 +304,7 @@ void GameSolver::iterDeepSearch()
       availMoves.clear();
       availMoves = currentNode.nodeState.puzzleMoves(); //available moves (children)
 
-
+      // open deepest node in level
       for(int i = 0; i < availMoves.size(); i++)
       {
 
@@ -352,13 +330,10 @@ void GameSolver::iterDeepSearch()
           }
         }
       }
-      level++;
+      currentLevel++; //update current level
       if(gameSolved)
         break;
     }
-    cutoff++;
+    cutoff++; //update cutoff
   }
-  // 
-  // if(gameSolved)
-  //   IDSnodes = explored.size();
 }

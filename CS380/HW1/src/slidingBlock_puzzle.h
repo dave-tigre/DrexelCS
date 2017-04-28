@@ -1,3 +1,13 @@
+/**
+* Author: David Tigreros
+* 4/27/2017
+*
+* CS380 Homework 1
+*
+* slidingBlock_puzzle.h
+* Defines classes that are used to create a game puzzle
+*/
+
 #ifndef _SLIDING_BLOCK_PUZZLE_H_
 #define _SLIDING_BLOCK_PUZZLE_H_
 
