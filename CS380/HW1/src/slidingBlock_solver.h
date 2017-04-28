@@ -12,15 +12,15 @@
 #include <sstream>
 #include <set>
 #include <iomanip>
-#include <queue>
+#include <deque>
 
 using namespace std;
 
 struct StateNode
 {
-  GameState *parentState = NULL; // parent node
-  GameState *nodeState = NULL; // current state
-  Move *action = NULL; // action to get here
+  GameState parentState; // parent node
+  GameState nodeState; // current state
+  Move action; // action to get here
 };
 
 class GameSolver
@@ -34,16 +34,6 @@ public:
   * Random Walk
   */
   void randomWalk(const int runtime);
-
-  /**
-  * Search Frontier
-  */
-  bool searchFrontier(const queue<StateNode>& front, GameState& state);
-
-  /**
-  * Search Explored
-  */
-  bool searchExplored(const set<GameState>& expl, GameState& state);
 
   /**
   * Breadth-First Search
@@ -61,6 +51,20 @@ public:
   void iterDeepSearch();
 
 private:
+
+  /**
+  * Search Frontier to see if given state is in the given frontieir queue
+  * return true if state is found else return false
+  */
+  bool searchFrontier(deque<StateNode>& front, GameState& state);
+
+  /**
+  * Search Explored to see if given state is in the explored set
+  * return true if state is found else return false
+  */
+  bool searchExplored(vector<GameState>& explored, GameState& state);
+
+
   GameState& gameState;
 };
 #endif // _SLIDING_BLOCK_SOLVER_H_

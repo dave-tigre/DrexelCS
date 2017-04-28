@@ -20,6 +20,7 @@ public:
   /**
   * Constructor and Destructor
   */
+  Move(){};
   Move(int piece, DIRECTION direc)
   {
     this->piece = piece;
@@ -68,8 +69,10 @@ public:
   /**
   * Constructor and Destructor
   */
+  GameState(){}
+  GameState(const std::vector<std::vector<int> > &puzzle);//: puzzleMatrix(puzzle){}
   GameState(const string filename);
-  GameState(const vector<vector<int> > &puzzle);
+  //GameState(const vector<vector<int> > &puzzle);
   ~GameState();
 
   /**
@@ -124,22 +127,22 @@ public:
   * Move generation
   * return:
   */
-  void applyMove(Move& move);
+  void applyMove(Move move);
 
   /**
   *
   */
-  GameState applyMoveCloning(Move& move);
+  GameState applyMoveCloning(Move move);
 
   /**
   * State Comparison
   */
-  bool compareState();
+  bool compareState(GameState& state);
 
-  /**
-  * Random Walks
-  */
-  void randomWalk();
+  friend bool operator< (GameState &gs1, GameState &gs2)
+  {
+    return gs1.compareState(gs2);
+  }
 
 private:
   vector<vector<int> > puzzleMatrix; // game puzzle matrix

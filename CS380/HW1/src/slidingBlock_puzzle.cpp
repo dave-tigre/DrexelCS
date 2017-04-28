@@ -12,21 +12,27 @@ GameState::GameState(const string filename){
   loadGame(filename);
 }
 
-GameState::GameState(const vector<vector<int> > &puzzle)
+GameState::GameState(const std::vector<std::vector<int> > &puzzle)
 {
-  col = puzzle.size();
-  row = puzzle[1].size();
+  row = puzzle.size();
+  col = puzzle[1].size();
 
-  puzzleMatrix.resize(col);
-  for(int c = 0; c < col; c++)
+  int m = row, n = col;
+   //Grow rows by m
+   puzzleMatrix.resize(m);
+   for(int i = 0 ; i < m ; ++i)
+   {
+       //Grow Columns by n
+       puzzleMatrix[i].resize(n);
+   }
+
+  for(int i = 0 ; i < m ; ++i)
   {
-      //Grow Columns by n
-      puzzleMatrix[c].resize(row);
+    for(int j = 0 ; j < n ; ++j)
+    {      //modify matrix
+      puzzleMatrix[i][j] = puzzle[i][j];
+    }
   }
-
-  puzzleMatrix = puzzle;
-
-
 }
 
 GameState::~GameState()
@@ -88,32 +94,43 @@ void GameState::createPuzzle(istream& in)
   col = stoi(elems[0]);
   row = stoi(elems[1]);
 
-  // allocate puzzle matrix space
-  puzzleMatrix.resize(col);
-  for(int c = 0; c < col; c++)
-  {
-      //Grow Columns by n
-      puzzleMatrix[c].resize(row);
-  }
+  int m = row, n = col;
+   //Grow rows by m
+   puzzleMatrix.resize(m);
+   for(int i = 0 ; i < m ; ++i)
+   {
+       //Grow Columns by n
+       puzzleMatrix[i].resize(n);
+   }
 
   /**
   * TODO:
     Fix issue for not being able to load non-normalized puzzle
   */
 
-  for(int r = 0; r < row; r++)
+  // for(int r = 0; r < row; r++)
+  // {
+  //   getline(in,current_line);
+  //   elems = split(current_line, ",", false);
+  //
+  //   for(int c = 0; c < col; c++)
+  //   {
+  //     puzzleMatrix[r][c] = std::stoi(elems[c]);
+  //   }
+  //
+  // }
+
+  int x = 0;
+  for(int i = 0 ; i < m ; ++i)
   {
-    if(in.eof())
-      break;
     getline(in,current_line);
     elems = split(current_line, ",", false);
-
-    for(int c = 0; c < col; c++)
-    {
-      puzzleMatrix[r][c] = std::stoi(elems[c]);
+    for(int j = 0 ; j < n ; ++j)
+    {      //modify matrix
+      puzzleMatrix[i][j] = std::stoi(elems[j]);
     }
-
   }
+
 }
 
 void GameState::displayPuzzle() const
@@ -349,7 +366,7 @@ vector<Move> GameState::puzzleMoves()
 
 }
 
-void GameState::applyMove(Move& move)
+void GameState::applyMove(Move move)
 {
   int piece = move.getPiece();
 
@@ -418,12 +435,11 @@ void GameState::applyMove(Move& move)
 
 }
 
-GameState GameState::applyMoveCloning(Move& move)
+GameState GameState::applyMoveCloning(Move move)
 {
     GameState movedState = this->cloneState();
     movedState.applyMove(move);
     return movedState;
-
 }
 
 bool GameState::compareState(GameState& state)
@@ -439,9 +455,4 @@ bool GameState::compareState(GameState& state)
   }
 
   return true;
-}
-
-void GameState::randomWalk()
-{
-
 }
