@@ -59,17 +59,13 @@ void GameState::loadGame(const string filename)
 }
 
 /**
- * Generic split string function.
- * Args:
- *     keep_empty (bool): Retain empty strings in the returned vector if set to true.
- *         Defaults to true.
- */
-static std::vector<std::string> split(const std::string& s, const std::string& delim,
-        const bool keep_empty=true){
-    std::vector<std::string> elems; // vector of string elements
+* Split the given string into a vector using given delimiter
+*/
+static vector<string> split(const string& s, const string& delim, const bool keep_empty=true){
+    vector<string> elems; // vector of string elements
     size_t pos = 0, last_pos = 0;
-    std::string token;
-    while ((pos = s.find(delim, last_pos)) != std::string::npos) {
+    string token;
+    while ((pos = s.find(delim, last_pos)) != string::npos) {
         token = s.substr(last_pos, pos - last_pos);
         if (keep_empty || token.length() > 0){
             elems.push_back(token);
@@ -102,23 +98,6 @@ void GameState::createPuzzle(istream& in)
        //Grow Columns by n
        puzzleMatrix[i].resize(n);
    }
-
-  /**
-  * TODO:
-    Fix issue for not being able to load non-normalized puzzle
-  */
-
-  // for(int r = 0; r < row; r++)
-  // {
-  //   getline(in,current_line);
-  //   elems = split(current_line, ",", false);
-  //
-  //   for(int c = 0; c < col; c++)
-  //   {
-  //     puzzleMatrix[r][c] = std::stoi(elems[c]);
-  //   }
-  //
-  // }
 
   int x = 0;
   for(int i = 0 ; i < m ; ++i)

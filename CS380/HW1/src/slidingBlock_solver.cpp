@@ -101,7 +101,7 @@ void GameSolver::breadthFirstSearch()
   // check if the current node is the solution
   if(gameSolved)
   {
-    cout << "\nSolved Puzzle:" << endl;
+    cout << "\nBFS Solved Puzzle:" << endl;
     parentNode.nodeState.displayPuzzle();
   }
 
@@ -151,7 +151,7 @@ void GameSolver::breadthFirstSearch()
 
         if(childNode.nodeState.gameCheck())
         {
-          cout << "\nSolved Puzzle" << endl;
+          cout << "\nBFS Solved Puzzle:" << endl;
           childNode.nodeState.displayPuzzle();
           gameSolved = true;
           break;
@@ -192,7 +192,7 @@ void GameSolver::depthFirstSearch()
   // check if the current node is the solution
   if(gameSolved)
   {
-    cout << "\nSolved Puzzle:" << endl;
+    cout << "\nDFS Solved Puzzle:" << endl;
     parentNode.nodeState.displayPuzzle();
   }
 
@@ -242,7 +242,7 @@ void GameSolver::depthFirstSearch()
 
         if(childNode.nodeState.gameCheck())
         {
-          cout << "\nSolved Puzzle" << endl;
+          cout << "\nDFS Solved Puzzle:" << endl;
           childNode.nodeState.displayPuzzle();
           gameSolved = true;
           break;
