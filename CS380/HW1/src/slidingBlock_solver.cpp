@@ -143,8 +143,8 @@ void GameSolver::breadthFirstSearch()
       childNode.parentState = currentNode.nodeState;
 
       childNode.nodeState = currentNode.nodeState.applyMoveCloning(availMoves[i]);
+      childNode.nodeState.normalizeState();
       //cout << "\n";
-      //childNode.nodeState.displayPuzzle();
 
       if(!(searchFrontier(frontier, childNode.nodeState) || searchExplored(explored, childNode.nodeState)))
       {
@@ -232,6 +232,7 @@ void GameSolver::depthFirstSearch()
 
       childNode.parentState = currentNode.nodeState;
       childNode.nodeState = currentNode.nodeState.applyMoveCloning(availMoves[i]);
+      childNode.nodeState.normalizeState();
 
 
       if(!(searchFrontier(frontier, childNode.nodeState) || searchExplored(explored, childNode.nodeState)))
@@ -323,6 +324,7 @@ void GameSolver::iterDeepSearch()
 
         childNode.parentState = currentNode.nodeState;
         childNode.nodeState = currentNode.nodeState.applyMoveCloning(availMoves[i]);
+        childNode.nodeState.normalizeState();
 
 
         if(!(searchFrontier(frontier, childNode.nodeState) || searchExplored(explored, childNode.nodeState)))
