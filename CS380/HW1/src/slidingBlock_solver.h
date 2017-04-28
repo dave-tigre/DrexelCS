@@ -58,13 +58,13 @@ private:
   * Search Frontier to see if given state is in the given frontieir queue
   * return true if state is found else return false
   */
-  bool searchFrontier(deque<StateNode>& front, GameState& state);
+  bool searchFrontier(const deque<StateNode>& front, GameState& state);
 
   /**
   * Search Explored to see if given state is in the explored set
   * return true if state is found else return false
   */
-  bool searchExplored(vector<GameState>& explored, GameState& state);
+  bool searchExplored(const vector<GameState>& explored, GameState& state);
 
 
   GameState& gameState;

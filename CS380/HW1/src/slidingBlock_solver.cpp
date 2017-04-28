@@ -53,7 +53,7 @@ void GameSolver::randomWalk(const int runtime)
   }
 }
 
-bool GameSolver::searchFrontier(deque<StateNode>& front, GameState& state)
+bool GameSolver::searchFrontier(const deque<StateNode>& front, GameState& state)
 {
   bool foundState = false;
   for(auto node : front)
@@ -67,7 +67,7 @@ bool GameSolver::searchFrontier(deque<StateNode>& front, GameState& state)
 
 }
 
-bool GameSolver::searchExplored(vector<GameState>& explored, GameState& state)
+bool GameSolver::searchExplored(const vector<GameState>& explored, GameState& state)
 {
   bool foundState = false;
   for(auto expState : explored)
@@ -218,6 +218,7 @@ void GameSolver::depthFirstSearch()
     currentNode = frontier.front();
     frontier.pop_front();
 
+
     // add it to explored "Set"
     if(!searchExplored(explored, currentNode.nodeState))
     {
@@ -226,16 +227,17 @@ void GameSolver::depthFirstSearch()
 
     availMoves.clear();
     availMoves = currentNode.nodeState.puzzleMoves(); //available moves (children)
+    cout << "\nLevel: " << level << "\n"<< endl;
     level++;
-    // loop through breadth-branches
+    /
     for(int i = 0; i < availMoves.size(); i++)
     {
 
       childNode.parentState = currentNode.nodeState;
+      cout << "\n";
       availMoves[i].printMove(); // display action
       childNode.nodeState = currentNode.nodeState.applyMoveCloning(availMoves[i]);
-      //cout << "\n";
-      //childNode.nodeState.displayPuzzle();
+      childNode.nodeState.displayPuzzle();
 
       if(!searchFrontier(frontier, childNode.nodeState) || !searchExplored(explored, childNode.nodeState))
       {
@@ -254,8 +256,6 @@ void GameSolver::depthFirstSearch()
 
       }
     }
-    if(level > 50)
-      gameSolved = true;
   }
 
   if(gameSolved)

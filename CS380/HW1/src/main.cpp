@@ -4,7 +4,7 @@
 #include <ctime>
 int main()
 {
-  GameState state("../gameboards/SBP-level0.txt");
+  GameState state("SBP-level0.txt");
   cout << "\nStarting Puzzle: " << endl;
   state.displayPuzzle();
   cout << "\n";
