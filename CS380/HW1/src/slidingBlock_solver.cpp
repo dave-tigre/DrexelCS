@@ -174,10 +174,7 @@ void GameSolver::breadthFirstSearch()
 
 void GameSolver::depthFirstSearch()
 {
-  /*
-  * TODO:
-    Develop breadth-first search algorithm
-  */
+
   deque<StateNode> frontier; // queue of unexplored (frontier) nodes
   vector<GameState> explored; // queue of explored nodes
 
@@ -262,51 +259,96 @@ void GameSolver::depthFirstSearch()
 
 }
 
-void GameSolver::recersiveDepthFirstSearch(int limit, bool useLimit)
-{
-  // deque<StateNode> frontier; // queue of unexplored (frontier) nodes
-  // vector<GameState> explored; // queue of explored nodes
-  //
-  // StateNode parentNode; //starting node
-  // StateNode childNode; // intiate childNode
-  // StateNode currentNode;
-  //
-  // parentNode.nodeState = gameState.cloneState(); //set state of the current node
-  //
-  // frontier.push_back(parentNode);
-  // bool gameSolved = parentNode.nodeState.gameCheck(); //var for solved node
-  //
-  // // check if the current node is the solution
-  // if(gameSolved)
-  // {
-  //   cout << "\nSolved Puzzle:" << endl;
-  //   parentNode.nodeState.displayPuzzle();
-  // }
-  // else if(useLimit)
-  // {
-  //   if(limit == 0)
-  //   {
-  //     cout << "\nReached Cutoff!" << endl;
-  //     break;
-  //   }
-  // }
-  //
-  //
-  //
-  // /*
-  // * TODO:
-  //     Create search explore and frontier methods
-  //     find valid return type
-  //     return solution
-  // */
-  //
-  // vector<Move> availMoves; // init of vector with available moves list
-}
-
 void GameSolver::iterDeepSearch()
 {
+  deque<StateNode> frontier; // queue of unexplored (frontier) nodes
+  vector<GameState> explored; // queue of explored nodes
+
+  StateNode parentNode; //starting node
+  StateNode childNode; // intiate childNode
+  StateNode currentNode;
+
+  parentNode.nodeState = gameState.cloneState(); //set state of the current node
+
+  frontier.push_front(parentNode);
+  bool gameSolved = parentNode.nodeState.gameCheck(); //var for solved node
+
+  // check if the current node is the solution
+  if(gameSolved)
+  {
+    cout << "\nIDS Solved Puzzle:" << endl;
+    parentNode.nodeState.displayPuzzle();
+  }
+
   /*
   * TODO:
-    Develop itertative deepening search algorithm
+      Create search explore and frontier methods
+      find valid return type
+      return solution
   */
+
+  vector<Move> availMoves; // init of vector with available moves list
+  int level = 0; // level it reached
+  int cutoff = 0; //cutoff level
+
+  //while the puzzle is not solved
+  while(!gameSolved)
+  {
+    level = 0;
+    while(level <= cutoff)
+    {
+      // if no more nodes to explore, failed
+      if(frontier.empty())
+      {
+        cout << "\nPuzzle not solved!" << endl;
+        break;
+      }
+
+      currentNode = frontier.front();
+      frontier.pop_front();
+
+
+      // add it to explored "Set"
+      if(!searchExplored(explored, currentNode.nodeState))
+      {
+        explored.push_back(currentNode.nodeState);
+      }
+
+      availMoves.clear();
+      availMoves = currentNode.nodeState.puzzleMoves(); //available moves (children)
+
+
+      for(int i = 0; i < availMoves.size(); i++)
+      {
+
+        childNode.parentState = currentNode.nodeState;
+        childNode.nodeState = currentNode.nodeState.applyMoveCloning(availMoves[i]);
+
+
+        if(!(searchFrontier(frontier, childNode.nodeState) || searchExplored(explored, childNode.nodeState)))
+        {
+          availMoves[i].printMove(); // display action
+          //childNode.nodeState.displayPuzzle();
+          if(childNode.nodeState.gameCheck())
+          {
+            cout << "\nIDS Solved Puzzle:" << endl;
+            childNode.nodeState.displayPuzzle();
+            gameSolved = true;
+            break;
+          }
+          else
+          {
+            frontier.push_front(childNode);
+          }
+        }
+      }
+      level++;
+      if(gameSolved)
+        break;
+    }
+    cutoff++;
+  }
+
+  if(gameSolved)
+    cout << "\nPuzzle was solved! N = "<< cutoff << endl;
 }
