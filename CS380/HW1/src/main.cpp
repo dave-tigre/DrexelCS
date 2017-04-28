@@ -1,10 +1,13 @@
 #include "slidingBlock_puzzle.h"
 #include "slidingBlock_solver.h"
 #include <iostream>
+#include <ctime>
 int main()
 {
   GameState state("../gameboards/SBP-level0.txt");
-
+  cout << "\nStarting Puzzle: " << endl;
+  state.displayPuzzle();
+  cout << "\n";
 
 
 
@@ -12,7 +15,17 @@ int main()
   //test.displayPuzzle();
   //test.displayPuzzle();
   GameSolver solver(state);
-  solver.breadFirstSearch();
+  cout << "\nBreadth-First Search\n" << endl;
+  clock_t startBFS = clock();
+  solver.breadthFirstSearch();
+  double durationBFS = (clock() - startBFS)/(double) CLOCKS_PER_SEC;
+  cout << "\nBreadth-First Duration = " << durationBFS << " seconds" << endl;
+
+  cout << "\nDepth-First Search\n" << endl;
+  clock_t startDFS = clock();
+  solver.depthFirstSearch();
+  double durationDFS = (clock() - startDFS)/(double) CLOCKS_PER_SEC;
+  cout << "\nDepth-First Duration = " << durationDFS << " seconds" << endl;
   //
   //solver.randomWalk(50);
   //

@@ -72,7 +72,6 @@ public:
   GameState(){}
   GameState(const std::vector<std::vector<int> > &puzzle);//: puzzleMatrix(puzzle){}
   GameState(const string filename);
-  //GameState(const vector<vector<int> > &puzzle);
   ~GameState();
 
   /**

@@ -10,10 +10,10 @@ sources:=				\
 		slidingBlock_solver.cpp	\
 		main.cpp		\
 
-all: clean test
+all: hw1
 
-test:
-	$(CCX) -o test $(sources) $(headers)
+hw1:
+	$(CCX) -o hw1 $(sources) $(headers)
 
 clean:
-	$(RM) test	
+	$(RM) hw1	

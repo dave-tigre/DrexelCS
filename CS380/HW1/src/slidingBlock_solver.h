@@ -38,12 +38,14 @@ public:
   /**
   * Breadth-First Search
   */
-  void breadFirstSearch();
+  void breadthFirstSearch();
 
   /**
   * Depth-First Search
   */
   void depthFirstSearch();
+
+  void recersiveDepthFirstSearch(int limit, bool useLimit);
 
   /**
   * Iterative Deepening Search
