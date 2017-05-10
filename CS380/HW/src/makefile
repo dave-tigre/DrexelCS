@@ -1,10 +1,10 @@
 # Author: David Tigreros
 # 4/27/2017
-# 
+#
 # CS380 Homework 1
 # Makefile
 
-CCX=g++ -std=c++11 
+CCX=g++ -std=c++11
 RM = rm -f
 
 headers:=				\
@@ -22,4 +22,4 @@ hw1:
 	$(CCX) -o hw1 $(sources) $(headers)
 
 clean:
-	$(RM) hw1	
+	$(RM) hw1
