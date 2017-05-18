@@ -24,6 +24,11 @@
 using namespace std;
 enum DIRECTION {UP=1, DOWN=2, LEFT=3, RIGHT=4};
 
+struct PiecePosition{
+  vector<int> r_pos; // vector to hold row position
+  vector<int> c_pos; // vector to hold coloumn position
+};
+
 class Move{
 
 public:
@@ -126,6 +131,8 @@ public:
   * Returns vector of possible moves a piece can make
   */
   vector<Move> pieceMoves(const int piece);
+
+  PiecePosition getPiecePosition(const int piece);
 
   /**
   * Returns list of possible moves a state has (union of moves that each piece can make)

@@ -103,7 +103,6 @@ void GameState::createPuzzle(istream& in)
        puzzleMatrix[i].resize(n);
    }
 
-  int x = 0;
   for(int i = 0 ; i < m ; ++i)
   {
     getline(in,current_line);
@@ -198,6 +197,30 @@ void GameState::swapIdx(int idx1, int idx2)
   }
 }
 
+PiecePosition GameState::getPiecePosition(const int piece)
+{
+  PiecePosition piece_pos;
+  vector<int> r_pos; // vector to hold row position
+  vector<int> c_pos; // vector to hold coloumn position
+
+  // find piece position in puzzle
+  for(int r = 0; r < row; r++)
+  {
+    for(int c = 0; c < col; c++)
+    {
+      if(puzzleMatrix[r][c] == piece){
+        r_pos.push_back(r);
+        c_pos.push_back(c);
+      }
+    }
+  }
+
+  piece_pos.r_pos = r_pos;
+  piece_pos.c_pos = c_pos;
+
+  return piece_pos;
+}
+
 vector<Move> GameState::pieceMoves(const int piece)
 {
   vector<Move> possibleMoves; //vector to for list of possible directions for given piece
@@ -240,18 +263,16 @@ vector<Move> GameState::pieceMoves(const int piece)
   {
     int start_r = r_pos[0]; // starting row position
     int start_c = c_pos[0]; // starting column position
-    // cout << "\nPosition of " << piece <<  ": ";
+
     for(int i = 0; i < num_pos; i++)
     {
 
-      //cout << "(" << c_pos[i] << ", " << r_pos[i] << ")";
       if(start_r != r_pos[i])
         height++;
 
       if(start_c != c_pos[i])
         width++;
     }
-    //cout << "\nwidth = " << width << "  height= " << height <<"\n\n";
 
     //check UP side
     bool openUp = true;
