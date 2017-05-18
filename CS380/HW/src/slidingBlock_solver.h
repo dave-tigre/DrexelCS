@@ -23,6 +23,7 @@
 #include <set>
 #include <iomanip>
 #include <deque>
+#include <cmath>
 
 using namespace std;
 
@@ -80,10 +81,9 @@ public:
   /**
   * A* Search
   */
-  void aStarSearch(const int HEURISTIC heuristic);
-  int evaluationFunction(const int g, const int h);
-  int manhattanDistance();
-  int straightLineDistance(const int pos_x, const pos_y);
+  void aStarSearch(const HEURISTIC heuristic);
+  int getEstimatedCost(int g, int h);
+  int getManhattanDistance(PiecePosition master_pos, PiecePosition goal_pos);
 
 private:
 

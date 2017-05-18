@@ -338,7 +338,62 @@ void GameSolver::iterDeepSearch()
   }
 }
 
-void GameSolver::aStarSearch(const int HEURISTIC heuristic)
+int GameSolver::getManhattanDistance(PiecePosition master_pos, PiecePosition goal_pos)
+{
+  /*
+  * Get most right and down position of master block
+  */
+  int master_start_r = master_pos.r_pos[0]; // starting row position
+  int master_start_c = master_pos.c_pos[0]; // starting column position
+  int mas_num_pos = master_pos.r_pos.size();
+  int master_width = 0;
+  int master_height = 0;
+  for(int i = 0; i < mas_num_pos; i++)
+  {
+
+    if(master_start_r != master_pos.r_pos[i])
+      master_height++;
+
+    if(master_start_c != master_pos.c_pos[i])
+      master_width++;
+  }
+
+  int master_max_r = master_start_r + master_height - 1;
+  int master_max_c = master_start_c + master_width - 1;
+
+  /*
+  * Get most right and down position of goal
+  */
+  int goal_start_r = goal_pos.r_pos[0]; // starting row position
+  int goal_start_c = goal_pos.c_pos[0]; // starting column position
+  int goal_num_pos = goal_pos.r_pos.size();
+  int goal_width = 0;
+  int goal_height = 0;
+  for(int i = 0; i < goal_num_pos; i++)
+  {
+
+    if(goal_start_r != goal_pos.r_pos[i])
+      goal_height++;
+
+    if(goal_start_c != goal_pos.c_pos[i])
+      goal_width++;
+  }
+
+  int goal_max_r = goal_start_r + goal_height - 1;
+  int goal_max_c = goal_start_c + goal_width - 1;
+
+  int manhattan_distance = abs(goal_max_r - master_max_r) + abs(goal_max_c - master_max_c);
+  return manhattan_distance;
+}
+
+
+int GameSolver::getEstimatedCost(int g, int h)
+{
+  return 0;
+}
+
+
+void GameSolver::aStarSearch(const HEURISTIC heuristic)
 {
   deque<StateNode> frontier;
   vector<GameState> explored;
