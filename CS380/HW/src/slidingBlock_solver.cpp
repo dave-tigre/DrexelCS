@@ -337,3 +337,50 @@ void GameSolver::iterDeepSearch()
     cutoff++; //update cutoff
   }
 }
+
+void GameSolver::aStarSearch(const int HEURISTIC heuristic)
+{
+  deque<StateNode> frontier;
+  vector<GameState> explored;
+
+  StateNode parentNode; // root node
+  StateNode childnode; // initiate child node
+  StateNode currentNode; // current Node
+
+  parentNode.nodeState = gameState.cloneState(); // clone root node
+
+  frontier.push_back(parentNode); // add to frontier
+  bool gameSolved = parentNode.nodeState.gameCheck(); // check if root is goal
+
+  if(gameSolved)
+  {
+    cout << "\nA* Search Solved Puzzle:" << endl;
+    parentNode.nodeState.displayPuzzle();
+  }
+
+  vector<Move> availMoves; // init vector with available moves list
+
+  while(!gameSolved)
+  {
+    if(frontier.empty())
+    {
+      cout << "\nPuzzle not solved!" << endl;
+      break;
+    }
+    currentNode = frontier.front(); //get current node from queue
+    frontier.pop_front(); // pop front node
+    aStarNodes++;
+
+    // add it to explored "Set"
+    if(!searchExplored(explored, currentNode.nodeState))
+    {
+      explored.push_back(currentNode.nodeState);
+    }
+
+    availMoves.clear();
+    availMoves = currentNode.nodeState.puzzleMoves(); //available moves (children)
+
+
+  }
+
+}

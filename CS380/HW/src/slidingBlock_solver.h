@@ -33,6 +33,8 @@ struct StateNode
   Move action; // action to get here
 };
 
+enum HEURISTIC{NONE=0, MANHATTAN=1, SLD=2};
+
 class GameSolver
 {
 public:
@@ -75,6 +77,14 @@ public:
   int getIDSnodes(){return IDSnodes;}
   int getIDSlength(){return IDSlength;}
 
+  /**
+  * A* Search
+  */
+  void aStarSearch(const int HEURISTIC heuristic);
+  int evaluationFunction(const int g, const int h);
+  int manhattanDistance();
+  int straightLineDistance(const int pos_x, const pos_y);
+
 private:
 
   /**
@@ -99,5 +109,10 @@ private:
 
   int IDSnodes;
   int IDSlength;
+
+  int aStarNodes;
+  int aStarLength;
+  int heuristic;
+  const int cost = 1;
 };
 #endif // _SLIDING_BLOCK_SOLVER_H_
