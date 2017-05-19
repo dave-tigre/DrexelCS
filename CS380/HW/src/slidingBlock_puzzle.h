@@ -40,6 +40,7 @@ public:
   {
     this->piece = piece;
     this->direc = direc;
+    this->moveCost = 0;
   }
   ~Move(){}
 
@@ -51,6 +52,16 @@ public:
   DIRECTION getDirection()
   {
     return direc;
+  }
+
+  void setMoveCost(float cost)
+  {
+    moveCost = cost;
+  }
+
+  float getMoveCost()
+  {
+    return moveCost;
   }
 
   void printMove()
@@ -74,6 +85,7 @@ private:
 
   int piece;
   DIRECTION direc;
+  float moveCost;
 
 };
 
