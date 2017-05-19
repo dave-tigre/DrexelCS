@@ -16,26 +16,18 @@
 
 int main()
 {
-  GameState state1("SBP-level0.txt");
+  GameState state1("../gameboards/SBP-level1.txt");
   cout << "\nStarting Puzzle: " << endl;
   state1.displayPuzzle();
   cout << "\n";
 
-  GameSolver solver1(state1);
+  GameSolver solver(state1);
+  // Breadth-First Search
+  cout << "\nA Star Search\n" << endl;
+  clock_t startaStar = clock();
+  solver.aStarSearch(EASE);
+  double durationAStar = ((clock() - startaStar)/(double) CLOCKS_PER_SEC);
+  cout << "\nA Star Search Results: " << durationAStar << " seconds" << endl;
 
-  int test1 = solver1.getManhattanDistance(state1.getPiecePosition(2), state1.getPiecePosition(-1));
-  cout << "\n\n Manhattan distance test1 : "  << test1 << endl;
-
-  GameState state2("SBP-level1.txt");
-  cout << "\nStarting Puzzle: " << endl;
-  state2.displayPuzzle();
-  cout << "\n";
-
-  GameSolver solver(state2);
-  state2.displayPuzzle();
-  cout << "\n";
-
-  int test2 = solver.getManhattanDistance(state2.getPiecePosition(2), state2.getPiecePosition(-1));
-  cout << "\n\n Manhattan distance test2 : "  << test2 << endl;
   return 0;
 }
