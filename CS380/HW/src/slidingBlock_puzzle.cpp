@@ -200,8 +200,6 @@ void GameState::swapIdx(int idx1, int idx2)
 PiecePosition GameState::getPiecePosition(const int piece)
 {
   PiecePosition piece_pos;
-  vector<int> r_pos; // vector to hold row position
-  vector<int> c_pos; // vector to hold coloumn position
 
   // find piece position in puzzle
   for(int r = 0; r < row; r++)
@@ -209,14 +207,12 @@ PiecePosition GameState::getPiecePosition(const int piece)
     for(int c = 0; c < col; c++)
     {
       if(puzzleMatrix[r][c] == piece){
-        r_pos.push_back(r);
-        c_pos.push_back(c);
+        piece_pos.r_pos.push_back(r);
+        piece_pos.c_pos.push_back(c);
       }
     }
   }
 
-  piece_pos.r_pos = r_pos;
-  piece_pos.c_pos = c_pos;
 
   return piece_pos;
 }
