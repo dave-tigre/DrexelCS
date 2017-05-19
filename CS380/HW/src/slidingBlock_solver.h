@@ -35,7 +35,7 @@ struct StateNode
   Move action; // action to get here
 };
 
-enum HEURISTIC{NONE=0, MANHATTAN=1, SLD=2};
+enum HEURISTIC{NONE=0, MANHATTAN=1, SLD=2, EASE=3};
 
 class GameSolver
 {
@@ -86,6 +86,7 @@ public:
   int getEstimatedCost(int g, int h);
   int getManhattanDistance(PiecePosition master_pos, PiecePosition goal_pos);
   float getStraightLineDistance(PiecePosition master_pos, PiecePosition goal_pos);
+  int getEaseCost(GameState movedState, GameState parentState, int movedPiece);
 
 private:
 
@@ -115,7 +116,7 @@ private:
   int aStarNodes;
   int aStarLength;
   int heuristic;
-  const int pathCost = 1;
+  const int pathCost = 10;
 
   const int masterPiece = 2;
   const int goalPiece = -1;

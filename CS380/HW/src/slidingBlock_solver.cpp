@@ -358,32 +358,49 @@ int GameSolver::getManhattanDistance(PiecePosition master_pos, PiecePosition goa
       master_width++;
   }
 
-  int master_max_r = master_start_r + master_height - 1;
-  int master_max_c = master_start_c + master_width - 1;
+  int master_max_r = master_start_r + master_height;
+  int master_max_c = master_start_c + master_width;
 
   /*
   * Get most right and down position of goal
   */
-  int goal_start_r = goal_pos.r_pos[0]; // starting row position
-  int goal_start_c = goal_pos.c_pos[0]; // starting column position
+  int goalRDStartR = goal_pos.r_pos[0]; // starting row position
+  int goalRDStartC= goal_pos.c_pos[0]; // starting column position
+
   int goal_num_pos = goal_pos.r_pos.size();
-  int goal_width = 0;
-  int goal_height = 0;
+  int goalRDWidth = 0;
+  int goalRDHeight = 0;
+
   for(int i = 0; i < goal_num_pos; i++)
   {
 
-    if(goal_start_r != goal_pos.r_pos[i])
-      goal_height++;
+    if(goalRDStartR != goal_pos.r_pos[i])
+      goalRDHeight++;
 
-    if(goal_start_c != goal_pos.c_pos[i])
-      goal_width++;
+    if(goalRDStartC != goal_pos.c_pos[i])
+      goalRDWidth++;
   }
 
-  int goal_max_r = goal_start_r + goal_height - 1;
-  int goal_max_c = goal_start_c + goal_width - 1;
+  int goalRDMaxR = goalRDStartR + goalRDHeight;
+  int goalRDMaxC = goalRDStartC + goalRDWidth;
+  //
+  // cout << "Piece Start: (" << master_start_r << "," << master_start_c << ")";
+  // cout << " Piece RD: (" << master_max_r << "," << master_max_c << ")" << endl;
+  //
+  // cout << "Goal Start: (" << goalRDStartR << "," << goalRDStartC << ")";
+  // cout << " Goal RD: (" << goalRDMaxR << "," << goalRDMaxC << ")" << endl;
 
-  int manhattan_distance = abs(goal_max_r - master_max_r) + abs(goal_max_c - master_max_c);
-  return manhattan_distance;
+  int manhattanDistance = abs(goalRDMaxR - master_max_r) + abs(goalRDMaxC - master_max_c);
+
+  if(master_pos.r_pos.size() == 1 && master_pos.c_pos.size() == 1)
+  {
+    int checkDist = abs(goalRDStartR - master_max_r) + abs(goalRDStartC - master_max_c);
+    if(checkDist < manhattanDistance)
+    {
+      manhattanDistance = checkDist;
+    }
+  }
+  return manhattanDistance;
 }
 
 float GameSolver::getStraightLineDistance(PiecePosition master_pos, PiecePosition goal_pos)
@@ -437,10 +454,47 @@ float GameSolver::getStraightLineDistance(PiecePosition master_pos, PiecePositio
   return straightLine_distance;
 }
 
+int GameSolver::getEaseCost(GameState movedState, GameState parentState, int movedPiece)
+{
+  PiecePosition oldPos = parentState.getPiecePosition(movedPiece);
+  PiecePosition movedPos = movedState.getPiecePosition(movedPiece);
+
+  PiecePosition goalPos = movedState.getPiecePosition(goalPiece);
+  PiecePosition masterPos = movedState.getPiecePosition(masterPiece);
+
+  int oldDist = getManhattanDistance(oldPos, goalPos);
+  int movedDist = getManhattanDistance(movedPos, goalPos);
+  int goalDist = getManhattanDistance(masterPos, goalPos);
+  int easeCost = goalDist - movedDist;
+
+  if(movedPiece == masterPiece)
+  {
+    easeCost = goalDist - 2*movedDist;
+  }
+  else if(movedDist > oldDist)
+  {
+    easeCost = easeCost;
+  }
+  else if (oldDist == movedDist)
+  {
+    easeCost++;
+  }
+  else{
+    easeCost = easeCost +5;
+  }
+
+
+  cout << "\nMove Piece: " << movedPiece  << " ManDis: " << movedDist << " Ease Cost:  " << easeCost <<  endl;
+
+
+
+  return easeCost;
+}
+
 
 int GameSolver::getEstimatedCost(int g, int h)
 {
-  return 0;
+  return g+h;
 }
 
 
@@ -487,7 +541,6 @@ void GameSolver::aStarSearch(const HEURISTIC heuristic)
     vector<Move> evaluatedMoves;
     evaluatedMoves.clear();
 
-    float lowestEval = 99;
     Move lowestMove;
 
     for(auto currentMove : availMoves)
@@ -495,7 +548,7 @@ void GameSolver::aStarSearch(const HEURISTIC heuristic)
       childNode.parentState = currentNode.nodeState; // record parent state of child node
 
       childNode.nodeState = currentNode.nodeState.applyMoveCloning(currentMove); // apply move and clone
-      childNode.nodeState.normalizeState(); // normalize clone
+
 
       //get lowest score of moves
       PiecePosition master = childNode.nodeState.getPiecePosition(masterPiece);
@@ -522,10 +575,17 @@ void GameSolver::aStarSearch(const HEURISTIC heuristic)
         case NONE: moveEval = pathCost;
         break;
 
-        case MANHATTAN: moveEval = pathCost + getManhattanDistance(master,goal);
+        case MANHATTAN: moveEval = getEstimatedCost(pathCost, getManhattanDistance(master,goal));
         break;
 
-        case SLD: moveEval = pathCost + getStraightLineDistance(master,goal);
+        case SLD: moveEval = getEstimatedCost(pathCost, getStraightLineDistance(master,goal));
+        break;
+
+        case EASE: moveEval = getEstimatedCost(pathCost, getEaseCost(childNode.nodeState,childNode.parentState, currentMove.getPiece()));
+        break;
+
+        default: moveEval = getEstimatedCost(pathCost, getManhattanDistance(master,goal));
+        break;
       }
       cout << "\nMOve Cost = " << moveEval << endl;;
       currentMove.setMoveCost(moveEval);
@@ -556,6 +616,9 @@ void GameSolver::aStarSearch(const HEURISTIC heuristic)
       {
         evaluatedMoves.insert(evaluatedMoves.begin()+pos, currentMove);
       }
+      currentMove.printMove();
+      childNode.nodeState.displayPuzzle();
+      childNode.nodeState.normalizeState(); // normalize clone
     }
 
     for(unsigned int i = 0; i < evaluatedMoves.size(); i++)
@@ -563,8 +626,9 @@ void GameSolver::aStarSearch(const HEURISTIC heuristic)
       childNode.nodeState = currentNode.nodeState.applyMoveCloning(evaluatedMoves[i]);
       if(!(searchFrontier(frontier, childNode.nodeState) || searchExplored(explored, childNode.nodeState)))
       {
-        evaluatedMoves[i].printMove();
+        //evaluatedMoves[i].printMove();
         frontier.push_front(childNode);
+        cout << "\n\nNew Node" << endl;
         childNode.nodeState.displayPuzzle();
         cout << "\n";
         break;
