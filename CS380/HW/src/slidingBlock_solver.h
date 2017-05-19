@@ -24,6 +24,7 @@
 #include <iomanip>
 #include <deque>
 #include <cmath>
+#include <math.h>
 
 using namespace std;
 
@@ -84,6 +85,7 @@ public:
   void aStarSearch(const HEURISTIC heuristic);
   int getEstimatedCost(int g, int h);
   int getManhattanDistance(PiecePosition master_pos, PiecePosition goal_pos);
+  float getStraightLineDistance(PiecePosition master_pos, PiecePosition goal_pos);
 
 private:
 
@@ -113,6 +115,9 @@ private:
   int aStarNodes;
   int aStarLength;
   int heuristic;
-  const int cost = 1;
+  const int pathCost = 1;
+
+  const int masterPiece = 2;
+  const int goalPiece = -1;
 };
 #endif // _SLIDING_BLOCK_SOLVER_H_

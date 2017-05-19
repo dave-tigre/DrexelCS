@@ -386,6 +386,57 @@ int GameSolver::getManhattanDistance(PiecePosition master_pos, PiecePosition goa
   return manhattan_distance;
 }
 
+float GameSolver::getStraightLineDistance(PiecePosition master_pos, PiecePosition goal_pos)
+{
+  /*
+  * Get most right and down position of master block
+  */
+  int master_start_r = master_pos.r_pos[0]; // starting row position
+  int master_start_c = master_pos.c_pos[0]; // starting column position
+  int mas_num_pos = master_pos.r_pos.size();
+  int master_width = 0;
+  int master_height = 0;
+  for(int i = 0; i < mas_num_pos; i++)
+  {
+
+    if(master_start_r != master_pos.r_pos[i])
+      master_height++;
+
+    if(master_start_c != master_pos.c_pos[i])
+      master_width++;
+  }
+
+  int master_max_r = master_start_r + master_height - 1;
+  int master_max_c = master_start_c + master_width - 1;
+
+  /*
+  * Get most right and down position of goal
+  */
+  int goal_start_r = goal_pos.r_pos[0]; // starting row position
+  int goal_start_c = goal_pos.c_pos[0]; // starting column position
+  int goal_num_pos = goal_pos.r_pos.size();
+  int goal_width = 0;
+  int goal_height = 0;
+  for(int i = 0; i < goal_num_pos; i++)
+  {
+
+    if(goal_start_r != goal_pos.r_pos[i])
+      goal_height++;
+
+    if(goal_start_c != goal_pos.c_pos[i])
+      goal_width++;
+  }
+
+  int goal_max_r = goal_start_r + goal_height - 1;
+  int goal_max_c = goal_start_c + goal_width - 1;
+
+  float r_dif = goal_max_r - master_max_r;
+  float c_dif = goal_max_c - master_max_c;
+
+  float straightLine_distance = sqrt((r_dif*r_dif)+(c_dif*c_dif));
+  return straightLine_distance;
+}
+
 
 int GameSolver::getEstimatedCost(int g, int h)
 {
@@ -399,8 +450,10 @@ void GameSolver::aStarSearch(const HEURISTIC heuristic)
   vector<GameState> explored;
 
   StateNode parentNode; // root node
-  StateNode childnode; // initiate child node
+  StateNode childNode; // initiate child node
   StateNode currentNode; // current Node
+
+  float moveEval = 0;
 
   parentNode.nodeState = gameState.cloneState(); // clone root node
 
@@ -426,14 +479,97 @@ void GameSolver::aStarSearch(const HEURISTIC heuristic)
     frontier.pop_front(); // pop front node
     aStarNodes++;
 
-    // add it to explored "Set"
-    if(!searchExplored(explored, currentNode.nodeState))
-    {
-      explored.push_back(currentNode.nodeState);
-    }
+    explored.push_back(currentNode.nodeState);
 
     availMoves.clear();
     availMoves = currentNode.nodeState.puzzleMoves(); //available moves (children)
+
+    vector<Move> evaluatedMoves;
+    evaluatedMoves.clear();
+
+    float lowestEval = 99;
+    Move lowestMove;
+
+    for(auto currentMove : availMoves)
+    {
+      childNode.parentState = currentNode.nodeState; // record parent state of child node
+
+      childNode.nodeState = currentNode.nodeState.applyMoveCloning(currentMove); // apply move and clone
+      childNode.nodeState.normalizeState(); // normalize clone
+
+      //get lowest score of moves
+      PiecePosition master = childNode.nodeState.getPiecePosition(masterPiece);
+      PiecePosition goal = childNode.nodeState.getPiecePosition(goalPiece);
+
+      // determine if already looked at this node
+      if(!(searchFrontier(frontier, childNode.nodeState) || searchExplored(explored, childNode.nodeState)))
+      {
+        if(childNode.nodeState.gameCheck())
+        {
+          cout << "\nA* Search Solved Puzzle:" << endl;
+          childNode.nodeState.displayPuzzle();
+          gameSolved = true;
+          break;
+        }
+
+      }
+
+      /*
+      * Evaluate current move
+      */
+      switch(heuristic)
+      {
+        case NONE: moveEval = pathCost;
+        break;
+
+        case MANHATTAN: moveEval = pathCost + getManhattanDistance(master,goal);
+        break;
+
+        case SLD: moveEval = pathCost + getStraightLineDistance(master,goal);
+      }
+      cout << "\nMOve Cost = " << moveEval << endl;;
+      currentMove.setMoveCost(moveEval);
+
+      // instert move into evaluated moves in order of evalcost
+      int pos = evaluatedMoves.size()+9;
+      if(evaluatedMoves.empty())
+      {
+        evaluatedMoves.push_back(currentMove);
+      }
+      else
+      {
+        for(unsigned int i = 0; i < evaluatedMoves.size(); i++)
+        {
+          if(currentMove.getMoveCost() < evaluatedMoves[i].getMoveCost())
+          {
+            pos = i;
+            break;
+          }
+        }
+      }
+
+      if(pos > evaluatedMoves.size())
+      {
+        evaluatedMoves.push_back(currentMove);
+      }
+      else
+      {
+        evaluatedMoves.insert(evaluatedMoves.begin()+pos, currentMove);
+      }
+    }
+
+    for(unsigned int i = 0; i < evaluatedMoves.size(); i++)
+    {
+      childNode.nodeState = currentNode.nodeState.applyMoveCloning(evaluatedMoves[i]);
+      if(!(searchFrontier(frontier, childNode.nodeState) || searchExplored(explored, childNode.nodeState)))
+      {
+        evaluatedMoves[i].printMove();
+        frontier.push_front(childNode);
+        childNode.nodeState.displayPuzzle();
+        cout << "\n";
+        break;
+      }
+    }
 
 
   }
