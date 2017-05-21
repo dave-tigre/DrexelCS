@@ -491,6 +491,82 @@ int GameSolver::getEaseCost(GameState movedState, GameState parentState, int mov
   return easeCost;
 }
 
+int GameSolver::block(GameState movedState, PiecePosition master_pos, PiecePosition goal_pos)
+{
+  vector<vector<int> > puzzleMatrix = movedState.getPuzzle();
+
+  /*
+  * Get most right and down position of goal
+  */
+  int goal_start_r = goal_pos.r_pos[0]; // starting row position
+  int goal_start_c = goal_pos.c_pos[0]; // starting column position
+  int goal_num_pos = goal_pos.r_pos.size();
+  int goal_width = 0;
+  int goal_height = 0;
+  for(int i = 0; i < goal_num_pos; i++)
+  {
+
+    if(goal_start_r != goal_pos.r_pos[i])
+      goal_height++;
+
+    if(goal_start_c != goal_pos.c_pos[i])
+      goal_width++;
+  }
+
+  //check UP side
+  bool openUp = true;
+  for(int c = start_c; c < start_c + width; c++)
+  {
+    if(puzzleMatrix[start_r-1][c] < boundary || puzzleMatrix[start_r-1][c] > 0)
+    {
+      openUp = false;
+      break;
+    }
+  }
+
+  //check Down side
+  bool openDown = true;
+  for(int c = start_c; c < start_c + width; c++)
+  {
+    if(puzzleMatrix[start_r+1][c] < boundary || puzzleMatrix[start_r+1][c] > 0)
+    {
+      openDown = false;
+      break;
+    }
+  }
+
+  //check Left side
+  bool openLeft = true;
+  for(int r = start_r; r < start_r + height; r++)
+  {
+    if(puzzleMatrix[r][start_c-1] < boundary || puzzleMatrix[r][start_c-1] > 0)
+    {
+      openLeft = false;
+      break;
+    }
+  }
+
+  //check Right side
+  bool openRight = true;
+  for(int r = start_r; r < start_r + height; r++)
+  {
+    if(puzzleMatrix[r][start_c+1] < boundary || puzzleMatrix[r][start_c+1] > 0)
+    {
+      openRight = false;
+      break;
+    }
+  }
+
+  int blockCost = 0;
+  if(!openUp || !openDown || !openRight || !openLeft)
+    blockCost++;
+
+  int totalCost = blockCost + getManhattanDistance(master_pos, goal_pos);
+
+  return totalCost;
+
+}
+
 
 int GameSolver::getEstimatedCost(int g, int h)
 {
@@ -555,16 +631,18 @@ void GameSolver::aStarSearch(const HEURISTIC heuristic)
       PiecePosition goal = childNode.nodeState.getPiecePosition(goalPiece);
 
       // determine if already looked at this node
-      if(!(searchFrontier(frontier, childNode.nodeState) || searchExplored(explored, childNode.nodeState)))
-      {
-        if(childNode.nodeState.gameCheck())
-        {
-          cout << "\nA* Search Solved Puzzle:" << endl;
-          childNode.nodeState.displayPuzzle();
-          gameSolved = true;
-          break;
-        }
+      // if(!(searchFrontier(frontier, childNode.nodeState) || searchExplored(explored, childNode.nodeState)))
+      // {
+      //
+      //
+      // }
 
+      if(childNode.nodeState.gameCheck())
+      {
+        cout << "\nA* Search Solved Puzzle:" << endl;
+        childNode.nodeState.displayPuzzle();
+        gameSolved = true;
+        break;
       }
 
       /*
@@ -590,7 +668,7 @@ void GameSolver::aStarSearch(const HEURISTIC heuristic)
       cout << "\nMOve Cost = " << moveEval << endl;;
       currentMove.setMoveCost(moveEval);
 
-      // instert move into evaluated moves in order of evalcost
+      // insert move into evaluated moves in order of evalcost
       int pos = evaluatedMoves.size()+9;
       if(evaluatedMoves.empty())
       {
@@ -618,7 +696,7 @@ void GameSolver::aStarSearch(const HEURISTIC heuristic)
       }
       currentMove.printMove();
       childNode.nodeState.displayPuzzle();
-      childNode.nodeState.normalizeState(); // normalize clone
+      //SchildNode.nodeState.normalizeState(); // normalize clone
     }
 
     for(unsigned int i = 0; i < evaluatedMoves.size(); i++)

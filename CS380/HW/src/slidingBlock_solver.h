@@ -87,6 +87,7 @@ public:
   int getManhattanDistance(PiecePosition master_pos, PiecePosition goal_pos);
   float getStraightLineDistance(PiecePosition master_pos, PiecePosition goal_pos);
   int getEaseCost(GameState movedState, GameState parentState, int movedPiece);
+  int block(GameState movedState, PiecePosition master_pos, PiecePosition goal_pos);
 
 private:
 
