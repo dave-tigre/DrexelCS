@@ -503,6 +503,7 @@ int GameSolver::block(GameState movedState, PiecePosition master_pos, PiecePosit
   int goal_num_pos = goal_pos.r_pos.size();
   int goal_width = 0;
   int goal_height = 0;
+  int boundary = 0; // boundary to allow master piece(2) to cover 0 and -1 block
   for(int i = 0; i < goal_num_pos; i++)
   {
 
@@ -515,9 +516,9 @@ int GameSolver::block(GameState movedState, PiecePosition master_pos, PiecePosit
 
   //check UP side
   bool openUp = true;
-  for(int c = start_c; c < start_c + width; c++)
+  for(int c = goal_start_c; c < goal_start_c + goal_width; c++)
   {
-    if(puzzleMatrix[start_r-1][c] < boundary || puzzleMatrix[start_r-1][c] > 0)
+    if(puzzleMatrix[goal_start_r-1][c] < boundary || puzzleMatrix[goal_start_r-1][c] > 0)
     {
       openUp = false;
       break;
@@ -526,9 +527,9 @@ int GameSolver::block(GameState movedState, PiecePosition master_pos, PiecePosit
 
   //check Down side
   bool openDown = true;
-  for(int c = start_c; c < start_c + width; c++)
+  for(int c = goal_start_c; c < goal_start_c + goal_width; c++)
   {
-    if(puzzleMatrix[start_r+1][c] < boundary || puzzleMatrix[start_r+1][c] > 0)
+    if(puzzleMatrix[goal_start_r+1][c] < boundary || puzzleMatrix[goal_start_r+1][c] > 0)
     {
       openDown = false;
       break;
@@ -537,9 +538,9 @@ int GameSolver::block(GameState movedState, PiecePosition master_pos, PiecePosit
 
   //check Left side
   bool openLeft = true;
-  for(int r = start_r; r < start_r + height; r++)
+  for(int r = goal_start_r; r < goal_start_r + goal_height; r++)
   {
-    if(puzzleMatrix[r][start_c-1] < boundary || puzzleMatrix[r][start_c-1] > 0)
+    if(puzzleMatrix[r][goal_start_c-1] < boundary || puzzleMatrix[r][goal_start_c-1] > 0)
     {
       openLeft = false;
       break;
@@ -548,9 +549,9 @@ int GameSolver::block(GameState movedState, PiecePosition master_pos, PiecePosit
 
   //check Right side
   bool openRight = true;
-  for(int r = start_r; r < start_r + height; r++)
+  for(int r = goal_start_r; r < goal_start_r + goal_height; r++)
   {
-    if(puzzleMatrix[r][start_c+1] < boundary || puzzleMatrix[r][start_c+1] > 0)
+    if(puzzleMatrix[r][goal_start_c+1] < boundary || puzzleMatrix[r][goal_start_c+1] > 0)
     {
       openRight = false;
       break;
@@ -660,6 +661,9 @@ void GameSolver::aStarSearch(const HEURISTIC heuristic)
         break;
 
         case EASE: moveEval = getEstimatedCost(pathCost, getEaseCost(childNode.nodeState,childNode.parentState, currentMove.getPiece()));
+        break;
+
+        case BLOCK: moveEval = getEstimatedCost(pathCost, block(childNode.nodeState,master, goal));
         break;
 
         default: moveEval = getEstimatedCost(pathCost, getManhattanDistance(master,goal));

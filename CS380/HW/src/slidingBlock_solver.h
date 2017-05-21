@@ -35,7 +35,7 @@ struct StateNode
   Move action; // action to get here
 };
 
-enum HEURISTIC{NONE=0, MANHATTAN=1, SLD=2, EASE=3};
+enum HEURISTIC{NONE=0, MANHATTAN=1, SLD=2, EASE=3, BLOCK=4};
 
 class GameSolver
 {
