@@ -392,6 +392,7 @@ int GameSolver::getManhattanDistance(PiecePosition master_pos, PiecePosition goa
 
   int manhattanDistance = abs(goalRDMaxR - master_max_r) + abs(goalRDMaxC - master_max_c);
 
+  // if single block, check to see if close to other goal position if exists
   if(master_pos.r_pos.size() == 1 && master_pos.c_pos.size() == 1)
   {
     int checkDist = abs(goalRDStartR - master_max_r) + abs(goalRDStartC - master_max_c);
@@ -483,93 +484,11 @@ int GameSolver::getEaseCost(GameState movedState, GameState parentState, int mov
     easeCost = easeCost +5;
   }
 
-
-  cout << "\nMove Piece: " << movedPiece  << " ManDis: " << movedDist << " Ease Cost:  " << easeCost <<  endl;
-
-
-
+  //cout << "\nMove Piece: " << movedPiece  << " ManDis: " << movedDist << " Ease Cost:  " << easeCost <<  endl;
   return easeCost;
 }
 
-int GameSolver::block(GameState movedState, PiecePosition master_pos, PiecePosition goal_pos)
-{
-  vector<vector<int> > puzzleMatrix = movedState.getPuzzle();
-
-  /*
-  * Get most right and down position of goal
-  */
-  int goal_start_r = goal_pos.r_pos[0]; // starting row position
-  int goal_start_c = goal_pos.c_pos[0]; // starting column position
-  int goal_num_pos = goal_pos.r_pos.size();
-  int goal_width = 0;
-  int goal_height = 0;
-  int boundary = 0; // boundary to allow master piece(2) to cover 0 and -1 block
-  for(int i = 0; i < goal_num_pos; i++)
-  {
-
-    if(goal_start_r != goal_pos.r_pos[i])
-      goal_height++;
-
-    if(goal_start_c != goal_pos.c_pos[i])
-      goal_width++;
-  }
-
-  //check UP side
-  bool openUp = true;
-  for(int c = goal_start_c; c < goal_start_c + goal_width; c++)
-  {
-    if(puzzleMatrix[goal_start_r-1][c] < boundary || puzzleMatrix[goal_start_r-1][c] > 0)
-    {
-      openUp = false;
-      break;
-    }
-  }
-
-  //check Down side
-  bool openDown = true;
-  for(int c = goal_start_c; c < goal_start_c + goal_width; c++)
-  {
-    if(puzzleMatrix[goal_start_r+1][c] < boundary || puzzleMatrix[goal_start_r+1][c] > 0)
-    {
-      openDown = false;
-      break;
-    }
-  }
-
-  //check Left side
-  bool openLeft = true;
-  for(int r = goal_start_r; r < goal_start_r + goal_height; r++)
-  {
-    if(puzzleMatrix[r][goal_start_c-1] < boundary || puzzleMatrix[r][goal_start_c-1] > 0)
-    {
-      openLeft = false;
-      break;
-    }
-  }
-
-  //check Right side
-  bool openRight = true;
-  for(int r = goal_start_r; r < goal_start_r + goal_height; r++)
-  {
-    if(puzzleMatrix[r][goal_start_c+1] < boundary || puzzleMatrix[r][goal_start_c+1] > 0)
-    {
-      openRight = false;
-      break;
-    }
-  }
-
-  int blockCost = 0;
-  if(!openUp || !openDown || !openRight || !openLeft)
-    blockCost++;
-
-  int totalCost = blockCost + getManhattanDistance(master_pos, goal_pos);
-
-  return totalCost;
-
-}
-
-
-int GameSolver::getEstimatedCost(int g, int h)
+float GameSolver::getEstimatedCost(float g, float h)
 {
   return g+h;
 }
@@ -577,6 +496,8 @@ int GameSolver::getEstimatedCost(int g, int h)
 
 void GameSolver::aStarSearch(const HEURISTIC heuristic)
 {
+  aStarNodes = 1;
+  aStarLength = 1;
   deque<StateNode> frontier;
   vector<GameState> explored;
 
@@ -584,7 +505,7 @@ void GameSolver::aStarSearch(const HEURISTIC heuristic)
   StateNode childNode; // initiate child node
   StateNode currentNode; // current Node
 
-  float moveEval = 0;
+  float moveEval = 0.0;
 
   parentNode.nodeState = gameState.cloneState(); // clone root node
 
@@ -608,7 +529,7 @@ void GameSolver::aStarSearch(const HEURISTIC heuristic)
     }
     currentNode = frontier.front(); //get current node from queue
     frontier.pop_front(); // pop front node
-    aStarNodes++;
+
 
     explored.push_back(currentNode.nodeState);
 
@@ -632,19 +553,18 @@ void GameSolver::aStarSearch(const HEURISTIC heuristic)
       PiecePosition goal = childNode.nodeState.getPiecePosition(goalPiece);
 
       // determine if already looked at this node
-      // if(!(searchFrontier(frontier, childNode.nodeState) || searchExplored(explored, childNode.nodeState)))
-      // {
-      //
-      //
-      // }
-
-      if(childNode.nodeState.gameCheck())
+      if(!(searchFrontier(frontier, childNode.nodeState) || searchExplored(explored, childNode.nodeState)))
       {
-        cout << "\nA* Search Solved Puzzle:" << endl;
-        childNode.nodeState.displayPuzzle();
-        gameSolved = true;
-        break;
+        if(childNode.nodeState.gameCheck())
+        {
+          cout << "\nA* Search Solved Puzzle:" << endl;
+          childNode.nodeState.displayPuzzle();
+          gameSolved = true;
+          break;
+        }
+
       }
+
 
       /*
       * Evaluate current move
@@ -663,13 +583,10 @@ void GameSolver::aStarSearch(const HEURISTIC heuristic)
         case EASE: moveEval = getEstimatedCost(pathCost, getEaseCost(childNode.nodeState,childNode.parentState, currentMove.getPiece()));
         break;
 
-        case BLOCK: moveEval = getEstimatedCost(pathCost, block(childNode.nodeState,master, goal));
-        break;
-
         default: moveEval = getEstimatedCost(pathCost, getManhattanDistance(master,goal));
         break;
       }
-      cout << "\nMOve Cost = " << moveEval << endl;;
+      //cout << "\nMOve Cost = " << moveEval << endl;;
       currentMove.setMoveCost(moveEval);
 
       // insert move into evaluated moves in order of evalcost
@@ -698,9 +615,10 @@ void GameSolver::aStarSearch(const HEURISTIC heuristic)
       {
         evaluatedMoves.insert(evaluatedMoves.begin()+pos, currentMove);
       }
-      currentMove.printMove();
-      childNode.nodeState.displayPuzzle();
-      //SchildNode.nodeState.normalizeState(); // normalize clone
+      //currentMove.printMove();
+      //childNode.nodeState.displayPuzzle();
+      childNode.nodeState.normalizeState(); // normalize clone
+      aStarLength++;
     }
 
     for(unsigned int i = 0; i < evaluatedMoves.size(); i++)
@@ -708,11 +626,12 @@ void GameSolver::aStarSearch(const HEURISTIC heuristic)
       childNode.nodeState = currentNode.nodeState.applyMoveCloning(evaluatedMoves[i]);
       if(!(searchFrontier(frontier, childNode.nodeState) || searchExplored(explored, childNode.nodeState)))
       {
-        //evaluatedMoves[i].printMove();
+        evaluatedMoves[i].printMove();
         frontier.push_front(childNode);
-        cout << "\n\nNew Node" << endl;
-        childNode.nodeState.displayPuzzle();
-        cout << "\n";
+        aStarNodes++;
+        //cout << "\n\nNew Node" << endl;
+        //childNode.nodeState.displayPuzzle();
+        //cout << "\n";
         break;
       }
     }

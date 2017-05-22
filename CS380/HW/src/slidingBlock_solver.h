@@ -49,6 +49,9 @@ public:
 
     IDSnodes = 0;
     IDSlength = 0;
+
+    aStarNodes = 0;
+    aStarLength = 0;
   }
   ~GameSolver(){}
 
@@ -83,11 +86,14 @@ public:
   * A* Search
   */
   void aStarSearch(const HEURISTIC heuristic);
-  int getEstimatedCost(int g, int h);
+  int getAStarNodes(){return aStarNodes;}
+  int getAStarLength(){return aStarLength;}
+
+  float getEstimatedCost(float g, float h);
+
   int getManhattanDistance(PiecePosition master_pos, PiecePosition goal_pos);
   float getStraightLineDistance(PiecePosition master_pos, PiecePosition goal_pos);
   int getEaseCost(GameState movedState, GameState parentState, int movedPiece);
-  int block(GameState movedState, PiecePosition master_pos, PiecePosition goal_pos);
 
 private:
 
@@ -116,9 +122,9 @@ private:
 
   int aStarNodes;
   int aStarLength;
-  int heuristic;
-  const int pathCost = 10;
 
+  int heuristic;
+  const int pathCost = 1;
   const int masterPiece = 2;
   const int goalPiece = -1;
 };
